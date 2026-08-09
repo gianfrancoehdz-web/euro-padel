@@ -38,6 +38,10 @@
   .cf-rise { opacity: 0; animation: cf-rise .5s ease forwards; }
   .cf-d1 { animation-delay: .18s; } .cf-d2 { animation-delay: .3s; } .cf-d3 { animation-delay: .42s; } .cf-d4 { animation-delay: .54s; }
   @media (max-width: 480px) { .bx-themebtn { display: none !important; } }
+  .bx-navlinks { display: none; }
+  .bx-mobnav { display: block; }
+  .bx-mobnav-btn::marker { content: ""; }
+  @media (min-width: 1100px) { .bx-navlinks { display: flex; } .bx-mobnav { display: none; } }
 </style>
 </helmet>
 
@@ -47,7 +51,36 @@
   <header style="position:sticky; top:0; z-index:40; padding-top:env(safe-area-inset-top); background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);">
     <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
       <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">BLU<span style="color:var(--accent);">WX</span></a>
-      <button class="bx-themebtn" onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="border:1px solid var(--line-strong); background:transparent; color:var(--fg); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; padding:7px 12px; cursor:pointer; border-radius:999px;" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
+      <nav class="bx-navlinks" style="flex:1; align-items:center; justify-content:center; gap:24px; font-size:14px; font-weight:500;">
+        <a href="index.dc.html" style="color:var(--accent);">Home</a>
+        <a href="HowItWorks.dc.html" style="color:var(--fg);">Network</a>
+        <a href="Shop.dc.html" style="color:var(--fg);">Shop</a>
+        <a href="Directory.dc.html" style="color:var(--fg);">Directory</a>
+        <a href="Blog.dc.html" style="color:var(--fg);">Blogs</a>
+        <a href="Sponsors.dc.html" style="color:var(--fg);">Sponsors</a>
+        <a href="Facility Builders.dc.html" style="color:var(--fg);">Facility Builders</a>
+        <a href="Investors.dc.html" style="color:var(--fg);">Investors</a>
+        <a href="https://www.padelfip.com/es/" style="color:var(--fg);">FIP</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <button class="bx-themebtn" onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="border:1px solid var(--line-strong); background:transparent; color:var(--fg); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; padding:7px 12px; cursor:pointer; border-radius:999px;" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
+        <details class="bx-mobnav" style="position:relative;">
+          <summary class="bx-mobnav-btn" style="list-style:none; cursor:pointer; border:1px solid var(--fg); width:40px; height:36px; border-radius:12px; display:flex; align-items:center; justify-content:center;" aria-label="Menu">
+            <div style="width:16px; height:1.5px; background:var(--fg); box-shadow:0 5px 0 var(--fg), 0 -5px 0 var(--fg);"></div>
+          </summary>
+          <div style="position:absolute; top:calc(100% + 10px); right:0; min-width:220px; background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:8px 14px; box-shadow:0 16px 40px rgba(0,0,0,0.4); z-index:60;">
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="index.dc.html" style="color:var(--accent);">Home</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="HowItWorks.dc.html" style="color:var(--fg);">Network</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Shop.dc.html" style="color:var(--fg);">Shop</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Directory.dc.html" style="color:var(--fg);">Directory</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Blog.dc.html" style="color:var(--fg);">Blogs</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Sponsors.dc.html" style="color:var(--fg);">Sponsors</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Facility Builders.dc.html" style="color:var(--fg);">Facility Builders</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Investors.dc.html" style="color:var(--fg);">Investors</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="https://www.padelfip.com/es/" style="color:var(--fg);">FIP</a>
+          </div>
+        </details>
+      </div>
     </div>
   </header>
 

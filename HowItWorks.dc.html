@@ -36,10 +36,10 @@
   }
   .hiw-join-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   @media (min-width: 560px) { .hiw-join-grid { grid-template-columns: 1fr 1fr; } }
-  @media (min-width: 760px) { .hiw-navlinks { display: flex !important; } }
+  @media (min-width: 1100px) { .hiw-navlinks { display: flex !important; } }
   .hiw-menubtn { display: inline-flex; }
   @media (max-width: 480px) { .hiw-themebtn { display: none !important; } }
-  @media (min-width: 880px) { .hiw-menubtn { display: none; } .hiw-mobilemenu { display: none !important; } }
+  @media (min-width: 1100px) { .hiw-menubtn { display: none; } .hiw-mobilemenu { display: none !important; } }
   .hiw-ben-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
   @media (min-width: 620px) { .hiw-ben-grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 960px) { .hiw-ben-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -55,7 +55,7 @@
       <a href="index.dc.html" style="{{ logoStyle }}">BLU<span style="color:var(--accent);">WX</span></a>
       <nav class="hiw-navlinks" style="{{ navStyle }}">
         <sc-for list="{{ navItems }}" as="link" hint-placeholder-count="5">
-          <a href="{{ link.href }}" style="padding:4px 0; color:{{ link.color }};" style-hover="color:var(--accent);">{{ link.label }}</a>
+          <a href="{{ link.href }}" style="padding:4px 0; color:var(--fg);" style-hover="color:var(--accent);">{{ link.label }}</a>
         </sc-for>
       </nav>
       <div style="{{ rightGroupStyle }}">
@@ -423,11 +423,16 @@ class Component extends DCLogic {
       menuOpen: s.menuOpen,
       toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
       navItems: [
-        { label: "Home", href: "index.dc.html", color: "var(--fg)" },
-        { label: "Shop", href: "Shop.dc.html", color: "var(--fg)" },
-        { label: "How it works", href: "HowItWorks.dc.html", color: "var(--accent)" },
-        { label: "Investors", href: "Investors.dc.html", color: "var(--fg)" },
-      ],
+      { label: "Home", href: "index.dc.html" },
+      { label: "Network", href: "HowItWorks.dc.html" },
+      { label: "Shop", href: "Shop.dc.html" },
+      { label: "Directory", href: "Directory.dc.html" },
+      { label: "Blogs", href: "Blog.dc.html" },
+      { label: "Sponsors", href: "Sponsors.dc.html" },
+      { label: "Facility Builders", href: "Facility Builders.dc.html" },
+      { label: "Investors", href: "Investors.dc.html" },
+      { label: "FIP", href: "https://www.padelfip.com/es/" },
+    ],
 
       audiences: [
         {

@@ -15,9 +15,9 @@
   .pf-navlinks { display: none; }
   .pf-mobnav { display: block; }
   .pf-mobnav-btn::marker { content: ""; }
-  @media (min-width: 880px) { .pf-mobnav { display: none; } }
+  @media (min-width: 1100px) { .pf-mobnav { display: none; } }
   .pf-menubtn { display: inline-flex; }
-  @media (min-width: 880px) {
+  @media (min-width: 1100px) {
     .pf-navlinks { display: flex; }
     .pf-menubtn { display: none; }
     .pf-mobilemenu { display: none !important; }
@@ -50,22 +50,28 @@
         <summary class="pf-mobnav-btn" style="list-style:none; cursor:pointer; border:1px solid var(--fg); width:40px; height:36px; border-radius:12px; display:flex; align-items:center; justify-content:center;" aria-label="Menu">
           <div style="width:16px; height:1.5px; background:var(--fg); box-shadow:0 5px 0 var(--fg), 0 -5px 0 var(--fg);"></div>
         </summary>
-        <div style="position:absolute; top:calc(100% + 10px); right:0; min-width:200px; background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:8px 14px; box-shadow:0 16px 40px rgba(0,0,0,0.4); z-index:60;">
-          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="index.dc.html">Network</a>
-          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Shop.dc.html">Shop</a>
-          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Directory.dc.html">Clubs</a>
-          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Directory.dc.html">Coaches</a>
-          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="HowItWorks.dc.html">How it works</a>
-          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Investors.dc.html">Investors</a>
+        <div style="position:absolute; top:calc(100% + 10px); right:0; min-width:220px; background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:8px 14px; box-shadow:0 16px 40px rgba(0,0,0,0.4); z-index:60;">
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="index.dc.html">Home</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="HowItWorks.dc.html">Network</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="Shop.dc.html">Shop</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="Directory.dc.html">Directory</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="Blog.dc.html">Blogs</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="Sponsors.dc.html" color:var(--accent);">Sponsors</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="Facility Builders.dc.html">Facility Builders</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="Investors.dc.html">Investors</a>
+          <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line); href="https://www.padelfip.com/es/">FIP</a>
         </div>
       </details>
-      <nav class="pf-navlinks" style="align-items:center; gap:30px; font-size:14px; font-weight:500;">
-        <a href="index.dc.html">Network</a>
+      <nav class="pf-navlinks" style="align-items:center; gap:26px; font-size:14px; font-weight:500;">
+        <a href="index.dc.html">Home</a>
+        <a href="HowItWorks.dc.html">Network</a>
         <a href="Shop.dc.html">Shop</a>
-        <a href="Directory.dc.html">Clubs</a>
-        <a href="Directory.dc.html">Coaches</a>
-        <a href="HowItWorks.dc.html">How it works</a>
+        <a href="Directory.dc.html">Directory</a>
+        <a href="Blog.dc.html">Blogs</a>
+        <a href="Sponsors.dc.html" style="color:var(--accent);">Sponsors</a>
+        <a href="Facility Builders.dc.html">Facility Builders</a>
         <a href="Investors.dc.html">Investors</a>
+        <a href="https://www.padelfip.com/es/">FIP</a>
       </nav>
       <a href="Cart.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--fg); display:inline-flex; align-items:center; gap:6px;">CART<span style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">{{ cartCount }}</span></a>
     </div>

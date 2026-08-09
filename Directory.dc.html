@@ -34,7 +34,7 @@
   .dir-navlinks { display: none; }
   .dir-menubtn { display: inline-flex; }
   @media (max-width: 480px) { .dir-langwrap, .dir-themebtn { display: none !important; } }
-  @media (min-width: 880px) {
+  @media (min-width: 1100px) {
     .dir-navlinks { display: flex; }
     .dir-menubtn { display: none; }
     .dir-mobilemenu { display: none !important; }
@@ -373,13 +373,16 @@ class Component extends DCLogic {
       toggleMenu: () => this.setState(st => ({ menuOpen: !st.menuOpen })),
       cartCount: s.cartCount,
       navItems: [
-        { label: "Network", href: "index.dc.html" },
-        { label: "Shop", href: "Shop.dc.html" },
-        { label: "Clubs", href: "Directory.dc.html" },
-        { label: "Coaches", href: "Directory.dc.html" },
-        { label: "Journal", href: "#" },
+      { label: "Home", href: "index.dc.html" },
+      { label: "Network", href: "HowItWorks.dc.html" },
+      { label: "Shop", href: "Shop.dc.html" },
+      { label: "Directory", href: "Directory.dc.html" },
+      { label: "Blogs", href: "Blog.dc.html" },
+      { label: "Sponsors", href: "Sponsors.dc.html" },
+      { label: "Facility Builders", href: "Facility Builders.dc.html" },
       { label: "Investors", href: "Investors.dc.html" },
-      ],
+      { label: "FIP", href: "https://www.padelfip.com/es/" },
+    ],
       tabs: TABS.map(t => ({
         label: t.label,
         select: () => this.setState({ tab: t.key, playerCat: null }),

@@ -15,7 +15,7 @@
   .pf-navlinks { display: none; }
   .pf-menubtn { display: inline-flex; }
   @media (max-width: 480px) { .pf-langwrap, .pf-themebtn { display: none !important; } }
-  @media (min-width: 880px) {
+  @media (min-width: 1100px) {
     .pf-navlinks { display: flex; }
     .pf-menubtn { display: none; }
     .pf-mobilemenu { display: none !important; }
@@ -299,12 +299,15 @@ class Component extends DCLogic {
     ];
     const currentLang = LANGS.find(l => l.code === this.state.lang) || LANGS[0];
     const NAV_ITEMS = [
-      { label: "Network", href: "index.dc.html" },
+      { label: "Home", href: "index.dc.html" },
+      { label: "Network", href: "HowItWorks.dc.html" },
       { label: "Shop", href: "Shop.dc.html" },
-      { label: "Clubs", href: "Directory.dc.html" },
-      { label: "Coaches", href: "Directory.dc.html" },
-      { label: "Journal", href: "#" },
+      { label: "Directory", href: "Directory.dc.html" },
+      { label: "Blogs", href: "Blog.dc.html" },
+      { label: "Sponsors", href: "Sponsors.dc.html" },
+      { label: "Facility Builders", href: "Facility Builders.dc.html" },
       { label: "Investors", href: "Investors.dc.html" },
+      { label: "FIP", href: "https://www.padelfip.com/es/" },
     ];
 
 
