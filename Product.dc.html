@@ -39,18 +39,19 @@
   @keyframes pd-toastin { 0%{opacity:0; transform:translateY(14px) scale(.96);} 100%{opacity:1; transform:translateY(0) scale(1);} }
   .pd-cart-pop { animation: pd-cartpop .5s cubic-bezier(.34,1.56,.64,1); }
   .pd-swatch { transition: border-color .16s, color .16s, background .16s; }
+  @media (max-width: 480px) { .bx-themebtn { display: none !important; } }
 </style>
 </helmet>
 
 <div class="pd-body" data-theme="{{ theme }}" style="font-family:'Inter',sans-serif; min-height:100vh; background:var(--bg); color:var(--fg); transition:background .25s, color .25s;">
 
   <!-- ===== HEADER ===== -->
-  <header style="position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);">
+  <header style="position:sticky; top:0; z-index:40; padding-top:env(safe-area-inset-top); background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);">
     <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
       <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">BLU<span style="color:var(--accent);">WX</span></a>
       <div style="display:flex; align-items:center; gap:16px;">
         <a href="Cart.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--fg); display:inline-flex; align-items:center; gap:6px;">CART<span ref="{{ cartBadgeRef }}" style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">{{ cartCount }}</span></a>
-        <button onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="border:1px solid var(--line-strong); background:transparent; color:var(--fg); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; padding:7px 12px; cursor:pointer; border-radius:999px;" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
+        <button class="bx-themebtn" onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="border:1px solid var(--line-strong); background:transparent; color:var(--fg); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; padding:7px 12px; cursor:pointer; border-radius:999px;" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
       </div>
     </div>
   </header>

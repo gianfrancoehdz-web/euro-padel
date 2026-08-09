@@ -14,6 +14,7 @@
 <style>
   .pf-navlinks { display: none; }
   .pf-menubtn { display: inline-flex; }
+  @media (max-width: 480px) { .pf-langwrap, .pf-themebtn { display: none !important; } }
   @media (min-width: 880px) {
     .pf-navlinks { display: flex; }
     .pf-menubtn { display: none; }
@@ -59,7 +60,7 @@
         </sc-for>
       </nav>
       <div style="{{ rightGroupStyle }}">
-        <div style="{{ langWrapStyle }}">
+        <div class="pf-langwrap" style="{{ langWrapStyle }}">
           <button onClick="{{ toggleLang }}" aria-label="Language" style="border:1px solid var(--line-strong); background:transparent; color:var(--fg); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; padding:7px 11px; cursor:pointer; border-radius:999px; display:inline-flex; align-items:center; gap:7px; transition:border-color .2s, color .2s;" style-hover="border-color:var(--accent); color:var(--accent);">
             <span style="font-size:14px; line-height:1;">{{ currentLang.flag }}</span>
             <span>{{ currentLang.code }}</span>
@@ -76,7 +77,7 @@
             </div>
           </sc-if>
         </div>
-        <button onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="{{ themeBtnStyle }}" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
+        <button class="pf-themebtn" onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="{{ themeBtnStyle }}" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
         <a href="Cart.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--fg); display:inline-flex; align-items:center; gap:6px;">CART<span style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">{{ cartCount }}</span></a>
         <button class="pf-menubtn" onClick="{{ toggleMenu }}" aria-label="Menu" style="border:1px solid var(--fg); background:transparent; width:40px; height:36px; align-items:center; justify-content:center; cursor:pointer; padding:0; border-radius:12px;">
           <div style="width:16px; height:1.5px; background:var(--fg); box-shadow:0 5px 0 var(--fg), 0 -5px 0 var(--fg);"></div>
@@ -298,8 +299,8 @@ class Component extends DCLogic {
     const compact = this.state.compact;
     const TRANS = "transition: top .4s cubic-bezier(.4,0,.2,1), width .4s cubic-bezier(.4,0,.2,1), border-radius .4s ease, background .3s ease;";
     const headerStyle = compact
-      ? `position:fixed; top:10px; left:50%; right:auto; transform:translateX(-50%); z-index:40; width:min(260px,92vw); border-radius:999px; background:color-mix(in srgb, var(--bg) 62%, transparent); backdrop-filter:blur(20px) saturate(1.6); -webkit-backdrop-filter:blur(20px) saturate(1.6); border:1px solid color-mix(in srgb, var(--fg) 14%, transparent); box-shadow:0 12px 34px rgba(0,0,0,0.26), inset 0 1px 0 color-mix(in srgb, var(--fg) 10%, transparent); ${TRANS}`
-      : `position:fixed; top:clamp(12px,2.4vw,20px); left:50%; right:auto; transform:translateX(-50%); z-index:40; width:min(1200px, calc(100vw - clamp(24px,6vw,56px))); border-radius:999px; background:color-mix(in srgb, var(--bg) 55%, transparent); backdrop-filter:blur(20px) saturate(1.6); -webkit-backdrop-filter:blur(20px) saturate(1.6); border:1px solid color-mix(in srgb, var(--fg) 14%, transparent); box-shadow:0 12px 34px rgba(0,0,0,0.22), inset 0 1px 0 color-mix(in srgb, var(--fg) 10%, transparent); ${TRANS}`;
+      ? `position:fixed; top:calc(10px + env(safe-area-inset-top)); left:50%; right:auto; transform:translateX(-50%); z-index:40; width:min(260px,92vw); border-radius:999px; background:color-mix(in srgb, var(--bg) 62%, transparent); backdrop-filter:blur(20px) saturate(1.6); -webkit-backdrop-filter:blur(20px) saturate(1.6); border:1px solid color-mix(in srgb, var(--fg) 14%, transparent); box-shadow:0 12px 34px rgba(0,0,0,0.26), inset 0 1px 0 color-mix(in srgb, var(--fg) 10%, transparent); ${TRANS}`
+      : `position:fixed; top:calc(clamp(12px,2.4vw,20px) + env(safe-area-inset-top)); left:50%; right:auto; transform:translateX(-50%); z-index:40; width:min(1200px, calc(100vw - clamp(24px,6vw,56px))); border-radius:999px; background:color-mix(in srgb, var(--bg) 55%, transparent); backdrop-filter:blur(20px) saturate(1.6); -webkit-backdrop-filter:blur(20px) saturate(1.6); border:1px solid color-mix(in srgb, var(--fg) 14%, transparent); box-shadow:0 12px 34px rgba(0,0,0,0.22), inset 0 1px 0 color-mix(in srgb, var(--fg) 10%, transparent); ${TRANS}`;
     const headerInnerStyle = compact
       ? "max-width:1200px; margin:0 auto; padding:0 10px 0 18px; height:52px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:8px; transition:all .35s cubic-bezier(.4,0,.2,1);"
       : "max-width:1200px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px; transition:all .35s cubic-bezier(.4,0,.2,1);";
