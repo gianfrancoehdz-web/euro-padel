@@ -313,7 +313,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kreuzberg Padel&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Berlin, DE&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Founded 2020&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kreuzberg Padel was one of the first dedicated padel facilities in the city and remains a central point for the local community. The club runs a competitive women's team alongside open play and coaching for all levels.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Berlin, Germany&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;members&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;280+ members&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;KREUZBERG15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Members and visitors: apply the club code at checkout to save, every order supports the club.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kreuzberg Padel&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Berlin, DE&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Founded 2020&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kreuzberg Padel was one of the first dedicated padel facilities in the city and remains a central point for the local community. The club runs a competitive women's team alongside open play and coaching for all levels.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Berlin, Germany&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;members&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;280+ members&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;KREUZBERG15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
@@ -378,6 +378,7 @@ class Component extends DCLogic {
       { label: "Clubs", href: "Directory.dc.html" },
       { label: "Coaches", href: "Directory.dc.html" },
       { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
     ];
 
 
@@ -401,7 +402,7 @@ class Component extends DCLogic {
       toggleTheme: () => this.setState(s => ({ theme: s.theme === "dark" ? "light" : "dark" })),
       copyLabel: this.state.copied ? "Copied ✓" : "Copy code",
       copyCode: () => {
-        const code = p.discountCode ?? "KREUZBERG15";
+        const code = p.discountCode ?? "KREUZBERG5";
         try { navigator.clipboard && navigator.clipboard.writeText(code); } catch (e) {}
         this.setState({ copied: true });
         clearTimeout(this._t);
@@ -419,8 +420,8 @@ class Component extends DCLogic {
       established: p.established ?? "Founded 2020",
       description: p.description ?? "Kreuzberg Padel was one of the first dedicated padel facilities in the city and remains a central point for the local community. The club runs a competitive women's team alongside open play and coaching for all levels.",
       address:     p.address ?? "Berlin, Germany",
-      discountCode: p.discountCode ?? "KREUZBERG15",
-      discountMsg: p.discountMsg ?? "Members and visitors: apply the club code at checkout to save, every order supports the club.",
+      discountCode: p.discountCode ?? "KREUZBERG5",
+      discountMsg: p.discountMsg ?? "Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.",
       members: p.members ?? "280+ members",
       hours: [
         { d: "Mon – Fri", t: "07:00 – 23:00" },

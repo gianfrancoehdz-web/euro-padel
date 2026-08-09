@@ -225,6 +225,22 @@
       </div>
     </sc-if>
 
+  <section style="border-top:1px solid var(--line); padding-top:clamp(28px,4vw,48px); margin-top:clamp(28px,4vw,48px);">
+    <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-0.01em; color:var(--accent); margin-bottom:20px;">Sponsors</div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
+      <a href="https://taopadelacademy.com/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; background:#000; border:1px solid var(--line); border-radius:18px; padding:clamp(28px,4vw,44px); transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); box-shadow:0 16px 34px rgba(0,0,0,0.26);">
+        <img src="assets/tao-sponsor.png" alt="TAO Padel Academy" style="width:100%; max-width:180px; height:auto; display:block;"/>
+      </a>
+      <a href="https://www.pizzeriamonello.com/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; background:#000; border:1px solid var(--line); border-radius:18px; padding:clamp(28px,4vw,44px); transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); box-shadow:0 16px 34px rgba(0,0,0,0.26);">
+        <img src="assets/monello-sponsor.webp" alt="Pizzeria Monello" style="width:100%; max-width:220px; height:auto; display:block;"/>
+      </a>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; margin-top:20px; background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:clamp(20px,3vw,28px);">
+      <p style="font-size:15px; line-height:1.5; color:var(--dim); margin:0; max-width:44ch;">Want your brand next to theirs? Become a BLUWX sponsor and get in front of our clubs, coaches and players.</p>
+      <a href="JoinForm.dc.html?type=company&reason=sponsor" style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--on-accent); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px; white-space:nowrap;" style-hover="filter:brightness(1.06);">Become a sponsor</a>
+    </div>
+  </section>
+
   </main>
 
 </div>
@@ -237,9 +253,11 @@ const DATA = {
     { name: "Padel Paris Est", city: "París", detail: "8 indoor courts", img: "uploads/club-paris.jpg", href: "Padel%20Paris%20Est%20Profile.dc.html", views: 720 },
     { name: "Trastevere Padel Club", city: "Roma", detail: "6 courts (4 indoor, 2 outdoor)", img: "uploads/club-roma.jpg", href: "Trastevere%20Padel%20Club%20Profile.dc.html", views: 610 },
     { name: "Kreuzberg Padel", city: "Berlín", detail: "5 indoor courts", img: "uploads/club-berlin.jpg", href: "Kreuzberg%20Padel%20Profile.dc.html", views: 540 },
+    { name: "Liga Tennis & Padel Ubud", city: "Ubud, Bali", detail: "3 tennis + 3 padel courts", img: "uploads/club-ubud.jpg", href: "Liga%20Tennis%20Padel%20Ubud%20Profile.dc.html", views: 300 },
   ],
   coaches: [
-    { name: "Joel Rodríguez", city: "Alicante", detail: "Technical Director · Seed Pro Padel Academy", img: "uploads/Joel-coach-2.png", href: "Coach%20Profile.dc.html", views: 1510 },
+    { name: "Miguel Ángel", city: "Ubud, Bali", detail: "Founder & Head Coach · TAO Padel Academy", img: "uploads/miguel-angel-2.jpg", href: "Miguel%20Angel%20Profile.dc.html", views: 1510 },
+    { name: "Joel Rodríguez", city: "Alicante", detail: "Technical Director · Seed Pro Padel Academy", img: "uploads/Joel-coach-2.png", href: "Coach%20Profile.dc.html", views: 1490 },
     { name: "Élise Moreau", city: "Lyon", detail: "Backhand & shot selection", img: "uploads/Elise-Moreau.jpg", href: "Elise%20Moreau%20Profile.dc.html", views: 720 },
     { name: "Tomás Rivera", city: "Málaga", detail: "Footwork & positioning", img: "uploads/Tomas-rivera-2.jpg", href: "Tomas%20Rivera%20Profile.dc.html", views: 610 },
     { name: "Greta Hoffmann", city: "Múnich", detail: "Doubles tactics & communication", img: "uploads/Greta-hoffman-2.png", href: "Greta%20Hoffmann%20Profile.dc.html", views: 540 },
@@ -254,10 +272,10 @@ const DATA = {
     { name: "Mattia Settimi", city: "Alicante", detail: "U14 competitions · NEURONPADEL", img: "uploads/mattias-settimi-3.jpeg", href: "Mattia%20Settimi%20Profile.dc.html", views: 340, category: "Promises" },
   ],
 };
-const CITIES = ["Alicante", "Madrid", "Milán", "Roma", "París", "Berlín"];
+const CITIES = ["Ubud, Bali", "Alicante", "Madrid", "Milán", "Roma", "París", "Berlín"];
 
 class Component extends DCLogic {
-  state = { theme: "dark", tab: "clubs", cities: [], menuOpen: false, cartCount: 0, compact: false, nearCity: "Alicante", playerCat: null };
+  state = { theme: "dark", tab: "clubs", cities: [], menuOpen: false, cartCount: 0, compact: false, nearCity: "Ubud, Bali", playerCat: null };
   nearRef = React.createRef();
   popularRef = React.createRef();
   newRef = React.createRef();
@@ -359,6 +377,7 @@ class Component extends DCLogic {
         { label: "Clubs", href: "Directory.dc.html" },
         { label: "Coaches", href: "Directory.dc.html" },
         { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
       ],
       tabs: TABS.map(t => ({
         label: t.label,

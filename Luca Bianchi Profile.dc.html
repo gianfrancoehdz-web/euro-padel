@@ -287,7 +287,7 @@
 </div>
 </helmet>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;playerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Player&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;playerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Luca Bianchi&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Milán, IT&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Playing since 2023&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;IT · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Luca picked up padel three years ago after switching from tennis. He plays competitive amateur circuits on weekends and trains twice a week at his local club.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LUCA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Use his code at checkout and save on your order, it credits Luca, too.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;playerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Player&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;playerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Luca Bianchi&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Milán, IT&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Playing since 2023&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;IT · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Luca picked up padel three years ago after switching from tennis. He plays competitive amateur circuits on weekends and trains twice a week at his local club.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;LUCA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { theme: "dark", copied: false, videoOpen: false, photoOpen: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
@@ -352,6 +352,7 @@ class Component extends DCLogic {
       { label: "Clubs", href: "Directory.dc.html" },
       { label: "Coaches", href: "Directory.dc.html" },
       { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
     ];
 
 
@@ -399,7 +400,7 @@ class Component extends DCLogic {
       languages:   p.languages ?? "IT · EN",
       bio:         p.bio ?? "Luca picked up padel three years ago after switching from tennis. He plays competitive amateur circuits on weekends and trains twice a week at his local club.",
       discountCode: p.discountCode ?? "LUCA5",
-      discountMsg: p.discountMsg ?? "Use his code at checkout and save on your order, it credits Luca, too.",
+      discountMsg: p.discountMsg ?? "Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.",
       facts: [
         { k: "Level", v: "Intermediate" },
         { k: "Plays", v: "Right-handed, net specialist" },

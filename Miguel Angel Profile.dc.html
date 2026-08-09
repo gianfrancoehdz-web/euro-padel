@@ -47,9 +47,6 @@
 
 <div class="coach-body" data-theme="{{ theme }}" style="font-family:'Inter',sans-serif; min-height:100vh; padding-bottom:80px; background:var(--bg); color:var(--fg); transition:background .25s, color .25s;">
 
-  <!-- ============================================================ -->
-  <!-- FIXED · HEADER NAV                                            -->
-  <!-- ============================================================ -->
   <header style="{{ headerStyle }}">
     <div style="{{ headerInnerStyle }}">
       <a href="index.dc.html" style="{{ logoStyle }}">BLU<span style="color:var(--accent);">WX</span></a>
@@ -94,12 +91,9 @@
 
   <main style="max-width:1200px; margin:0 auto; padding:0 clamp(16px,4vw,40px);">
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 1 · PROFILE HEADER                                      -->
-    <!-- ============================================================ -->
     <section style="padding:clamp(32px,5vw,64px) 0 clamp(20px,3vw,32px);">
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);">{{ playerTag }}</div>
-      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(46px,9vw,104px); line-height:0.94; letter-spacing:-0.025em; margin:14px 0 0; text-wrap:balance;">{{ playerName }}</h1>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);">{{ coachTag }}</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(46px,9vw,104px); line-height:0.94; letter-spacing:-0.025em; margin:14px 0 0; text-wrap:balance;">{{ coachName }}</h1>
       <div style="display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:22px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--dim);">
         <span>{{ location }}</span>
         <span style="color:var(--line-strong);">/</span>
@@ -119,16 +113,11 @@
       <line x1="600" y1="4" x2="600" y2="36" style="stroke:var(--accent)" stroke-width="1.5"/>
     </svg>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 2+3 · PHOTO + BIO                                       -->
-    <!-- ============================================================ -->
     <section style="padding:clamp(28px,4vw,52px) 0;">
       <div class="coach-desk2" style="display:grid; gap:clamp(20px,3vw,44px); align-items:stretch;">
-
         <div style="overflow:hidden; background:#0E0D0B; border:1px solid var(--line); border-radius:22px;">
-          <img src="uploads/mattias-settimi-3.jpeg" alt="Mattia Settimi" style="display:block; width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center top;">
+          <img src="uploads/miguel-angel-2.jpg" alt="Miguel Ángel" style="display:block; width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center top;">
         </div>
-
         <div style="display:flex; flex-direction:column; justify-content:center;">
           <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent);">The story</div>
           <p style="font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:clamp(20px,2.4vw,29px); line-height:1.32; letter-spacing:-0.01em; margin:16px 0 0; color:var(--fg); text-wrap:pretty;">{{ bio }}</p>
@@ -141,13 +130,9 @@
             </sc-for>
           </div>
         </div>
-
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 4 · GALLERY                                             -->
-    <!-- ============================================================ -->
     <section style="padding:clamp(24px,4vw,48px) 0;">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
         <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3.2vw,38px); letter-spacing:-0.02em; margin:0;">On court</h2>
@@ -155,45 +140,18 @@
       </div>
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:10px;">
         <sc-for list="{{ gallery }}" as="m" hint-placeholder-count="5">
-          <div onClick="{{ m.onOpen }}" style="position:relative; aspect-ratio:1/1; overflow:hidden; background:var(--panel); border:1px solid var(--line); border-radius:16px; cursor:{{ m.cursor }};">
-            <sc-if value="{{ m.thumb }}" hint-placeholder-val="{{ false }}">
-              <img src="{{ m.thumb }}" alt="{{ m.slot }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:{{ m.pos }};"/>
-            </sc-if>
-            <sc-if value="{{ m.noThumb }}" hint-placeholder-val="{{ true }}">
-              <div style="position:absolute; inset:0; background-image:repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 18px); opacity:0.6;"></div>
-            </sc-if>
+          <div style="position:relative; aspect-ratio:1/1; overflow:hidden; background:var(--panel); border:1px solid var(--line); border-radius:16px;">
+            <div style="position:absolute; inset:0; background-image:repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 18px); opacity:0.6;"></div>
             <sc-if value="{{ m.isVideo }}" hint-placeholder-val="{{ false }}">
-              <div style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,0.35), transparent 40%);"></div>
-              <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:44px; height:44px; border-radius:999px; border:1px solid var(--accent); background:rgba(14,26,21,0.55); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:14px;">▶</div>
+              <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:44px; height:44px; border-radius:999px; border:1px solid var(--accent); display:flex; align-items:center; justify-content:center; color:var(--accent); font-size:14px;">▶</div>
             </sc-if>
-            <span style="position:absolute; top:11px; left:11px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--dim); text-shadow:0 1px 3px rgba(0,0,0,0.6);">{{ m.tag }}</span>
-            <span style="position:absolute; bottom:11px; left:11px; right:11px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--dim); text-shadow:0 1px 3px rgba(0,0,0,0.6);">{{ m.slot }}</span>
+            <span style="position:absolute; top:11px; left:11px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--dim);">{{ m.tag }}</span>
+            <span style="position:absolute; bottom:11px; left:11px; right:11px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--dim);">{{ m.slot }}</span>
           </div>
         </sc-for>
       </div>
     </section>
 
-    <!-- VIDEO MODAL -->
-    <sc-if value="{{ videoOpen }}" hint-placeholder-val="{{ false }}">
-      <div onClick="{{ closeVideo }}" style="position:fixed; inset:0; z-index:100; background:rgba(10,9,8,0.88); display:flex; align-items:center; justify-content:center; padding:20px;">
-        <div onClick="{{ stopProp }}" style="position:relative; width:100%; max-width:420px; aspect-ratio:9/16; background:#000; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.5);">
-          <iframe src="{{ videoUrl }}" title="YouTube video player" style="position:absolute; inset:0; width:100%; height:100%; border:none;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          <button onClick="{{ closeVideo }}" aria-label="Close" style="position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:999px; border:none; background:rgba(0,0,0,0.55); color:#fff; font-size:16px; cursor:pointer;">✕</button>
-        </div>
-      </div>
-    </sc-if>
-
-    <!-- PHOTO MODAL -->
-    <sc-if value="{{ photoOpen }}" hint-placeholder-val="{{ false }}">
-      <div onClick="{{ closePhoto }}" style="position:fixed; inset:0; z-index:100; background:rgba(10,9,8,0.88); display:flex; align-items:center; justify-content:center; padding:20px;">
-        <div onClick="{{ stopProp }}" style="position:relative; max-width:520px; max-height:86vh; border-radius:16px; overflow:hidden; box-shadow:0 30px 80px rgba(0,0,0,0.5);">
-          <img src="{{ photoUrl }}" alt="Mattia Settimi on court" style="display:block; max-width:100%; max-height:86vh; object-fit:contain;"/>
-          <button onClick="{{ closePhoto }}" aria-label="Close" style="position:absolute; top:10px; right:10px; width:34px; height:34px; border-radius:999px; border:none; background:rgba(0,0,0,0.55); color:#fff; font-size:16px; cursor:pointer;">✕</button>
-        </div>
-      </div>
-    </sc-if>
-
-    <!-- signature court-line divider (service box) -->
     <div style="padding:clamp(12px,2vw,24px) 0;">
       <svg viewBox="0 0 1200 60" preserveAspectRatio="none" style="width:100%; height:40px; display:block;" aria-hidden="true">
         <line x1="0" y1="30" x2="1200" y2="30" style="stroke:var(--line-strong)" stroke-width="1"/>
@@ -202,9 +160,6 @@
       </svg>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 5 · EQUIPMENT (commercial)                              -->
-    <!-- ============================================================ -->
     <section id="gear" style="padding:clamp(24px,4vw,48px) 0 clamp(36px,5vw,72px); scroll-margin-top:80px;">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:6px;">
         <div>
@@ -213,7 +168,6 @@
         </div>
       </div>
 
-      <!-- DISCOUNT CODE -->
       <div style="margin:clamp(20px,3vw,28px) 0; background:var(--panel); border:1px solid var(--accent); border-radius:20px; padding:clamp(20px,3vw,30px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:18px;">
         <div style="min-width:220px;">
           <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">His code</div>
@@ -223,7 +177,6 @@
         <button onClick="{{ copyCode }}" style="border:none; cursor:pointer; background:var(--accent); color:var(--on-accent); font-family:'Inter',sans-serif; font-weight:600; font-size:15px; padding:15px 28px; border-radius:999px; transition:transform .2s, box-shadow .2s, filter .2s; box-shadow:0 6px 18px rgba(87,185,141,0.28);" style-hover="filter:brightness(1.1); transform:translateY(-3px); box-shadow:0 14px 32px rgba(87,185,141,0.5);">{{ copyLabel }}</button>
       </div>
 
-      <!-- PRODUCTS -->
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px;">
         <sc-for list="{{ products }}" as="prod" hint-placeholder-count="3">
           <div style="display:flex; flex-direction:column; border:1px solid var(--line); background:var(--bg); border-radius:20px; overflow:hidden; transition:border-color .22s, transform .22s, box-shadow .22s;" style-hover="border-color:var(--accent); transform:translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.30);">
@@ -243,14 +196,16 @@
       </div>
     </section>
 
-    <!-- ===== SPONSORS ===== -->
     <section style="padding:0 0 clamp(40px,6vw,80px);">
       <div style="border-top:1px solid var(--line-strong); padding-top:clamp(28px,4vw,48px);">
         <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-0.01em; color:var(--accent); margin-bottom:20px;">Sponsors</div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
-          <div style="display:flex; align-items:center; justify-content:center; background:#000; border:1px solid var(--line); border-radius:18px; padding:clamp(28px,4vw,44px);">
-            <span style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(22px,3vw,30px); letter-spacing:0.02em; color:#F6F4EF;">NEURONPADEL</span>
-          </div>
+          <a href="https://taopadelacademy.com/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; background:#000; border:1px solid var(--line); border-radius:18px; padding:clamp(28px,4vw,44px); transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); box-shadow:0 16px 34px rgba(0,0,0,0.26);">
+            <img src="assets/tao-sponsor.png" alt="TAO Padel Academy" style="width:100%; max-width:180px; height:auto; display:block;"/>
+          </a>
+          <a href="https://www.pizzeriamonello.com/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; background:#000; border:1px solid var(--line); border-radius:18px; padding:clamp(28px,4vw,44px); transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); box-shadow:0 16px 34px rgba(0,0,0,0.26);">
+            <img src="assets/monello-sponsor.webp" alt="Pizzeria Monello" style="width:100%; max-width:220px; height:auto; display:block;"/>
+          </a>
         </div>
         <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; margin-top:20px; background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:clamp(20px,3vw,28px);">
           <p style="font-size:15px; line-height:1.5; color:var(--dim); margin:0; max-width:44ch;">Want your brand next to theirs? Become a BLUWX sponsor and get in front of our clubs, coaches and players.</p>
@@ -261,19 +216,13 @@
 
   </main>
 
-  <!-- ============================================================ -->
-  <!-- FIXED · FOOTER                                                -->
-  <!-- ============================================================ -->
   <footer style="background:var(--fg); color:var(--bg);">
     <div style="max-width:1200px; margin:0 auto; padding:clamp(32px,4vw,56px) clamp(16px,4vw,40px); display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center; justify-content:space-between;">
       <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,5vw,54px); letter-spacing:0.06em; line-height:1;">BLUWX</div>
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; opacity:0.75;">Player profile · the padel community</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; opacity:0.75;">Coach profile · the padel community</div>
     </div>
   </footer>
 
-  <!-- ============================================================ -->
-  <!-- FIXED · THUMB-ZONE STICKY CTA (mobile)                        -->
-  <!-- ============================================================ -->
   <div class="coach-thumbcta" style="position:fixed; left:0; right:0; bottom:0; z-index:50; padding:12px clamp(12px,4vw,16px); background:linear-gradient(to top, var(--bg) 62%, transparent);">
     <a href="#gear" style="display:flex; align-items:center; justify-content:center; gap:10px; background:var(--accent); color:var(--on-accent); font-family:'Inter',sans-serif; font-weight:600; font-size:16px; padding:16px; border-radius:999px; box-shadow:0 8px 26px rgba(87,185,141,0.4);">Shop his gear · {{ discountCode }}</a>
   </div>
@@ -281,9 +230,9 @@
 </div>
 </helmet>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;playerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Player&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;playerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Mattia Settimi&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Born 2012&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;IT · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Mattia is one of the rising names on the U14 padel circuit, currently ranked No. 74. Competing across international junior tournaments, he's built his game around speed, aggression at the net, and a relentless competitive drive.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;MATTIA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;coachTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coach&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;coachName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Miguel Ángel&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ubud, Indonesia&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;10+ Years experience&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;🇪🇸 Spanish · English&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;I'm the Founder and Head Coach of TAO Padel Academy in Bali. My passion is helping players reach their full potential through a structured methodology based on tactics, decision-making, and a deep understanding of the game. I believe great coaching is about adapting to every player, creating the right learning environment, and developing not only better athletes but smarter competitors.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;MIGUEL5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each coach has a personalized shop, a discount code reserved for their students, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, videoOpen: false, photoOpen: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {
@@ -361,54 +310,49 @@ class Component extends DCLogic {
       navItems: NAV_ITEMS,
       cartCount: window.CartStore ? window.CartStore.count() : 0,
 
-      instagramUrl: p.instagramUrl ?? "https://instagram.com/mattia-settimi-placeholder",
-      youtubeUrl: p.youtubeUrl ?? "https://youtube.com/@mattia-settimi-placeholder",
-      tiktokUrl: p.tiktokUrl ?? "https://tiktok.com/@mattia-settimi-placeholder",
+      instagramUrl: p.instagramUrl ?? "https://instagram.com/miguel-angel-placeholder",
+      youtubeUrl: p.youtubeUrl ?? "https://youtube.com/@miguel-angel-placeholder",
+      tiktokUrl: p.tiktokUrl ?? "https://tiktok.com/@miguel-angel-placeholder",
       theme,
       themeLabel: theme === "dark" ? "LIGHT ☀" : "DARK ☾",
       toggleTheme: () => this.setState(s => ({ theme: s.theme === "dark" ? "light" : "dark" })),
       copyLabel: this.state.copied ? "Copied ✓" : "Copy code",
       copyCode: () => {
-        const code = p.discountCode ?? "MATTIA5";
+        const code = p.discountCode ?? "MIGUEL5";
         try { navigator.clipboard && navigator.clipboard.writeText(code); } catch (e) {}
         this.setState({ copied: true });
         clearTimeout(this._t);
         this._t = setTimeout(() => this.setState({ copied: false }), 1800);
       },
-      videoOpen: this.state.videoOpen,
-      videoUrl: "",
-      closeVideo: () => this.setState({ videoOpen: false }),
-      photoOpen: this.state.photoOpen,
-      photoUrl: this.state.photoOpen ? (this.state._photoUrl || "") : "",
-      closePhoto: () => this.setState({ photoOpen: false }),
-      stopProp: (e) => e.stopPropagation(),
     };
 
     return {
       ...base,
-      playerTag:   p.playerTag ?? "Player",
-      playerName:  p.playerName ?? "Mattia Settimi",
-      location:    p.location ?? "Alicante",
-      since:       p.since ?? "Born 2012",
-      languages:   p.languages ?? "IT · EN",
-      bio:         p.bio ?? "Mattia is one of the rising names on the U14 padel circuit, currently ranked No. 74. Competing across international junior tournaments, he's built his game around speed, aggression at the net, and a relentless competitive drive.",
-      discountCode: p.discountCode ?? "MATTIA5",
-      discountMsg: p.discountMsg ?? "Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.",
+      coachTag:    p.coachTag ?? "Coach",
+      coachName:   p.coachName ?? "Miguel Ángel",
+      location:    p.location ?? "Ubud, Indonesia",
+      since:       p.since ?? "10+ Years experience",
+      languages:   p.languages ?? "🇪🇸 Spanish · English",
+      bio:         p.bio ?? "I'm the Founder and Head Coach of TAO Padel Academy in Bali. My passion is helping players reach their full potential through a structured methodology based on tactics, decision-making, and a deep understanding of the game. I believe great coaching is about adapting to every player, creating the right learning environment, and developing not only better athletes but smarter competitors.",
+      discountCode: p.discountCode ?? "MIGUEL5",
+      discountMsg: p.discountMsg ?? "Each coach has a personalized shop, a discount code reserved for their students, and a selection of recommended products.",
       facts: [
-        { k: "Born", v: "2012" },
-        { k: "Circuit", v: "U14 Circuit" },
-        { k: "Ranking", v: "No. 74" },
-        { k: "Sponsor", v: "NeuronPadel" },
+        { k: "Role", v: "Founder & Head Coach, TAO Padel Academy" },
+        { k: "Experience", v: "10+ years" },
+        { k: "Nationality", v: "🇪🇸 Spain" },
+        { k: "Based in", v: "Ubud, Indonesia" },
       ],
       gallery: [
-        { tag: "TOURNAMENT", slot: "[ tournament ]", thumb: "uploads/mattias-settimi-2.jpeg", pos: "center top", noThumb: false, isVideo: false, cursor: "pointer", onOpen: () => this.setState({ photoOpen: true, _photoUrl: "uploads/mattias-settimi-2.jpeg" }) },
-        { tag: "MATCH", slot: "[ match ]", thumb: "uploads/mattias-settimi-3.jpeg", pos: "center top", noThumb: false, isVideo: false, cursor: "pointer", onOpen: () => this.setState({ photoOpen: true, _photoUrl: "uploads/mattias-settimi-3.jpeg" }) },
-        { tag: "OFF COURT", slot: "[ off_court ]", thumb: "uploads/mattias-settimi-4.1.jpeg", pos: "center top", noThumb: false, isVideo: false, cursor: "pointer", onOpen: () => this.setState({ photoOpen: true, _photoUrl: "uploads/mattias-settimi-4.1.jpeg" }) },
+        { tag: "COURT · 01", slot: "[ rally_action ]", isVideo: false },
+        { tag: "REEL", slot: "[ drill_clip ]", isVideo: true },
+        { tag: "COURT · 02", slot: "[ smash ]", isVideo: false },
+        { tag: "COURT · 03", slot: "[ doubles ]", isVideo: false },
+        { tag: "REEL", slot: "[ coaching_tip ]", isVideo: true },
       ],
       products: [
         { cat: "RACKET", name: "RONIN V1 2026", price: "€230,00", img: "uploads/np-ronin-v1.webp" },
         { cat: "APPAREL", name: "Performance T-Shirt", price: "€25,50", img: "uploads/np-tshirt.webp" },
-        { cat: "APPAREL", name: "Pro+ Skort", price: "€25,50", img: "uploads/np-shorts.webp" },
+        { cat: "APPAREL", name: "Pro+ Shorts", price: "€25,50", img: "uploads/np-shorts.webp" },
       ],
     };
   }

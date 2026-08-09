@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  .inv-navlinks { display: none; }
+  .inv-menubtn { display: inline-flex; }
+  @media (min-width: 880px) {
+    .inv-navlinks { display: flex; }
+    .inv-menubtn { display: none; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #14140F; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: #57B98D; color: #14140F; }
+  .inv-body { --bg: #14140F; --fg: #F2F1EC; --panel: #1C1C16; --line: rgba(242,241,236,0.14); --line-strong: rgba(242,241,236,0.26); --dim: #9C9A8D; --accent: #57B98D; --on-accent: #0E1A15; }
+  .inv-stat-grid { grid-template-columns: repeat(2,1fr); }
+  @media (min-width: 900px) { .inv-stat-grid { grid-template-columns: repeat(4,1fr); } }
+  .inv-eco-grid { grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .inv-eco-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (min-width: 1080px) { .inv-eco-grid { grid-template-columns: repeat(4,1fr); } }
+  .inv-rev-grid { grid-template-columns: 1fr; }
+  @media (min-width: 800px) { .inv-rev-grid { grid-template-columns: repeat(3,1fr); } }
+  .inv-flow { flex-direction: column; }
+  @media (min-width: 800px) { .inv-flow { flex-direction: row; } }
+</style>
+</helmet>
+
+<div class="inv-body" ref="{{ rootRef }}" style="font-family:'Inter',sans-serif; min-height:100vh; background:var(--bg); color:var(--fg);">
+
+  <header style="position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter:blur(16px) saturate(1.4); border-bottom:1px solid var(--line);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">BLU<span style="color:var(--accent);">WX</span></a>
+      <nav class="inv-navlinks" style="align-items:center; gap:30px; font-size:14px; font-weight:500;">
+        <a href="index.dc.html">Network</a>
+        <a href="Shop.dc.html">Shop</a>
+        <a href="HowItWorks.dc.html">How it works</a>
+        <a href="Investors.dc.html" style="color:var(--accent);">Investors</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width:1120px; margin:0 auto; padding:0 clamp(16px,4vw,40px);">
+
+    <!-- HERO -->
+    <section style="padding:clamp(56px,8vw,104px) 0 clamp(32px,4vw,48px); text-align:center;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--accent);">For Investors</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(40px,7vw,76px); line-height:1.02; letter-spacing:-0.03em; margin:18px 0 0;">Invest in BLUWX</h1>
+      <p style="font-size:clamp(17px,1.8vw,21px); color:var(--dim); max-width:44ch; margin:18px auto 0; line-height:1.5;">The Digital Ecosystem for the Global Padel Community</p>
+      <div style="display:inline-block; margin-top:32px; border:1px solid var(--accent); border-radius:999px; padding:14px 28px; font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">BLUWX is open to investment opportunities</div>
+    </section>
+
+    <!-- INTRO -->
+    <section style="padding:clamp(24px,4vw,40px) 0; border-top:1px solid var(--line);">
+      <p style="font-size:clamp(17px,1.9vw,22px); line-height:1.6; color:var(--fg); max-width:74ch; margin:0 auto; text-align:center; text-wrap:pretty;">BLUWX connects business, community and commerce in a single digital platform built for the entire padel industry — from manufacturers and clubs to coaches, influencers and players.</p>
+      <p style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(22px,2.6vw,30px); text-align:center; margin:24px 0 0; color:var(--accent);">Everything for Padel. Everyone in Padel.</p>
+    </section>
+
+    <!-- ECOSYSTEM -->
+    <section style="padding:clamp(40px,6vw,72px) 0; border-top:1px solid var(--line);">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.02em; margin:0 0 28px; text-align:center;">One Platform. An Entire Ecosystem.</h2>
+      <div class="inv-eco-grid" style="display:grid; gap:14px;">
+        <sc-for list="{{ ecosystem }}" as="e" hint-placeholder-count="7">
+          <div style="border:1px solid var(--line); background:var(--panel); border-radius:16px; padding:22px;">
+            <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px; margin:0 0 10px;">{{ e.title }}</h3>
+            <p style="font-size:13.5px; line-height:1.55; color:var(--dim); margin:0;">{{ e.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- COMMUNITY GENERATES COMMERCE -->
+    <section style="padding:clamp(40px,6vw,72px) 0; border-top:1px solid var(--line);">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.02em; margin:0 0 18px;">A Community That Generates Commerce</h2>
+      <p style="font-size:16px; line-height:1.65; color:var(--dim); max-width:70ch; margin:0 0 32px;">BLUWX turns relationships and influence into commerce. Every recommendation that leads to a sale generates a commission for the person who made it, while the buyer receives a 5% purchase advantage — creating a self-reinforcing cycle of trust and transactions across the network.</p>
+      <div class="inv-flow" style="display:flex; gap:8px; align-items:stretch;">
+        <sc-for list="{{ cycle }}" as="c" hint-placeholder-count="6">
+          <div style="flex:1; display:flex; align-items:center; gap:8px;">
+            <div style="flex:1; border:1px solid var(--line-strong); background:var(--panel); border-radius:14px; padding:18px 14px; text-align:center;">
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); letter-spacing:0.08em;">{{ c.num }}</div>
+              <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; margin-top:6px;">{{ c.label }}</div>
+            </div>
+            <sc-if value="{{ c.hasArrow }}" hint-placeholder-val="{{ true }}">
+              <span style="color:var(--dim); font-size:18px; flex:none;">→</span>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- REVENUE -->
+    <section style="padding:clamp(40px,6vw,72px) 0; border-top:1px solid var(--line);">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.02em; margin:0 0 28px;">How BLUWX Makes Money</h2>
+      <div class="inv-rev-grid" style="display:grid; gap:14px;">
+        <sc-for list="{{ revenue }}" as="r" hint-placeholder-count="3">
+          <div style="border:1px solid var(--line); background:var(--panel); border-radius:18px; padding:26px;">
+            <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:19px; color:var(--accent); margin:0 0 12px; letter-spacing:-0.01em;">{{ r.title }}</h3>
+            <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:0;">{{ r.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <p style="text-align:center; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(18px,2vw,22px); margin:28px 0 0;">A scalable model combining transaction revenue, recurring revenue and advertising revenue.</p>
+    </section>
+
+    <!-- FLYWHEEL -->
+    <section style="padding:clamp(40px,6vw,72px) 0; border-top:1px solid var(--line); text-align:center;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);">The BLUWX Flywheel</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.02em; margin:14px 0 0;">One ecosystem. Continuous growth.</h2>
+      <p style="font-size:15px; color:var(--dim); max-width:56ch; margin:12px auto 28px; line-height:1.55;">Every new participant creates more value for everyone else.</p>
+      {{ flywheelDiagram }}
+      <p style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(15px,1.6vw,18px); max-width:56ch; margin:28px auto 6px; line-height:1.5;">More participants → more recommendations → more purchases → more earnings → stronger community → more sellers</p>
+      <p style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.05em; color:var(--dim); margin:0;">BLUWX.com | Growth Flywheel</p>
+    </section>
+
+    <!-- WHY PADEL WHY NOW -->
+    <section style="padding:clamp(40px,6vw,72px) 0; border-top:1px solid var(--line);">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.02em; margin:0 0 28px;">Why Padel. Why Now.</h2>
+      <div class="inv-stat-grid" style="display:grid; gap:14px;">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <div style="{{ statCardStyle }}">
+            <div style="{{ statValStyle }}">{{ s.val }}</div>
+            <div style="font-size:13px; color:var(--dim); margin-top:8px;">{{ s.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:11.5px; color:var(--dim); margin:14px 0 0; text-align:center;">Coach figure: BLUWX market estimate; clubs, courts and players: FIP World Padel Report 2025.</p>
+
+      <div style="display:grid; grid-template-columns:1fr; gap:24px; margin-top:clamp(32px,4vw,48px);">
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:19px; margin:0 0 10px;">Global Growth</h3>
+          <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:0;">Padel is becoming a global sport. BLUWX is building the digital infrastructure that connects its community and its commerce.</p>
+        </div>
+        <div>
+          <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:19px; margin:0 0 10px;">Built to Scale</h3>
+          <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:0;">BLUWX is digital by design and global by ambition. The same technology can connect a club in Madrid, a coach in Milan, a player in London, a manufacturer in Asia and a retailer in Dubai. As the network grows, BLUWX can expand geographically without changing its fundamental business model.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPPORTUNITY -->
+    <section style="padding:clamp(40px,6vw,72px) 0; border-top:1px solid var(--line); text-align:center;">
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,38px); letter-spacing:-0.02em; margin:0 0 16px;">The Opportunity</h2>
+      <p style="font-size:16px; line-height:1.65; color:var(--dim); max-width:66ch; margin:0 auto 32px;">BLUWX is open to strategic investment to accelerate its growth, expand its commercial network and consolidate its position as the digital infrastructure of the global padel industry.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:14px; justify-content:center;">
+        <a href="JoinForm.dc.html?type=company&reason=investor_inquiry" style="display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--on-accent); font-weight:600; font-size:15px; padding:16px 30px; border-radius:999px;">Request Investor Deck</a>
+        <a href="JoinForm.dc.html?type=company&reason=investor_inquiry" style="display:inline-flex; align-items:center; justify-content:center; border:1px solid var(--line-strong); color:var(--fg); font-weight:500; font-size:15px; padding:16px 30px; border-radius:999px;">Contact Investor Relations</a>
+      </div>
+    </section>
+
+    <!-- CLOSING QUOTE -->
+    <section style="padding:clamp(32px,5vw,56px) 0; border-top:1px solid var(--line); text-align:center;">
+      <p style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(22px,3vw,32px); letter-spacing:-0.02em; max-width:26ch; margin:0 auto; line-height:1.3;">BLUWX is building the digital economy of padel.</p>
+    </section>
+
+  </main>
+
+  <!-- LEGAL NOTICE -->
+  <footer style="border-top:1px solid var(--line); background:var(--panel);">
+    <div style="max-width:1120px; margin:0 auto; padding:clamp(24px,3vw,36px) clamp(16px,4vw,40px);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim); margin-bottom:10px;">Investor Notice</div>
+      <p style="font-size:11.5px; line-height:1.6; color:var(--dim); max-width:90ch; margin:0;">The information contained on this page is provided for general informational purposes only and does not constitute an offer to sell, or a solicitation of an offer to purchase, shares, securities or other financial instruments in BLUWX. Any potential investment opportunity will be subject to applicable law, appropriate documentation, eligibility requirements and, where applicable, due diligence.</p>
+    </div>
+  </footer>
+
+</div>
+</helmet>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#57B98D&quot;,&quot;options&quot;:[&quot;#57B98D&quot;,&quot;#7C93F0&quot;,&quot;#E3A857&quot;,&quot;#D4685C&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Flywheel&quot;},&quot;tone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;corporate&quot;,&quot;options&quot;:[&quot;corporate&quot;,&quot;bold&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Flywheel&quot;},&quot;flywheelMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Flywheel&quot;}}">
+class Component extends DCLogic {
+  state = { fwVisible: false };
+  componentDidMount() {
+    this._applyAccent();
+  }
+  componentDidUpdate() {
+    this._applyAccent();
+  }
+  _applyAccent() {
+    if (this._rootRef) this._rootRef.style.setProperty("--accent", this.props.accentColor ?? "#57B98D");
+  }
+  setFwRef(el) {
+    if (!el || this._fwObserved) return;
+    this._fwObserved = true;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !this.state.fwVisible) {
+          this.setState({ fwVisible: true });
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    io.observe(el);
+  }
+  buildFlywheel() {
+    const on = this.state.fwVisible;
+    const bold = (this.props.tone ?? "corporate") === "bold";
+    const C = "#26433A", PAPER = "#F6F4EF", STONE = "#A79C8C", INK = "#161512", ACCENT = this.props.accentColor ?? "#57B98D";
+    const motion = this.props.flywheelMotion ?? true;
+    const order = { companies: 0, products: 1, network: 2, players: 3, transactions: 4, revenue: 5 };
+    const boxDelay = (key) => 0.4 + order[key] * 0.18;
+    const box = (key, x, y, w, h, label, extra) => React.createElement("g", {
+      key,
+      className: "fw-box",
+      onMouseEnter: () => this.setState({ ["fwHover_" + key]: true }),
+      onMouseLeave: () => this.setState({ ["fwHover_" + key]: false }),
+      style: {
+        cursor: "default",
+        opacity: on ? 1 : 0,
+        transform: on
+          ? (this.state["fwHover_" + key] ? `translateY(-4px) scale(1.04)` : "translate(0,0) scale(1)")
+          : `translate(${(x < 350 ? 30 : x > 350 ? -30 : 0)}px,${(y < 350 ? -20 : 20)}px) scale(0.85)`,
+        transformOrigin: `${x}px ${y}px`,
+        transition: on ? "transform .25s ease, filter .25s ease" : `opacity .5s ease ${boxDelay(key)}s, transform .5s ease ${boxDelay(key)}s`,
+        filter: this.state["fwHover_" + key] ? `drop-shadow(0 10px 22px rgba(87,185,141,0.45))` : "none",
+      },
+    },
+      React.createElement("rect", { x: x - w / 2, y: y - h / 2, width: w, height: h, rx: 14, fill: `color-mix(in srgb, ${INK} 60%, transparent)`, stroke: this.state["fwHover_" + key] ? ACCENT : STONE, strokeWidth: this.state["fwHover_" + key] ? 1.5 : 1, style: { transition: "stroke .25s ease" } }),
+      React.createElement("text", { x, y: y + 5, textAnchor: "middle", fontFamily: "'Space Grotesk',sans-serif", fontWeight: bold ? 800 : 700, fontSize: bold ? 13.5 : 12.5, letterSpacing: "0.02em", fill: PAPER },
+        ...String(label).split("\n").map((line, i) => React.createElement("tspan", { key: i, x, dy: i === 0 ? -((String(label).split("\n").length - 1) * 7) : 14 }, line))
+      )
+    );
+    const arrow = (key, d, delay) => React.createElement("path", {
+      key, d, fill: "none", stroke: ACCENT, strokeWidth: 2, markerEnd: "url(#fwArrow)",
+      style: {
+        strokeDasharray: 300,
+        strokeDashoffset: on ? 0 : 300,
+        opacity: on ? 1 : 0,
+        transition: `stroke-dashoffset 1s ease ${delay}s, opacity .3s ease ${delay}s`,
+        animation: on && motion ? "fwPulse 2.6s ease-in-out infinite" : "none",
+        animationDelay: `${delay + 1}s`,
+      },
+    });
+    return React.createElement("div", { ref: (el) => this.setFwRef(el), style: { width: "min(700px,92vw)", margin: "0 auto" } },
+      React.createElement("style", null, "@keyframes fwPulse{0%,100%{opacity:.55}50%{opacity:1}}"),
+      React.createElement("svg", { viewBox: "0 0 700 700", style: { width: "100%", height: "auto", display: "block" } },
+        React.createElement("defs", null,
+          React.createElement("marker", { id: "fwArrow", viewBox: "0 0 10 10", refX: 8, refY: 5, markerWidth: 6, markerHeight: 6, orient: "auto-start-reverse" },
+            React.createElement("path", { d: "M0,0 L10,5 L0,10 z", fill: ACCENT })
+          )
+        ),
+        arrow("a1", "M320,120 C230,150 170,180 140,205", boxDelay("products") + 0.2),
+        arrow("a2", "M380,120 C470,150 530,180 560,205", boxDelay("network") + 0.2),
+        arrow("a3", "M110,455 L110,255", boxDelay("revenue") + 0.2),
+        arrow("a4", "M590,255 L590,455", boxDelay("network") + 0.35),
+        arrow("a5", "M320,585 L140,470", boxDelay("transactions") + 0.2),
+        arrow("a6", "M380,585 L560,470", boxDelay("network") + 0.5),
+        React.createElement("circle", {
+          cx: 350, cy: 350, r: 92, fill: C,
+          onMouseEnter: () => this.setState({ fwHoverCore: true }),
+          onMouseLeave: () => this.setState({ fwHoverCore: false }),
+          style: {
+            cursor: "default",
+            opacity: on ? 1 : 0,
+            transform: on ? (this.state.fwHoverCore ? "scale(1.08)" : "scale(1)") : "scale(0.7)",
+            transformOrigin: "350px 350px",
+            transition: "opacity .5s ease, transform .3s ease, filter .3s ease",
+            filter: this.state.fwHoverCore ? "drop-shadow(0 0 34px rgba(87,185,141,0.65))" : "none",
+          },
+        }),
+        React.createElement("text", { x: 350, y: 344, textAnchor: "middle", fontFamily: "'Space Grotesk',sans-serif", fontWeight: 700, fontSize: 26, fill: PAPER, style: { opacity: on ? 1 : 0, transition: "opacity .5s ease .1s" } }, "BLUWX"),
+        React.createElement("text", { x: 350, y: 366, textAnchor: "middle", fontFamily: "'IBM Plex Mono',monospace", fontSize: 10, letterSpacing: "0.08em", fill: ACCENT, style: { opacity: on ? 1 : 0, transition: "opacity .5s ease .1s" } }, "CONNECT · SELL · EARN"),
+        box("companies", 350, 90, 190, 50, "MORE COMPANIES\n& BRANDS"),
+        (() => {
+          const d = boxDelay("companies") + 0.15;
+          return React.createElement("g", { key: "pill", style: { opacity: on ? 1 : 0, transition: `opacity .4s ease ${d}s` } },
+            React.createElement("rect", { x: 350 - 130, y: 140, width: 260, height: 30, rx: 15, fill: "transparent", stroke: ACCENT, strokeWidth: 1.2 }),
+            React.createElement("text", { x: 350, y: 159, textAnchor: "middle", fontFamily: "'IBM Plex Mono',monospace", fontSize: 9, letterSpacing: "0.05em", fill: ACCENT }, "MORE VALUE FOR COMPANIES & BRANDS")
+          );
+        })(),
+        box("revenue", 110, 230, 180, 56, "MORE REVENUE FOR\nTHE COMMUNITY"),
+        box("products", 590, 230, 180, 56, "MORE PRODUCTS &\nOPPORTUNITIES"),
+        box("transactions", 110, 470, 170, 50, "MORE\nTRANSACTIONS"),
+        box("network", 590, 470, 190, 56, "MORE CLUBS, COACHES\n& INFLUENCERS"),
+        box("players", 350, 610, 170, 50, "MORE PLAYERS")
+      )
+    );
+  }
+  renderVals() {
+    const bold = (this.props.tone ?? "corporate") === "bold";
+    const accent = this.props.accentColor ?? "#57B98D";
+    return {
+      rootRef: (el) => { this._rootRef = el; },
+      statCardStyle: `border:1px solid var(--line); background:${bold ? `color-mix(in srgb, ${accent} 14%, var(--panel))` : "var(--panel)"}; border-radius:16px; padding:24px; text-align:center;`,
+      statValStyle: `font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:${bold ? "clamp(30px,3.8vw,44px)" : "clamp(26px,3.2vw,36px)"}; color:var(--accent); letter-spacing:-0.02em;`,
+      flywheelDiagram: this.buildFlywheel(),
+      ecosystem: [
+        { title: "Companies & Brands", text: "Showcase their businesses and commercialize their products." },
+        { title: "Retailers & Wholesalers", text: "Reach new customers and sell directly through the BLUWX marketplace." },
+        { title: "Padel Court Builders", text: "Present their solutions and connect with clubs, investors and operators." },
+        { title: "Clubs & Academies", text: "Build their digital presence, connect with their communities and generate additional revenue." },
+        { title: "Coaches", text: "Promote their professional profile, recommend products and earn from the sales they generate." },
+        { title: "Influencers & Ambassadors", text: "Connect their audiences with products and opportunities while monetizing their influence." },
+        { title: "Players", text: "Professional, promises and amateur players can create their profiles, connect with the padel world, discover products and participate in the BLUWX ecosystem." },
+      ],
+      cycle: ["Connect","Discover","Recommend","Buy","Earn","Grow"].map((label, i, arr) => ({ num: "0" + (i + 1), label, hasArrow: i < arr.length - 1 })),
+      revenue: [
+        { title: "15% Marketplace Commission", text: "BLUWX receives a 15% commission on every product commercialized through the platform." },
+        { title: "Monthly Fees — Commercial Memberships", text: "Companies, brands, retailers, wholesalers and padel court builders pay a recurring monthly fee to access BLUWX's commercial services and marketplace." },
+        { title: "Advertising — Media & Visibility", text: "BLUWX generates additional revenue through advertising, sponsored content, featured products, brand campaigns and premium visibility across the platform." },
+      ],
+      stats: [
+        { val: "24,600+", label: "Clubs" },
+        { val: "77,300+", label: "Courts" },
+        { val: "30,000–50,000", label: "Coaches*" },
+        { val: "35M+", label: "Players" },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

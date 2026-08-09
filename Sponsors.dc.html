@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  .pf-navlinks { display: none; }
+  .pf-menubtn { display: inline-flex; }
+  @media (min-width: 880px) {
+    .pf-navlinks { display: flex; }
+    .pf-menubtn { display: none; }
+    .pf-mobilemenu { display: none !important; }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #161512; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; transition: color .18s ease; }
+  ::selection { background: #57B98D; color: #161512; }
+  .sp-body {
+    --bg: #161512; --fg: #F6F4EF; --panel: #201F1B;
+    --line: rgba(246,244,239,0.16); --line-strong: rgba(246,244,239,0.30);
+    --dim: #A79C8C; --accent: #57B98D; --on-accent: #0E1A15;
+  }
+  .sp-body[data-theme="light"] {
+    --bg: #F6F4EF; --fg: #161512; --panel: #ECE8E0;
+    --line: #C9C1B4; --line-strong: #A79C8C;
+    --dim: #6E6A62; --accent: #26433A; --on-accent: #F6F4EF;
+  }
+  a:hover { color: var(--accent); }
+</style>
+</helmet>
+
+<div class="sp-body" data-theme="{{ theme }}" style="font-family:'Inter',sans-serif; min-height:100vh; background:var(--bg); color:var(--fg); transition:background .25s, color .25s;">
+
+  <header style="position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(16px) saturate(1.5); border-bottom:1px solid var(--line);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">BLU<span style="color:var(--accent);">WX</span></a>
+      <nav class="pf-navlinks" style="align-items:center; gap:30px; font-size:14px; font-weight:500;">
+        <a href="index.dc.html">Network</a>
+        <a href="Shop.dc.html">Shop</a>
+        <a href="Directory.dc.html">Clubs</a>
+        <a href="Directory.dc.html">Coaches</a>
+        <a href="HowItWorks.dc.html">How it works</a>
+        <a href="Investors.dc.html">Investors</a>
+      </nav>
+      <a href="Cart.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--fg); display:inline-flex; align-items:center; gap:6px;">CART<span style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">{{ cartCount }}</span></a>
+    </div>
+  </header>
+
+  <main style="max-width:1200px; margin:0 auto; padding:0 clamp(16px,4vw,40px);">
+
+    <section style="padding:clamp(40px,6vw,72px) 0 clamp(24px,3vw,32px);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);">Partner with BLUWX</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(38px,6.5vw,72px); line-height:0.98; letter-spacing:-0.03em; margin:16px 0 0; max-width:16ch; text-wrap:balance;">Become a Sponsor</h1>
+      <p style="font-size:clamp(16px,1.5vw,18px); line-height:1.6; color:var(--dim); max-width:62ch; margin:22px 0 0; text-wrap:pretty;">Reach a passionate, fast-growing padel community across clubs, players, coaches and events. Partner with BLUWX and put your brand in front of the audience that matters.</p>
+    </section>
+
+    <section style="padding:clamp(12px,2vw,24px) 0 clamp(48px,6vw,88px);">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;">
+        <sc-for list="{{ benefits }}" as="b" hint-placeholder-count="4">
+          <div style="border:1px solid var(--line); background:var(--panel); border-radius:20px; padding:clamp(22px,2.6vw,28px); display:flex; flex-direction:column; gap:12px;">
+            <div style="width:40px; height:40px; border-radius:12px; background:var(--bg); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:18px; color:var(--accent);">{{ b.icon }}</div>
+            <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:18px; letter-spacing:-0.01em; margin:0;">{{ b.title }}</h3>
+            <p style="font-size:14px; line-height:1.55; color:var(--dim); margin:0;">{{ b.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="padding:0 0 clamp(56px,8vw,100px);">
+      <div style="border:1px solid var(--line); background:var(--panel); border-radius:24px; padding:clamp(32px,5vw,56px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px;">
+        <div style="max-width:48ch;">
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3vw,34px); letter-spacing:-0.02em; margin:0;">Ready to put your brand on the court?</h2>
+          <p style="font-size:15px; line-height:1.55; color:var(--dim); margin:12px 0 0;">Tell us about your brand and goals — we'll get back with tailored partnership packages.</p>
+        </div>
+        <a href="JoinForm.dc.html?type=company&reason=sponsorship_inquiry" style="flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--on-accent); font-weight:600; font-size:16px; padding:16px 32px; border-radius:999px; white-space:nowrap; transition:filter .2s, transform .2s;" style-hover="filter:brightness(1.06); transform:translateY(-2px);">Become a Sponsor</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="background:var(--fg); color:var(--bg);">
+    <div style="max-width:1200px; margin:0 auto; padding:clamp(32px,4vw,56px) clamp(16px,4vw,40px); display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center; justify-content:space-between;">
+      <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,5vw,54px); letter-spacing:0.06em; line-height:1;">BLUWX</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; opacity:0.75;">Sponsors · the padel community</div>
+    </div>
+  </footer>
+
+</div>
+</helmet>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: "dark" };
+  renderVals() {
+    return {
+      theme: this.state.theme,
+      cartCount: window.CartStore ? window.CartStore.count() : 0,
+      benefits: [
+        { icon: "◎", title: "Brand visibility", text: "Featured placement across the platform — home, club, coach and event profiles." },
+        { icon: "⌖", title: "Direct community access", text: "Reach the padel community in the cities where we operate: Alicante, Madrid, Milan, Rome, Paris, Berlin." },
+        { icon: "★", title: "Event & tournament sponsorship", text: "Get your brand in front of players at padel events and tournaments across the network." },
+        { icon: "◫", title: "Tailored partnerships", text: "Custom sponsorship packages built around your brand's goals and budget." },
+      ],
+    };
+  }
+}
+
+</script>
+</body>
+</html>

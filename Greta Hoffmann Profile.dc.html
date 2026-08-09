@@ -260,7 +260,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;coachTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coach&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;coachName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Greta Hoffmann&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Múnich, DE&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coaching since 2020&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;DE · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Greta coaches the women's competitive team at her club and previously played professionally in Germany's national league. She focuses on tactical doubles play, court coverage, poaching, and communication.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;GRETA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Use her code at checkout and save on your order, it credits Greta, too.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;coachTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coach&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;coachName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Greta Hoffmann&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Múnich, DE&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coaching since 2020&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;DE · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Greta coaches the women's competitive team at her club and previously played professionally in Germany's national league. She focuses on tactical doubles play, court coverage, poaching, and communication.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;GRETA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each coach has a personalized shop, a discount code reserved for their students, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
@@ -325,6 +325,7 @@ class Component extends DCLogic {
       { label: "Clubs", href: "Directory.dc.html" },
       { label: "Coaches", href: "Directory.dc.html" },
       { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
     ];
 
 
@@ -367,7 +368,7 @@ class Component extends DCLogic {
       languages:   p.languages ?? "DE · EN",
       bio:         p.bio ?? "Greta coaches the women's competitive team at her club and previously played professionally in Germany's national league. She focuses on tactical doubles play, court coverage, poaching, and communication.",
       discountCode: p.discountCode ?? "GRETA5",
-      discountMsg: p.discountMsg ?? "Use her code at checkout and save on your order, it credits Greta, too.",
+      discountMsg: p.discountMsg ?? "Each coach has a personalized shop, a discount code reserved for their students, and a selection of recommended products.",
       facts: [
         { k: "Focus", v: "Doubles tactics & communication" },
         { k: "Level", v: "Advanced → Pro" },

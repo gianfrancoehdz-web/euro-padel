@@ -330,6 +330,10 @@ class Component extends DCLogic {
   componentDidMount() {
     this.setState({ cartCount: window.CartStore ? window.CartStore.count() : 0 });
     this._off = window.CartStore ? window.CartStore.onChange(() => this.setState({ cartCount: window.CartStore.count() })) : null;
+    try {
+      const brand = new URLSearchParams(location.search).get("brand");
+      if (brand && BRANDS.includes(brand)) this.setState({ brands: [brand] });
+    } catch (e) {}
     if (window.__bluwxHeaderScrollBound) { this._ownsScrollLock = false; }
     else {
       window.__bluwxHeaderScrollBound = true;
@@ -418,6 +422,7 @@ class Component extends DCLogic {
       { label: "Clubs", href: "Directory.dc.html" },
       { label: "Coaches", href: "Directory.dc.html" },
       { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
     ];
 
     return {

@@ -101,7 +101,7 @@
   <section style="position:relative; overflow:hidden; border-bottom:1px solid var(--line); padding-top:clamp(80px,10vw,112px);">
     <img src="uploads/DL-Padel-13.09.236229-1-scaled-1-1024x683.jpg" alt="Padel racket and balls on court" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;">
     <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(22,21,18,0.62) 0%, rgba(22,21,18,0.68) 45%, rgba(22,21,18,0.9) 82%, var(--bg) 100%);"></div>
-    <span style="position:absolute; top:130px; left:50%; transform:translateX(-50%); z-index:2; opacity:0.7; font-family:'IBM Plex Mono',monospace; font-size:33px; letter-spacing:0.1em; text-transform:uppercase; color:#FF0000; background:rgba(14,13,11,0.65); padding:10px 24px; border-radius:999px; border:2px solid rgba(255,0,0,0.5);">DEMO</span>
+    <span style="display:none; position:absolute; top:130px; left:50%; transform:translateX(-50%); z-index:2; opacity:0.7; font-family:'IBM Plex Mono',monospace; font-size:33px; letter-spacing:0.1em; text-transform:uppercase; color:#FF0000; background:rgba(14,13,11,0.65); padding:10px 24px; border-radius:999px; border:2px solid rgba(255,0,0,0.5);">DEMO</span>
     <span style="position:absolute; bottom:14px; right:16px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; color:rgba(246,244,239,0.6);">TEMP · placeholder photo</span>
     <div style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(56px,10vw,120px) clamp(16px,4vw,40px) clamp(48px,7vw,96px);">
       <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">The Padel Network</div>
@@ -215,6 +215,17 @@
           <div style="padding:clamp(18px,2vw,26px);">
             <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(21px,2.4vw,27px); letter-spacing:-0.01em; margin:0;">Facility Builders</h3>
             <p style="font-size:14px; line-height:1.55; color:var(--dim); margin:12px 0 0;">Recommended court manufacturers to bring world-class padel facilities to life.</p>
+          </div>
+        </a>
+
+        <!-- Sponsors -->
+        <a href="Sponsors.dc.html" style="display:block; border:1px solid var(--line); background:var(--bg); border-radius:22px; overflow:hidden; transition:transform .22s, border-color .22s, box-shadow .22s;" style-hover="border-color:var(--accent); transform:translateY(-6px); box-shadow:0 20px 44px rgba(0,0,0,0.30);">
+          <div style="position:relative; aspect-ratio:4/3; overflow:hidden; background:#fff; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:center;">
+            <img src="uploads/sponsor-stamp-design-template-67630e7e4496c4e2a046fee0a7ab788c_screen.jpg" alt="Sponsors" style="width:56%; height:56%; object-fit:contain; display:block;">
+          </div>
+          <div style="padding:clamp(18px,2vw,26px);">
+            <h3 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(21px,2.4vw,27px); letter-spacing:-0.01em; margin:0;">Sponsors</h3>
+            <p style="font-size:14px; line-height:1.55; color:var(--dim); margin:12px 0 0;">Put your brand in front of the padel community that matters.</p>
           </div>
         </a>
       </div>
@@ -386,11 +397,14 @@ class Component extends DCLogic {
       menuOpen: this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
       navItems: [
-        { label: "Network", href: "#" },
+        { label: "Network", href: "HowItWorks.dc.html" },
         { label: "Shop", href: "Shop.dc.html" },
-        { label: "Clubs", href: "Directory.dc.html" },
-        { label: "Coaches", href: "Directory.dc.html" },
-        { label: "Journal", href: "#" },
+        { label: "Clubs", href: "Directory.dc.html?tab=clubs" },
+        { label: "Coaches", href: "Directory.dc.html?tab=coaches" },
+        { label: "Players", href: "Directory.dc.html?tab=players" },
+        { label: "Influencers", href: "Directory.dc.html?tab=influencers" },
+        { label: "Blogs", href: "Blog.dc.html" },
+        { label: "FIP", href: "https://www.padelfip.com/es/" },
       ],
       pillars: [
         { name: "Clubs", code: "NET · 01", img: "uploads/Club.png", objPos: "center", stat: "140+", blurb: "Stocked and supplied across the continent, demo racks, trade pricing and event support." },
@@ -458,6 +472,7 @@ class Component extends DCLogic {
         { title: "Community", links: [
           { label: "Social Club", href: "#" },
           { label: "Journal", href: "#" },
+        { label: "Investors", href: "Investors.dc.html" },
           { label: "Events", href: "#" },
           { label: "Newsletter", href: "#" },
         ] },

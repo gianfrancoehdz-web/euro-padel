@@ -287,7 +287,7 @@
 </div>
 </helmet>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;playerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Player&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;playerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Amara Diallo&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;París, FR&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Playing since 2021&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;FR · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Amara started playing padel during university and now competes in regional tournaments. She's known for her aggressive smash game.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;AMARA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Use her code at checkout and save on your order, it credits Amara, too.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;playerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Player&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;playerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Amara Diallo&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;París, FR&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Playing since 2021&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;FR · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Amara started playing padel during university and now competes in regional tournaments. She's known for her aggressive smash game.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;AMARA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { theme: "dark", copied: false, videoOpen: false, photoOpen: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
@@ -352,6 +352,7 @@ class Component extends DCLogic {
       { label: "Clubs", href: "Directory.dc.html" },
       { label: "Coaches", href: "Directory.dc.html" },
       { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
     ];
 
 
@@ -399,7 +400,7 @@ class Component extends DCLogic {
       languages:   p.languages ?? "FR · EN",
       bio:         p.bio ?? "Amara started playing padel during university and now competes in regional tournaments. She's known for her aggressive smash game.",
       discountCode: p.discountCode ?? "AMARA5",
-      discountMsg: p.discountMsg ?? "Use her code at checkout and save on your order, it credits Amara, too.",
+      discountMsg: p.discountMsg ?? "Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.",
       facts: [
         { k: "Level", v: "Advanced" },
         { k: "Plays", v: "Right-handed, attacking style" },

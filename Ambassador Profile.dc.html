@@ -238,7 +238,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;ambTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Influencer&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;ambName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sofia Rinaldi&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Barcelona, ES&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;role&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Brand ambassador&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;With BLUWX since 2024&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;intro&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sofia lives padel as much off the court as on it, mornings at the club, afternoons shooting, weekends chasing tournaments wherever the next one is. She wears BLUWX because it looks as good in the city as it plays under the lights, and she brings the community along for every rally.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;SOFIA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Shop Sofia's edit with her code at checkout, you save, and it credits her, too.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;ambTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Influencer&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;ambName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sofia Rinaldi&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Barcelona, ES&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;role&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Brand ambassador&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;With BLUWX since 2024&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;intro&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Sofia lives padel as much off the court as on it, mornings at the club, afternoons shooting, weekends chasing tournaments wherever the next one is. She wears BLUWX because it looks as good in the city as it plays under the lights, and she brings the community along for every rally.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;SOFIA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each influencer has a personalized shop, a discount code reserved for their followers, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
@@ -303,6 +303,7 @@ class Component extends DCLogic {
       { label: "Clubs", href: "Directory.dc.html" },
       { label: "Coaches", href: "Directory.dc.html" },
       { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
     ];
 
 
@@ -342,7 +343,7 @@ class Component extends DCLogic {
       since:       p.since ?? "With BLUWX since 2024",
       intro:       p.intro ?? "Sofia lives padel as much off the court as on it, mornings at the club, afternoons shooting, weekends chasing tournaments wherever the next one is. She wears BLUWX because it looks as good in the city as it plays under the lights, and she brings the community along for every rally.",
       discountCode: p.discountCode ?? "SOFIA5",
-      discountMsg: p.discountMsg ?? "Shop Sofia's edit with her code at checkout, you save, and it credits her, too.",
+      discountMsg: p.discountMsg ?? "Each influencer has a personalized shop, a discount code reserved for their followers, and a selection of recommended products.",
       instagramUrl: p.instagramUrl ?? "https://instagram.com/sofia-ambassador-placeholder",
       youtubeUrl: p.youtubeUrl ?? "https://youtube.com/@sofia-ambassador-placeholder",
       tiktokUrl: p.tiktokUrl ?? "https://tiktok.com/@sofia-ambassador-placeholder",

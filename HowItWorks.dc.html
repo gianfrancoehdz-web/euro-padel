@@ -172,6 +172,16 @@
               <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:0;">The company or brand sets the selling prices, taking into account that 5% represents the discount received by the buyer, 15% is the commission for the club, coach, or influencer, and 15% is the commission for the platform.</p>
               <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:0;">Companies and brands can build their own stores within the platform. If this task is delegated to the site, the actual costs for the work performed will be charged.</p>
             </div>
+            <div style="margin-top:24px; padding-top:20px; border-top:1px solid var(--line);">
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:16px;">Brands that trust us</div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px;">
+                <sc-for list="{{ trustedBrands }}" as="tb" hint-placeholder-count="7">
+                  <a href="{{ tb.href }}" style="display:flex; align-items:center; justify-content:center; background:#fff; border:1px solid var(--line); border-radius:14px; padding:16px; transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-4px); box-shadow:0 12px 26px rgba(0,0,0,0.22);">
+                    <img src="{{ tb.logo }}" alt="{{ tb.name }}" style="width:100%; max-width:{{ tb.maxW }}; height:{{ tb.h }}; object-fit:contain; display:block;"/>
+                  </a>
+                </sc-for>
+              </div>
+            </div>
           </div>
         </sc-if>
       </section>
@@ -338,6 +348,13 @@ class Component extends DCLogic {
 
   componentDidMount() {
     this.setState({ cartCount: window.CartStore ? window.CartStore.count() : 0, compact: (window.scrollY || 0) > 110 });
+    if (location.hash) {
+      const id = location.hash.slice(1);
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ block: "start" });
+      }, 250);
+    }
     this._off = window.CartStore ? window.CartStore.onChange(() => this.setState({ cartCount: window.CartStore.count() })) : null;
     if (window.__bluwxHeaderScrollBound) { this._ownsScrollLock = false; }
     else {
@@ -387,6 +404,14 @@ class Component extends DCLogic {
     const themeBtnStyle = "border:1px solid var(--line-strong); background:transparent; color:var(--fg); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; padding:7px 12px; cursor:pointer; border-radius:999px; transition:border-color .2s, color .2s;" + (compact ? " display:none;" : "");
 
     return {
+      trustedBrands: [
+        { name: "NeuronPadel", logo: "uploads/logo_neuronpadel-black.png", href: "Shop.dc.html?brand=NeuronPadel", maxW: "120px", h: "36px" },
+        { name: "StarVie", logo: "uploads/starvie-logo.webp", href: "Shop.dc.html?brand=StarVie", maxW: "480px", h: "144px" },
+        { name: "Adidas", logo: "uploads/adidas-logo.png", href: "Shop.dc.html?brand=Adidas", maxW: "120px", h: "36px" },
+        { name: "FILA", logo: "uploads/fila-logo.webp", href: "Shop.dc.html?brand=FILA", maxW: "480px", h: "144px" },
+        { name: "Coco Padel", logo: "uploads/cocopadel-logo-2.webp", href: "Shop.dc.html?brand=Coco%20Padel", maxW: "120px", h: "36px" },
+        { name: "Macron", logo: "uploads/logo-macron.jpg", href: "Shop.dc.html?brand=Macron", maxW: "120px", h: "36px" },
+      ],
       theme: s.theme,
       themeLabel: s.theme === "dark" ? "LIGHT ☀" : "DARK ☾",
       toggleTheme: () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" })),
@@ -400,6 +425,7 @@ class Component extends DCLogic {
         { label: "Home", href: "index.dc.html", color: "var(--fg)" },
         { label: "Shop", href: "Shop.dc.html", color: "var(--fg)" },
         { label: "How it works", href: "HowItWorks.dc.html", color: "var(--accent)" },
+        { label: "Investors", href: "Investors.dc.html", color: "var(--fg)" },
       ],
 
       audiences: [

@@ -19,7 +19,6 @@
     .pf-menubtn { display: none; }
     .pf-mobilemenu { display: none !important; }
   }
-
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body { background: #161512; -webkit-font-smoothing: antialiased; }
@@ -47,9 +46,6 @@
 
 <div class="club-body" data-theme="{{ theme }}" style="font-family:'Inter',sans-serif; min-height:100vh; padding-bottom:80px; background:var(--bg); color:var(--fg); transition:background .25s, color .25s;">
 
-  <!-- ============================================================ -->
-  <!-- FIXED · HEADER NAV                                            -->
-  <!-- ============================================================ -->
   <header style="{{ headerStyle }}">
     <div style="{{ headerInnerStyle }}">
       <a href="index.dc.html" style="{{ logoStyle }}">BLU<span style="color:var(--accent);">WX</span></a>
@@ -92,41 +88,31 @@
     </sc-if>
   </header>
 
-  <!-- ============================================================ -->
-  <!-- BLOCK 1 · CLUB HEADER   [dynamic: tag, name, meta]           -->
-  <!-- ============================================================ -->
   <section style="max-width:1200px; margin:0 auto; padding:clamp(32px,5vw,60px) clamp(16px,4vw,40px) clamp(20px,3vw,30px);">
     <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);">{{ clubTag }}</div>
-    <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(42px,8vw,96px); line-height:0.94; letter-spacing:-0.025em; margin:14px 0 0; text-wrap:balance;">{{ clubName }}</h1>
+    <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(38px,7vw,88px); line-height:0.96; letter-spacing:-0.025em; margin:14px 0 0; text-wrap:balance;">{{ clubName }}</h1>
     <div style="display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--dim);">
       <span>{{ city }}</span>
       <span style="color:var(--line-strong);">/</span>
       <span>{{ courtsLine }}</span>
       <span style="color:var(--line-strong);">/</span>
       <span>{{ established }}</span>
-      <span style="color:var(--line-strong);">/</span>
-      <span>{{ members }}</span>
     </div>
     <div style="display:flex; align-items:center; gap:10px; margin-top:20px;">
+      <a href="{{ websiteUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:8px; border:1px solid var(--line-strong); border-radius:999px; padding:9px 18px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.05em; color:var(--fg); transition:border-color .2s, color .2s;" style-hover="border-color:var(--accent); color:var(--accent);">VISIT WEBSITE ↗</a>
       <a href="{{ instagramUrl }}" target="_blank" rel="noopener" aria-label="Instagram" style="display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:999px; border:1px solid var(--line-strong); color:var(--fg); transition:border-color .2s, color .2s, transform .2s;" style-hover="border-color:var(--accent); color:var(--accent); transform:translateY(-2px);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
       <a href="{{ youtubeUrl }}" target="_blank" rel="noopener" aria-label="YouTube" style="display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:999px; border:1px solid var(--line-strong); color:var(--fg); transition:border-color .2s, color .2s, transform .2s;" style-hover="border-color:var(--accent); color:var(--accent); transform:translateY(-2px);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="M10.5 9.5v5l4.5-2.5z" fill="currentColor" stroke="none"/></svg></a>
       <a href="{{ tiktokUrl }}" target="_blank" rel="noopener" aria-label="TikTok" style="display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:999px; border:1px solid var(--line-strong); color:var(--fg); transition:border-color .2s, color .2s, transform .2s;" style-hover="border-color:var(--accent); color:var(--accent); transform:translateY(-2px);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 3v10.5a3.5 3.5 0 1 1-3.5-3.5" stroke-linecap="round"/><path d="M14 3c.4 2.4 2.2 4.2 4.6 4.5" stroke-linecap="round"/></svg></a>
     </div>
   </section>
 
-  <!-- ============================================================ -->
-  <!-- BLOCK 2 · HERO · FACILITIES (full-bleed)   [dynamic: photo]  -->
-  <!-- ============================================================ -->
   <section style="position:relative; width:100%; aspect-ratio:16/10; max-height:78vh; overflow:hidden; background:var(--panel); border-top:1px solid var(--line);">
-    <img src="uploads/club-paris.jpg" alt="Padel Paris Est courts" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"/>
+    <img src="uploads/club-ubud.jpg" alt="Liga Tennis & Padel Ubud courts" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;"/>
     <div style="position:absolute; left:0; right:0; bottom:0; height:35%; background:linear-gradient(to bottom, transparent, var(--bg));"></div>
   </section>
 
   <main style="max-width:1200px; margin:0 auto; padding:0 clamp(16px,4vw,40px);">
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 3 · ABOUT THE CLUB   [dynamic: description]           -->
-    <!-- ============================================================ -->
     <section style="padding:clamp(32px,5vw,64px) 0;">
       <div style="max-width:760px;">
         <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent);">The club</div>
@@ -134,25 +120,19 @@
       </div>
     </section>
 
-    <!-- signature court-line divider -->
     <svg viewBox="0 0 1200 40" preserveAspectRatio="none" style="width:100%; height:28px; display:block;" aria-hidden="true">
       <line x1="0" y1="20" x2="1200" y2="20" style="stroke:var(--line-strong)" stroke-width="1"/>
       <line x1="600" y1="4" x2="600" y2="36" style="stroke:var(--accent)" stroke-width="1.5"/>
     </svg>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 4 · VISIT · practical info   [dynamic: address,hours] -->
-    <!-- ============================================================ -->
     <section style="padding:clamp(28px,4vw,52px) 0;">
       <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3.4vw,40px); letter-spacing:-0.02em; margin:0 0 clamp(18px,2.5vw,28px);">Visit</h2>
       <div class="club-visit" style="display:grid; gap:12px; align-items:stretch;">
-        <!-- address -->
         <div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:clamp(18px,2.5vw,26px);">
           <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;">Address</div>
           <p style="font-size:15px; line-height:1.55; color:var(--fg); margin:0;">{{ address }}</p>
-          <a href="#" style="display:inline-flex; align-items:center; gap:7px; margin-top:16px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.04em; color:var(--fg); border-bottom:1px solid var(--fg); padding-bottom:3px;" style-hover="color:var(--accent); border-color:var(--accent);">GET DIRECTIONS ↗</a>
+          <a href="{{ mapsUrl }}" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:7px; margin-top:16px; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.04em; color:var(--fg); border-bottom:1px solid var(--fg); padding-bottom:3px;" style-hover="color:var(--accent); border-color:var(--accent);">GET DIRECTIONS ↗</a>
         </div>
-        <!-- hours -->
         <div style="background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:clamp(18px,2.5vw,26px);">
           <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:14px;">Opening hours</div>
           <div style="display:flex; flex-direction:column; gap:9px; font-family:'IBM Plex Mono',monospace; font-size:13px;">
@@ -164,9 +144,8 @@
             </sc-for>
           </div>
         </div>
-        <!-- map -->
         <div style="position:relative; min-height:190px; overflow:hidden; background:var(--panel); border:1px solid var(--line); border-radius:18px;">
-          <img src="assets/club-map.png" alt="Map to the club, Alicante" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;"/>
+          <img src="assets/club-map.png" alt="Map to the club, Ubud" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;"/>
           <div style="position:absolute; top:47.4%; left:46.8%; transform:translate(-50%,-100%);">
             <div style="width:16px; height:16px; border-radius:999px; background:var(--accent); box-shadow:0 0 0 6px color-mix(in srgb, var(--accent) 25%, transparent);"></div>
           </div>
@@ -174,34 +153,37 @@
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 5 · CLUB COACHES   [dynamic: coach list → profiles]   -->
-    <!-- ============================================================ -->
+    <!-- FACILITIES -->
     <section style="padding:clamp(28px,4vw,52px) 0;">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
-        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3.4vw,40px); letter-spacing:-0.02em; margin:0;">Coaches at this club</h2>
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--dim);">DYNAMIC · COACHES</span>
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3.4vw,40px); letter-spacing:-0.02em; margin:0;">Facilities</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--dim);">On-site amenities</span>
       </div>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px;">
-        <sc-for list="{{ coaches }}" as="c" hint-placeholder-count="4">
-          <a href="{{ c.href }}" style="display:flex; flex-direction:column; border:1px solid var(--line); background:var(--bg); border-radius:18px; overflow:hidden; transition:transform .2s, border-color .2s, box-shadow .2s;" style-hover="transform:translateY(-5px); border-color:var(--accent); box-shadow:0 14px 30px rgba(0,0,0,0.26);">
-            <div style="position:relative; aspect-ratio:1/1; overflow:hidden; background:var(--panel); border-bottom:1px solid var(--line);">
-              <div style="position:absolute; inset:0; background-image:repeating-linear-gradient(135deg, var(--line) 0 1px, transparent 1px 18px); opacity:0.6;"></div>
-              <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}">
-                <img src="{{ c.img }}" alt="{{ c.name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 20%;"/>
-              </sc-if>
-              <span style="position:absolute; bottom:10px; left:10px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--dim);">{{ c.slot }}</span>
-            </div>
-            <div style="padding:13px 14px;">
-              <div style="font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:16px;">{{ c.name }}</div>
-              <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; color:var(--dim); margin-top:4px;">{{ c.role }}</div>
-            </div>
-          </a>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px;">
+        <sc-for list="{{ facilities }}" as="f" hint-placeholder-count="5">
+          <div style="background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:18px; font-family:'IBM Plex Mono',monospace;">
+            <div style="font-size:15px; color:var(--fg); line-height:1.4;">{{ f.label }}</div>
+          </div>
         </sc-for>
       </div>
     </section>
 
-    <!-- signature court-line divider (service box) -->
+    <!-- PROGRAMS -->
+    <section style="padding:clamp(28px,4vw,52px) 0;">
+      <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
+        <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3.4vw,40px); letter-spacing:-0.02em; margin:0;">Programs</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--dim);">Lessons · rentals · academy</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px;">
+        <sc-for list="{{ programs }}" as="pr" hint-placeholder-count="4">
+          <div style="background:var(--bg); border:1px solid var(--line); border-radius:16px; padding:18px; display:flex; align-items:center; gap:12px;">
+            <span style="color:var(--accent); font-size:14px;">◎</span>
+            <span style="font-size:14.5px; color:var(--fg);">{{ pr.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
     <div style="padding:clamp(8px,2vw,20px) 0;">
       <svg viewBox="0 0 1200 60" preserveAspectRatio="none" style="width:100%; height:38px; display:block;" aria-hidden="true">
         <line x1="0" y1="30" x2="1200" y2="30" style="stroke:var(--line-strong)" stroke-width="1"/>
@@ -210,9 +192,6 @@
       </svg>
     </div>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 6 · GALLERY · facilities & events   [dynamic: media]  -->
-    <!-- ============================================================ -->
     <section style="padding:clamp(24px,4vw,48px) 0;">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
         <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(24px,3.4vw,40px); letter-spacing:-0.02em; margin:0;">Inside the club</h2>
@@ -229,9 +208,6 @@
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 7 · CLUB SHOP · wider mini-grid   [dynamic: products] -->
-    <!-- ============================================================ -->
     <section id="shop" style="padding:clamp(24px,4vw,48px) 0; scroll-margin-top:80px;">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:20px;">
         <div>
@@ -241,7 +217,7 @@
         <a href="Shop.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--fg); border-bottom:1px solid var(--fg); padding-bottom:3px;" style-hover="color:var(--accent); border-color:var(--accent);">FULL CATALOG ↗</a>
       </div>
       <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:10px;">
-        <sc-for list="{{ products }}" as="prod" hint-placeholder-count="8">
+        <sc-for list="{{ products }}" as="prod" hint-placeholder-count="7">
           <a href="Shop.dc.html" style="display:flex; flex-direction:column; border:1px solid var(--line); background:var(--bg); border-radius:16px; overflow:hidden; transition:transform .2s, border-color .2s, box-shadow .2s;" style-hover="transform:translateY(-5px); border-color:var(--accent); box-shadow:0 14px 30px rgba(0,0,0,0.24);">
             <div style="position:relative; aspect-ratio:1/1; overflow:hidden; background:#f4f4f1; border-bottom:1px solid var(--line);">
               <img src="{{ prod.img }}" alt="{{ prod.name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:12px;"/>
@@ -256,9 +232,6 @@
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- BLOCK 8 · CLUB DISCOUNT · attribution hook   [dynamic]      -->
-    <!-- ============================================================ -->
     <section style="padding:clamp(20px,3vw,32px) 0 clamp(36px,5vw,72px);">
       <div style="background:var(--panel); border:1px solid var(--accent); border-radius:20px; padding:clamp(22px,3.5vw,36px); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px;">
         <div style="min-width:240px;">
@@ -273,7 +246,6 @@
       </div>
     </section>
 
-    <!-- ===== SPONSORS ===== -->
     <section style="padding:0 0 clamp(40px,6vw,80px);">
       <div style="border-top:1px solid var(--line-strong); padding-top:clamp(28px,4vw,48px);">
         <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-0.01em; color:var(--accent); margin-bottom:20px;">Sponsors</div>
@@ -294,9 +266,6 @@
 
   </main>
 
-  <!-- ============================================================ -->
-  <!-- FIXED · FOOTER                                                -->
-  <!-- ============================================================ -->
   <footer style="background:var(--fg); color:var(--bg);">
     <div style="max-width:1200px; margin:0 auto; padding:clamp(32px,4vw,56px) clamp(16px,4vw,40px); display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center; justify-content:space-between;">
       <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,5vw,54px); letter-spacing:0.06em; line-height:1;">BLUWX</div>
@@ -304,16 +273,14 @@
     </div>
   </footer>
 
-  <!-- ============================================================ -->
-  <!-- FIXED · THUMB-ZONE STICKY CTA (mobile)                        -->
-  <!-- ============================================================ -->
   <div class="club-thumbcta" style="position:fixed; left:0; right:0; bottom:0; z-index:50; padding:12px clamp(12px,4vw,16px); background:linear-gradient(to top, var(--bg) 62%, transparent);">
     <a href="#shop" style="display:flex; align-items:center; justify-content:center; gap:10px; background:var(--accent); color:var(--on-accent); font-family:'Inter',sans-serif; font-weight:600; font-size:16px; padding:16px; border-radius:999px; box-shadow:0 8px 26px rgba(87,185,141,0.4);">Shop the club · {{ discountCode }}</a>
   </div>
 
 </div>
+</helmet>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Padel Paris Est&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Paris, FR&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;8 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Founded 2021&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Padel Paris Est opened its doors five years ago in the east of the city and has grown into one of the busiest clubs in the Île-de-France region. With eight indoor courts and a full coaching staff, it runs everything from beginner clinics to competitive league play.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Paris, France&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;members&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;400+ members&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PARISEST15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Liga Tennis &amp; Padel Ubud&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ubud, Bali, ID&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;3 tennis + 3 padel courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Racket sports, all year round&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A racket sports paradise for all skill levels and ages, all year round. Liga Tennis &amp; Padel Ubud brings together tennis and padel under one roof, with dedicated coaching, open play and a relaxed clubhouse atmosphere at the heart of Bali.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Jl. Katik Lantang, Singakerta, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;websiteUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://liga.tennis/venue/ligatennis-padel-ubud&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;UBUD5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
@@ -381,7 +348,6 @@ class Component extends DCLogic {
       { label: "Investors", href: "Investors.dc.html" },
     ];
 
-
     const base = {
       headerStyle, headerInnerStyle, logoStyle, rightGroupStyle, midStyle,
       navStyle, langWrapStyle, themeBtnStyle,
@@ -394,15 +360,17 @@ class Component extends DCLogic {
       navItems: NAV_ITEMS,
       cartCount: window.CartStore ? window.CartStore.count() : 0,
 
-      instagramUrl: p.instagramUrl ?? "https://instagram.com/padel-paris-est-placeholder",
-      youtubeUrl: p.youtubeUrl ?? "https://youtube.com/@padel-paris-est-placeholder",
-      tiktokUrl: p.tiktokUrl ?? "https://tiktok.com/@padel-paris-est-placeholder",
+      websiteUrl: p.websiteUrl ?? "https://liga.tennis/venue/ligatennis-padel-ubud",
+      instagramUrl: p.instagramUrl ?? "https://instagram.com/ligatennis-padel-ubud-placeholder",
+      youtubeUrl: p.youtubeUrl ?? "https://youtube.com/@ligatennis-padel-ubud-placeholder",
+      tiktokUrl: p.tiktokUrl ?? "https://tiktok.com/@ligatennis-padel-ubud-placeholder",
+      mapsUrl: p.mapsUrl ?? "https://www.google.com/maps/search/?api=1&query=Jl.+Katik+Lantang,+Singakerta,+Ubud,+Bali+80571,+Indonesia",
       theme,
       themeLabel: theme === "dark" ? "LIGHT ☀" : "DARK ☾",
       toggleTheme: () => this.setState(s => ({ theme: s.theme === "dark" ? "light" : "dark" })),
       copyLabel: this.state.copied ? "Copied ✓" : "Copy code",
       copyCode: () => {
-        const code = p.discountCode ?? "PARISEST5";
+        const code = p.discountCode ?? "UBUD5";
         try { navigator.clipboard && navigator.clipboard.writeText(code); } catch (e) {}
         this.setState({ copied: true });
         clearTimeout(this._t);
@@ -410,37 +378,42 @@ class Component extends DCLogic {
       },
     };
 
-    // ---- DYNAMIC · one instance per club (override via props) ----
     return {
       ...base,
       clubTag:     p.clubTag ?? "Club",
-      clubName:    p.clubName ?? "Padel Paris Est",
-      city:        p.city ?? "Paris, FR",
-      courtsLine:  p.courtsLine ?? "8 indoor courts",
-      established: p.established ?? "Founded 2021",
-      description: p.description ?? "Padel Paris Est opened its doors five years ago in the east of the city and has grown into one of the busiest clubs in the Île-de-France region. With eight indoor courts and a full coaching staff, it runs everything from beginner clinics to competitive league play.",
-      address:     p.address ?? "Paris, France",
-      discountCode: p.discountCode ?? "PARISEST5",
+      clubName:    p.clubName ?? "Liga Tennis & Padel Ubud",
+      city:        p.city ?? "Ubud, Bali, ID",
+      courtsLine:  p.courtsLine ?? "3 tennis + 3 padel courts",
+      established: p.established ?? "Racket sports, all year round",
+      description: p.description ?? "A racket sports paradise for all skill levels and ages, all year round. Liga Tennis & Padel Ubud brings together tennis and padel under one roof, with dedicated coaching, open play and a relaxed clubhouse atmosphere at the heart of Bali.",
+      address:     p.address ?? "Jl. Katik Lantang, Singakerta, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia",
+      discountCode: p.discountCode ?? "UBUD5",
       discountMsg: p.discountMsg ?? "Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.",
-      members: p.members ?? "400+ members",
       hours: [
-        { d: "Mon – Fri", t: "07:00 – 23:00" },
-        { d: "Saturday", t: "08:00 – 22:00" },
+        { d: "Mon – Fri", t: "07:00 – 21:00" },
+        { d: "Saturday", t: "07:00 – 21:00" },
         { d: "Sunday", t: "08:00 – 20:00" },
-        { d: "Holidays", t: "09:00 – 18:00" },
+        { d: "Holidays", t: "08:00 – 18:00" },
       ],
-      coaches: [
-        { name: "Élise Moreau", role: "Head coach", img: "uploads/Elise-Moreau.jpg", slot: "", href: "Elise Moreau Profile.dc.html" },
-        { name: "Marc Dubois", role: "Juniors", slot: "[ coach_02 ]", href: "Coach Profile.dc.html" },
-        { name: "Camille Roy", role: "Competition", slot: "[ coach_03 ]", href: "Coach Profile.dc.html" },
-        { name: "Nadia Bakir", role: "Beginners", slot: "[ coach_04 ]", href: "Coach Profile.dc.html" },
+      facilities: [
+        { label: "3 indoor tennis courts" },
+        { label: "3 padel courts" },
+        { label: "Relaxation area" },
+        { label: "Bar" },
+        { label: "Specialty shop" },
+      ],
+      programs: [
+        { label: "Court rentals" },
+        { label: "Private and group tennis lessons" },
+        { label: "Junior Academy" },
+        { label: "Private and group padel lessons" },
       ],
       gallery: [
-        { tag: "FACILITY", slot: "[ court_row ]", ratio: "4/3" },
-        { tag: "FACILITY", slot: "[ clubhouse ]", ratio: "4/3" },
-        { tag: "EVENT", slot: "[ league_night ]", ratio: "4/3" },
-        { tag: "TOURNAMENT", slot: "[ finals_day ]", ratio: "4/3" },
-        { tag: "FACILITY", slot: "[ terrace ]", ratio: "4/3" },
+        { tag: "FACILITY", slot: "[ padel_courts ]", ratio: "4/3" },
+        { tag: "FACILITY", slot: "[ tennis_courts ]", ratio: "4/3" },
+        { tag: "FACILITY", slot: "[ clubhouse_bar ]", ratio: "4/3" },
+        { tag: "FACILITY", slot: "[ pro_shop ]", ratio: "4/3" },
+        { tag: "EVENT", slot: "[ junior_academy ]", ratio: "4/3" },
       ],
       products: [
         { cat: "RACKET", name: "RONIN V1 2026", price: "€230,00", img: "uploads/np-ronin-v1.webp" },
@@ -454,6 +427,7 @@ class Component extends DCLogic {
     };
   }
 }
+
 </script>
 </body>
 </html>

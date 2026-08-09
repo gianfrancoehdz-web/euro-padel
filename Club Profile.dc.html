@@ -311,7 +311,7 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante Padel Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante, ES&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;8 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open since 2014&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A neighbourhood club a few streets back from the marina, built around eight glass courts and a terrace where matches are argued over long after they finish. Members range from Saturday-morning beginners to the regional league squad, everyone shares the same ball machine and the same coffee.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Carrer del Doctor Just 12, 03005 Alicante, Spain&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ALICANTE15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Members and visitors: apply the club code at checkout to save, every order supports the club.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante Padel Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante, ES&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;8 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open since 2014&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A neighbourhood club a few streets back from the marina, built around eight glass courts and a terrace where matches are argued over long after they finish. Members range from Saturday-morning beginners to the regional league squad, everyone shares the same ball machine and the same coffee.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Carrer del Doctor Just 12, 03005 Alicante, Spain&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ALICANTE15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
   state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
@@ -376,6 +376,7 @@ class Component extends DCLogic {
       { label: "Clubs", href: "Directory.dc.html" },
       { label: "Coaches", href: "Directory.dc.html" },
       { label: "Journal", href: "#" },
+      { label: "Investors", href: "Investors.dc.html" },
     ];
 
 
@@ -399,7 +400,7 @@ class Component extends DCLogic {
       toggleTheme: () => this.setState(s => ({ theme: s.theme === "dark" ? "light" : "dark" })),
       copyLabel: this.state.copied ? "Copied ✓" : "Copy code",
       copyCode: () => {
-        const code = p.discountCode ?? "ALICANTE15";
+        const code = p.discountCode ?? "ALICANTE5";
         try { navigator.clipboard && navigator.clipboard.writeText(code); } catch (e) {}
         this.setState({ copied: true });
         clearTimeout(this._t);
@@ -417,8 +418,8 @@ class Component extends DCLogic {
       established: p.established ?? "Open since 2014",
       description: p.description ?? "A neighbourhood club a few streets back from the marina, built around eight glass courts and a terrace where matches are argued over long after they finish. Members range from Saturday-morning beginners to the regional league squad, everyone shares the same ball machine and the same coffee.",
       address:     p.address ?? "Carrer del Doctor Just 12, 03005 Alicante, Spain",
-      discountCode: p.discountCode ?? "ALICANTE15",
-      discountMsg: p.discountMsg ?? "Members and visitors: apply the club code at checkout to save, every order supports the club.",
+      discountCode: p.discountCode ?? "ALICANTE5",
+      discountMsg: p.discountMsg ?? "Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.",
       hours: [
         { d: "Mon – Fri", t: "07:00 – 23:00" },
         { d: "Saturday", t: "08:00 – 22:00" },

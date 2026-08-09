@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  .pf-navlinks { display: none; }
+  @media (min-width: 880px) { .pf-navlinks { display: flex; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #161512; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: #57B98D; color: #161512; }
+  .post-body { --bg: #161512; --fg: #F6F4EF; --panel: #201F1B; --line: rgba(246,244,239,0.16); --line-strong: rgba(246,244,239,0.30); --dim: #A79C8C; --accent: #57B98D; --on-accent: #0E1A15; }
+</style>
+</helmet>
+
+<div class="post-body" style="font-family:'Inter',sans-serif; min-height:100vh; background:var(--bg); color:var(--fg);">
+
+  <header style="position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter:blur(16px) saturate(1.5); border-bottom:1px solid var(--line);">
+    <div style="max-width:1200px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
+      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">BLU<span style="color:var(--accent);">WX</span></a>
+      <nav class="pf-navlinks" style="align-items:center; gap:30px; font-size:14px; font-weight:500;">
+        <a href="index.dc.html">Network</a>
+        <a href="Shop.dc.html">Shop</a>
+        <a href="Blog.dc.html" style="color:var(--accent);">Blogs</a>
+      </nav>
+      <a href="Cart.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--fg); display:inline-flex; align-items:center; gap:6px;">CART<span style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">{{ cartCount }}</span></a>
+    </div>
+  </header>
+
+  <main style="max-width:760px; margin:0 auto; padding:0 clamp(16px,4vw,40px);">
+    <section style="padding:clamp(32px,5vw,56px) 0 clamp(20px,3vw,28px);">
+      <a href="Blog.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.05em; color:var(--dim); border-bottom:1px solid var(--dim); padding-bottom:2px;">← All posts</a>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-top:22px;">August 9, 2026 · Tournaments</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,5vw,46px); line-height:1.08; letter-spacing:-0.02em; margin:14px 0 0; text-wrap:balance;">FIP Promises Bali 2026 Comes to Indonesia</h1>
+    </section>
+
+    <section style="padding:0 0 clamp(24px,3vw,32px);">
+      <div style="border-radius:20px; overflow:hidden; border:1px solid var(--line);">
+        <img src="uploads/pasted-1786286439439-0.png" alt="FIP Promises Bali 2026 official poster" style="display:block; width:100%; height:auto;"/>
+      </div>
+    </section>
+
+    <section style="padding:0 0 clamp(48px,7vw,80px); font-size:17px; line-height:1.7; color:var(--fg);">
+      <p>The FIP Promises Bali 2026 is set to bring international junior padel to Indonesia, part of the FIP Tour organized under the International Padel Federation. The tournament runs from August 10 to 16 at Island Sports — Holywings Padel Club, in Bali.</p>
+      <p style="color:var(--dim);">The event is backed by PB YPI Bali and sponsors including Bullpadel, among others, bringing a high-level competitive field to the island for a full week of matches.</p>
+      <p style="font-family:'Space Grotesk',sans-serif; font-weight:500; font-size:clamp(19px,2.2vw,23px); line-height:1.4; letter-spacing:-0.01em; margin:32px 0; color:var(--fg);">The standout storyline for the BLUWX community: Zara Settimi is heading to Indonesia to compete in the tournament, going head to head with Bellaluna on one of this edition's most anticipated cards.</p>
+      <p>Zara has been building her name on the international junior circuit, and Bali marks another step in that journey, competing against strong regional talent on foreign courts.</p>
+      <p>Follow along and cheer Zara on as she takes on the FIP Promises Bali 2026 field.</p>
+      <a href="Player Profile.dc.html" style="display:inline-flex; align-items:center; justify-content:center; margin-top:12px; background:var(--accent); color:var(--on-accent); font-weight:600; font-size:15px; padding:14px 26px; border-radius:999px;" style-hover="filter:brightness(1.06);">View Zara's Profile</a>
+    </section>
+  </main>
+
+  <footer style="background:var(--fg); color:var(--bg);">
+    <div style="max-width:1200px; margin:0 auto; padding:clamp(32px,4vw,56px) clamp(16px,4vw,40px); display:flex; flex-wrap:wrap; gap:16px 24px; align-items:center; justify-content:space-between;">
+      <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,5vw,54px); letter-spacing:0.06em; line-height:1;">BLUWX</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; opacity:0.75;">Blog · the padel community</div>
+    </div>
+  </footer>
+
+</div>
+</helmet>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return { cartCount: window.CartStore ? window.CartStore.count() : 0 };
+  }
+}
+
+</script>
+</body>
+</html>
