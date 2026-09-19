@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Shop the Neuron Padel collection at Euro Padel.">
+<title>Shop Neuron Padel | Euro Padel</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -72,7 +74,7 @@
   <!-- ===== FIXED · HEADER ===== -->
   <header style="{{ headerStyle }}">
     <div style="{{ headerInnerStyle }}">
-      <a href="index.dc.html" style="{{ logoStyle }}">BLU<span style="color:var(--accent);">WX</span></a>
+      <a href="index.dc.html" style="{{ logoStyle }}">EURO<span style="color:var(--accent);">PADEL</span></a>
       <nav class="shop-navlinks" style="{{ navStyle }}">
         <sc-for list="{{ navItems }}" as="link" hint-placeholder-count="5">
           <a href="{{ link.href }}" style="padding:4px 0; color:{{ link.color }}; transition:color .18s;" style-hover="color:var(--accent);">{{ link.label }}</a>
@@ -133,7 +135,7 @@
         <span style="color:var(--fg);">Shop</span>
       </nav>
       <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:14px;">
-        <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(34px,6vw,64px); line-height:0.98; letter-spacing:-0.025em; margin:0;">All gear</h1>
+        <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(34px,6vw,64px); line-height:0.98; letter-spacing:-0.025em; margin:0;">Neuron Padel collection</h1>
         <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.06em; color:var(--dim); padding-bottom:6px;">{{ resultCount }} products</span>
       </div>
       <!-- promo banner · NEURONPADEL store header -->
@@ -142,7 +144,7 @@
         <div style="position:absolute; inset:0; background:linear-gradient(270deg, rgba(10,9,8,0.85) 0%, rgba(10,9,8,0.55) 26%, rgba(10,9,8,0.12) 44%, transparent 60%);"></div>
         <div class="shop-banner-content" style="position:relative; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:flex-end; text-align:right; gap:clamp(4px,0.8vw,8px); margin-left:auto;">
           <img class="shop-banner-logo" src="uploads/logo_neuronpadel.webp" alt="NEURONPADEL" style="width:auto; object-fit:contain; align-self:flex-end; margin-right:-6px;"/>
-          <div style="font-family:'IBM Plex Mono',monospace; font-size:clamp(11px,1.3vw,13px); letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">Official global distributor</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:clamp(11px,1.3vw,13px); letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">Featured collection</div>
           <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,3vw,34px); line-height:1.04; letter-spacing:-0.02em; margin:8px 0 0; color:#F6F4EF; text-wrap:balance;">High-end padel gear, exceptional value.</h2>
         </div>
       </div>
@@ -273,8 +275,8 @@
 
     </div>
 
-    <!-- ===== SPONSORS ===== -->
-    <section style="padding:clamp(40px,6vw,64px) 0 0;">
+    <!-- Preserved for a future partnerships phase; intentionally hidden from the ecommerce MVP. -->
+    <section style="display:none; padding:clamp(40px,6vw,64px) 0 0;">
       <div style="border-top:1px solid var(--line-strong); padding-top:clamp(28px,4vw,48px);">
         <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-0.01em; color:var(--accent); margin-bottom:20px;">Sponsors</div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
@@ -297,43 +299,33 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;partnerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Joel Rodríguez&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;partnerCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;JOEL5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;totalCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:124,&quot;tsType&quot;:&quot;number&quot;}}">
-const CATS = ["Rackets", "Apparel", "Padel Bags", "Balls", "Accessories", "Footwear"];
-const BRANDS = ["NeuronPadel", "StarVie", "Adidas", "FILA", "Coco Padel", "Macron"];
+const CATS = ["Rackets", "Apparel", "Bags & Gear", "Balls", "Accessories"];
+const BRANDS = ["Neuron Padel"];
 const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
 
 // ---- DYNAMIC catalog data (one dataset per store; placeholders here) ----
 const PRODUCTS = [
-  { name: "RONIN V1 2026", slug: "ronin", brand: "NeuronPadel", cat: "Rackets", price: 230, stock: "in", new: 10, img: "uploads/np-ronin-v1.webp" },
-  { name: "RONIN V1 Sakura Edition", slug: "ronin", brand: "NeuronPadel", cat: "Rackets", price: 250, stock: "low", new: 9, img: "uploads/np-ronin-sakura.webp" },
-  { name: "Performance Pro+ Player Bag", slug: "bag", brand: "NeuronPadel", cat: "Padel Bags", price: 125, stock: "in", new: 8, img: "uploads/np-player-bag.webp" },
-  { name: "Performance T-Shirt", slug: "tshirt", brand: "NeuronPadel", cat: "Apparel", price: 25.5, stock: "in", new: 7, img: "uploads/np-tshirt.webp" },
-  { name: "Pro+ Shorts", slug: "shorts", brand: "NeuronPadel", cat: "Apparel", price: 25.5, stock: "in", new: 6, img: "uploads/np-shorts.webp" },
-  { name: "Performance Padel Socks", slug: "socks", brand: "NeuronPadel", cat: "Accessories", price: 9, stock: "in", new: 5, img: "uploads/np-socks.webp" },
-  { name: "Pro+ Balls · Box of 24", slug: "balls", brand: "NeuronPadel", cat: "Balls", price: 7, stock: "in", new: 4, img: "uploads/np-balls.webp" },
-  { name: "StarVie Metheora", slug: "metheora", brand: "StarVie", cat: "Rackets", price: 245, stock: "in", new: 14, img: "uploads/Pala StarVie BASALTO PRO 2025 - Gran Control y Potencia.jpg" },
-  { name: "StarVie Triton", slug: "triton", brand: "StarVie", cat: "Rackets", price: 215, stock: "in", new: 13, img: "uploads/Starvie Raptor+ Padelschläger  Padello Shop - Padello.webp" },
-  { name: "StarVie Player Bag", slug: "starvie-bag", brand: "StarVie", cat: "Padel Bags", price: 95, stock: "in", new: 12, img: "uploads/SB011_2048x.webp" },
-  { name: "StarVie Black Titan", slug: "black-titan", brand: "StarVie", cat: "Rackets", price: 230, stock: "in", new: 11, img: "uploads/121644-pala-starvie-drax-mas-pstdp31000-1500x1500-1.webp" },
-  { name: "StarVie Overgrip Pack · Red", slug: "overgrip-red", brand: "StarVie", cat: "Accessories", price: 8, stock: "in", new: 10, img: "uploads/MUÑEQUERA STAVIE ROJA STAR ROJA PACK 2 - MegaPadelStore.webp" },
-  { name: "Adidas Metalbone Superlight", slug: "metalbone-superlight", brand: "Adidas", cat: "Rackets", price: 259, stock: "in", new: 15, img: "uploads/adidas-racket.webp" },
-  { name: "FILA The Agilis", slug: "fila-agilis", brand: "FILA", cat: "Rackets", price: 219, stock: "in", new: 16, img: "uploads/racket-fila-1.webp" },
-  { name: "FILA Carbon 3K", slug: "fila-carbon-3k", brand: "FILA", cat: "Rackets", price: 235, stock: "in", new: 17, img: "uploads/racket-fila-2.jpg" },
-  { name: "Coco Padel Est. 2021 · Teal", slug: "coco-teal", brand: "Coco Padel", cat: "Rackets", price: 189, stock: "in", new: 18, img: "uploads/racket-coco-1.jpg" },
-  { name: "Coco Padel Est. 2021 · Noir", slug: "coco-noir", brand: "Coco Padel", cat: "Rackets", price: 189, stock: "in", new: 19, img: "uploads/racket-coco-2.jpg" },
-  { name: "Macron Training Shoe", slug: "macron-shoe", brand: "Macron", cat: "Footwear", price: 79, stock: "in", new: 20, img: "uploads/shoe-macron-1.jpg" },
-  { name: "Macron Performance Tank", slug: "macron-tank", brand: "Macron", cat: "Apparel", price: 32, stock: "in", new: 21, img: "uploads/ropa-macron-1.jpg" },
-  { name: "Macron Performance Tee", slug: "macron-tee", brand: "Macron", cat: "Apparel", price: 29, stock: "in", new: 22, img: "uploads/ropa-macron-2.jpg" },
+  { name: "RONIN V1 2026", slug: "ronin", brand: "Neuron Padel", cat: "Rackets", price: 230, stock: "in", new: 10, img: "uploads/np-ronin-v1.webp" },
+  { name: "RONIN V1 Sakura Edition", slug: "ronin-sakura", brand: "Neuron Padel", cat: "Rackets", price: 250, stock: "low", new: 9, img: "uploads/np-ronin-sakura.webp" },
+  { name: "Performance Pro+ Player Bag", slug: "bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, stock: "in", new: 8, img: "uploads/np-player-bag.webp" },
+  { name: "Performance T-Shirt", slug: "tshirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in", new: 7, img: "uploads/np-tshirt.webp" },
+  { name: "Pro+ Shorts", slug: "shorts", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in", new: 6, img: "uploads/np-shorts.webp" },
+  { name: "Performance Padel Socks", slug: "socks", brand: "Neuron Padel", cat: "Accessories", price: 9, stock: "in", new: 5, img: "uploads/np-socks.webp" },
+  { name: "Pro+ Balls · Box of 24", slug: "balls", brand: "Neuron Padel", cat: "Balls", price: 7, stock: "in", new: 4, img: "uploads/np-balls.webp" },
 ];
 
 class Component extends DCLogic {
-  state = { theme: "dark", filterOpen: false, bannerOpen: true, cats: [], brands: [], price: "all", inStock: false, sort: "relevance", cartCount: 0, menuOpen: false, langOpen: false, lang: "EN", compact: false };
+  state = { theme: "dark", filterOpen: false, bannerOpen: false, cats: [], brands: [], price: "all", inStock: false, sort: "relevance", cartCount: 0, menuOpen: false, langOpen: false, lang: "EN", compact: false };
 
   componentDidMount() {
     this.setState({ cartCount: window.CartStore ? window.CartStore.count() : 0 });
     this._off = window.CartStore ? window.CartStore.onChange(() => this.setState({ cartCount: window.CartStore.count() })) : null;
     try {
-      const brand = new URLSearchParams(location.search).get("brand");
+      const params = new URLSearchParams(location.search);
+      const brand = params.get("brand");
+      const category = params.get("category");
       if (brand && BRANDS.includes(brand)) this.setState({ brands: [brand] });
+      if (category && CATS.includes(category)) this.setState({ cats: [category] });
     } catch (e) {}
     if (window.__bluwxHeaderScrollBound) { this._ownsScrollLock = false; }
     else {
@@ -419,14 +411,10 @@ class Component extends DCLogic {
     const currentLang = LANGS.find(l => l.code === s.lang) || LANGS[0];
     const NAV_ITEMS = [
       { label: "Home", href: "index.dc.html" },
-      { label: "Network", href: "HowItWorks.dc.html" },
       { label: "Shop", href: "Shop.dc.html" },
-      { label: "Directory", href: "Directory.dc.html" },
-      { label: "Blogs", href: "Blog.dc.html" },
-      { label: "Sponsors", href: "Sponsors.dc.html" },
-      { label: "Facility Builders", href: "Facility Builders.dc.html" },
-      { label: "Investors", href: "Investors.dc.html" },
-      { label: "FIP", href: "https://www.padelfip.com/es/" },
+      { label: "Rackets", href: "Shop.dc.html?category=Rackets" },
+      { label: "Apparel", href: "Shop.dc.html?category=Apparel" },
+      { label: "Accessories", href: "Shop.dc.html?category=Accessories" },
     ];
 
     return {

@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Review your Euro Padel shopping cart.">
+<title>Cart | Euro Padel</title>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -49,17 +51,13 @@
   <!-- ===== HEADER ===== -->
   <header style="position:sticky; top:0; z-index:40; padding-top:env(safe-area-inset-top); background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);">
     <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
-      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">BLU<span style="color:var(--accent);">WX</span></a>
+      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">EURO<span style="color:var(--accent);">PADEL</span></a>
       <nav class="bx-navlinks" style="flex:1; align-items:center; justify-content:center; gap:24px; font-size:14px; font-weight:500;">
         <a href="index.dc.html" style="color:var(--accent);">Home</a>
-        <a href="HowItWorks.dc.html" style="color:var(--fg);">Network</a>
         <a href="Shop.dc.html" style="color:var(--fg);">Shop</a>
-        <a href="Directory.dc.html" style="color:var(--fg);">Directory</a>
-        <a href="Blog.dc.html" style="color:var(--fg);">Blogs</a>
-        <a href="Sponsors.dc.html" style="color:var(--fg);">Sponsors</a>
-        <a href="Facility Builders.dc.html" style="color:var(--fg);">Facility Builders</a>
-        <a href="Investors.dc.html" style="color:var(--fg);">Investors</a>
-        <a href="https://www.padelfip.com/es/" style="color:var(--fg);">FIP</a>
+        <a href="Shop.dc.html?category=Rackets" style="color:var(--fg);">Rackets</a>
+        <a href="Shop.dc.html?category=Apparel" style="color:var(--fg);">Apparel</a>
+        <a href="Shop.dc.html?category=Accessories" style="color:var(--fg);">Accessories</a>
       </nav>
       <div style="display:flex; align-items:center; gap:16px;">
         <a href="Cart.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--accent); display:inline-flex; align-items:center; gap:6px;">CART<span style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">{{ cartCount }}</span></a>
@@ -70,14 +68,10 @@
           </summary>
           <div style="position:absolute; top:calc(100% + 10px); right:0; min-width:220px; background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:8px 14px; box-shadow:0 16px 40px rgba(0,0,0,0.4); z-index:60;">
             <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="index.dc.html" style="color:var(--accent);">Home</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="HowItWorks.dc.html" style="color:var(--fg);">Network</a>
             <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Shop.dc.html" style="color:var(--fg);">Shop</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Directory.dc.html" style="color:var(--fg);">Directory</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Blog.dc.html" style="color:var(--fg);">Blogs</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Sponsors.dc.html" style="color:var(--fg);">Sponsors</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Facility Builders.dc.html" style="color:var(--fg);">Facility Builders</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Investors.dc.html" style="color:var(--fg);">Investors</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="https://www.padelfip.com/es/" style="color:var(--fg);">FIP</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Shop.dc.html?category=Rackets" style="color:var(--fg);">Rackets</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Shop.dc.html?category=Apparel" style="color:var(--fg);">Apparel</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Shop.dc.html?category=Accessories" style="color:var(--fg);">Accessories</a>
           </div>
         </details>
       </div>
@@ -116,7 +110,7 @@
           <path d="M60 35 a9 9 0 0 1 0 18" style="stroke:var(--on-accent)" stroke-width="1.5" fill="none" opacity="0.5"/>
         </svg>
         <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(22px,3vw,30px); margin:0; letter-spacing:-0.02em;">Your cart is empty</h2>
-        <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:12px 0 0; max-width:38ch;">No gear on the court yet. Browse the NeuronPadel range and kit up for your next match.</p>
+        <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:12px 0 0; max-width:38ch;">No gear on the court yet. Browse the Neuron Padel range and kit up for your next match.</p>
         <a href="Shop.dc.html" style="margin-top:26px; display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--on-accent); border-radius:999px; padding:14px 26px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px;" style-hover="filter:brightness(1.06);">Browse the shop →</a>
       </div>
     </sc-if>
@@ -205,7 +199,7 @@
       </div>
     </sc-if>
 
-  <section style="border-top:1px solid var(--line); padding-top:clamp(28px,4vw,48px); margin-top:clamp(28px,4vw,48px);">
+  <section style="display:none; border-top:1px solid var(--line); padding-top:clamp(28px,4vw,48px); margin-top:clamp(28px,4vw,48px);">
     <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-0.01em; color:var(--accent); margin-bottom:20px;">Sponsors</div>
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
       <a href="https://taopadelacademy.com/" target="_blank" rel="noopener" style="display:flex; align-items:center; justify-content:center; background:#000; border:1px solid var(--line); border-radius:18px; padding:clamp(28px,4vw,44px); transition:transform .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); box-shadow:0 16px 34px rgba(0,0,0,0.26);">

@@ -3,7 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Euro Padel — a specialist online padel store featuring the Neuron Padel collection.">
+<title>Euro Padel | Neuron Padel equipment</title>
 <script src="./support.js"></script>
+<script src="./cart-store.js"></script>
 </head>
 <body>
 <x-dc>
@@ -58,7 +61,7 @@
   <!-- ===== HEADER / NAV ===== -->
   <header style="{{ headerStyle }}">
     <div style="{{ headerInnerStyle }}">
-      <a href="index.dc.html" style="{{ logoStyle }}">BLU<span style="color:var(--accent);">WX</span></a>
+      <a href="index.dc.html" style="{{ logoStyle }}">EURO<span style="color:var(--accent);">PADEL</span></a>
       <nav class="bluwx-navlinks" style="{{ navStyle }}">
         <sc-for list="{{ navItems }}" as="link" hint-placeholder-count="5">
           <a href="{{ link.href }}" style="padding:4px 0; color:var(--fg); transition:color .18s;" style-hover="color:var(--accent);">{{ link.label }}</a>
@@ -83,7 +86,7 @@
           </sc-if>
         </div>
         <button class="bluwx-themebtn" onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="{{ themeBtnStyle }}" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
-        <a href="#" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--fg); display:inline-flex; align-items:center; gap:6px;">CART<span style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">2</span></a>
+        <a href="Cart.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--fg); display:inline-flex; align-items:center; gap:6px;">CART<span style="display:inline-flex; align-items:center; justify-content:center; min-width:18px; height:18px; padding:0 5px; background:var(--accent); color:var(--on-accent); border-radius:9px; font-size:10px;">{{ cartCount }}</span></a>
         <button class="bluwx-menubtn" onClick="{{ toggleMenu }}" aria-label="Menu" style="border:1px solid var(--fg); background:transparent; width:40px; height:36px; align-items:center; justify-content:center; cursor:pointer; padding:0; border-radius:12px;">
           <div style="width:16px; height:1.5px; background:var(--fg); box-shadow:0 5px 0 var(--fg), 0 -5px 0 var(--fg);"></div>
         </button>
@@ -103,23 +106,22 @@
     <img src="uploads/DL-Padel-13.09.236229-1-scaled-1-1024x683.jpg" alt="Padel racket and balls on court" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;">
     <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(22,21,18,0.62) 0%, rgba(22,21,18,0.68) 45%, rgba(22,21,18,0.9) 82%, var(--bg) 100%);"></div>
     <span style="display:none; position:absolute; top:130px; left:50%; transform:translateX(-50%); z-index:2; opacity:0.7; font-family:'IBM Plex Mono',monospace; font-size:33px; letter-spacing:0.1em; text-transform:uppercase; color:#FF0000; background:rgba(14,13,11,0.65); padding:10px 24px; border-radius:999px; border:2px solid rgba(255,0,0,0.5);">DEMO</span>
-    <span style="position:absolute; bottom:14px; right:16px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; color:rgba(246,244,239,0.6);">TEMP · placeholder photo</span>
+    <span style="display:none; position:absolute; bottom:14px; right:16px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; color:rgba(246,244,239,0.6);">TEMP · placeholder photo</span>
     <div style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(56px,10vw,120px) clamp(16px,4vw,40px) clamp(48px,7vw,96px);">
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">The Padel Network</div>
-      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(44px,8.5vw,104px); line-height:0.94; letter-spacing:-0.025em; margin:20px 0 0; max-width:16ch; text-wrap:balance; color:#F6F4EF;">Everything for padel. Everyone in padel.</h1>
-      <p style="font-size:clamp(16px,1.6vw,19px); line-height:1.5; color:rgba(246,244,239,0.78); max-width:52ch; margin:24px 0 0;">BLUWX is the digital padel platform, connecting companies, brands, clubs, coaches, influencers and players through a smarter way to discover and shop for premium padel products.</p>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">Specialist padel equipment</div>
+      <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(44px,8.5vw,104px); line-height:0.94; letter-spacing:-0.025em; margin:20px 0 0; max-width:16ch; text-wrap:balance; color:#F6F4EF;">Built for the way you play.</h1>
+      <p style="font-size:clamp(16px,1.6vw,19px); line-height:1.5; color:rgba(246,244,239,0.78); max-width:52ch; margin:24px 0 0;">Euro Padel is a specialist online store for players who care about their equipment. Discover our focused collection from Neuron Padel.</p>
       <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:34px;">
-        <a href="HowItWorks.dc.html#join" style="display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(246,244,239,0.7); color:#F6F4EF; font-weight:500; font-size:15px; padding:16px 32px; border-radius:999px; transition:transform .2s, background .2s, color .2s, border-color .2s;" style-hover="background:#F6F4EF; color:#161512; border-color:#F6F4EF; transform:translateY(-3px);">Join the community</a>
-        <a href="HowItWorks.dc.html" style="display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(246,244,239,0.7); color:#F6F4EF; font-weight:500; font-size:15px; padding:16px 32px; border-radius:999px; transition:transform .2s, background .2s, color .2s, border-color .2s;" style-hover="background:#F6F4EF; color:#161512; border-color:#F6F4EF; transform:translateY(-3px);">See how it works</a>
-        <a href="Shop.dc.html" style="display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--on-accent); font-weight:600; font-size:15px; padding:16px 34px; border-radius:999px; box-shadow:0 6px 18px rgba(87,185,141,0.28); transition:transform .2s, box-shadow .2s, filter .2s;" style-hover="filter:brightness(1.12); transform:translateY(-3px); box-shadow:0 14px 32px rgba(87,185,141,0.5);">Shop</a>
+        <a href="Shop.dc.html" style="display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--on-accent); font-weight:600; font-size:15px; padding:16px 34px; border-radius:999px; box-shadow:0 6px 18px rgba(87,185,141,0.28); transition:transform .2s, box-shadow .2s, filter .2s;" style-hover="filter:brightness(1.12); transform:translateY(-3px); box-shadow:0 14px 32px rgba(87,185,141,0.5);">Shop Neuron Padel</a>
+        <a href="Product.dc.html#ronin" style="display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(246,244,239,0.7); color:#F6F4EF; font-weight:500; font-size:15px; padding:16px 32px; border-radius:999px; transition:transform .2s, background .2s, color .2s, border-color .2s;" style-hover="background:#F6F4EF; color:#161512; border-color:#F6F4EF; transform:translateY(-3px);">Explore RONIN</a>
       </div>
     </div>
   </section>
 
   <main style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px);">
 
-    <!-- ===== THE NETWORK ===== -->
-    <section style="padding:clamp(40px,6vw,88px) 0 clamp(24px,4vw,48px);">
+    <!-- Preserved for a future community phase; intentionally hidden from the ecommerce MVP. -->
+    <section style="display:none; padding:clamp(40px,6vw,88px) 0 clamp(24px,4vw,48px);">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:clamp(20px,3vw,36px);">
         <div>
           <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(28px,4.4vw,52px); line-height:1.0; letter-spacing:-0.02em; margin:14px 0 0; max-width:20ch; text-wrap:balance;">The people are the platform.</h2>
@@ -248,7 +250,7 @@
     <section style="padding:clamp(16px,3vw,32px) 0 clamp(32px,5vw,56px);">
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:22px;">
         <div>
-          <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,42px); letter-spacing:-0.02em; margin:12px 0 0;">Shop, built into the network.</h2>
+          <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,42px); letter-spacing:-0.02em; margin:12px 0 0;">The Neuron Padel collection.</h2>
         </div>
         <a href="Shop.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--fg); border-bottom:1px solid var(--fg); padding-bottom:3px;" style-hover="color:var(--accent); border-color:var(--accent);">ALL PRODUCTS ↗</a>
       </div>
@@ -273,8 +275,8 @@
       </sc-for>
     </section>
 
-    <!-- ===== SPONSORS ===== -->
-    <section style="padding:clamp(24px,4vw,48px) 0 clamp(40px,6vw,80px);">
+    <!-- Preserved for a future partnerships phase; intentionally hidden from the ecommerce MVP. -->
+    <section style="display:none; padding:clamp(24px,4vw,48px) 0 clamp(40px,6vw,80px);">
       <div style="border-top:1px solid var(--line-strong); padding-top:clamp(28px,4vw,48px);">
         <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-0.01em; color:var(--accent); margin-bottom:20px;">Sponsors</div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
@@ -299,7 +301,7 @@
     <div style="max-width:1280px; margin:0 auto; padding:clamp(36px,5vw,64px) clamp(16px,4vw,40px) clamp(24px,3vw,40px);">
       <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:clamp(24px,3vw,40px);">
         <div style="grid-column:1/-1;">
-          <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(40px,8vw,90px); letter-spacing:0.06em; line-height:1;">BLU<span style="color:#2C7A57;">WX</span></div>
+          <div style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(40px,8vw,90px); letter-spacing:0.06em; line-height:1;">EURO<span style="color:#2C7A57;">PADEL</span></div>
         </div>
         <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="4">
           <div>
@@ -311,23 +313,25 @@
         </sc-for>
       </div>
       <div style="display:flex; flex-wrap:wrap; gap:12px 24px; justify-content:space-between; align-items:center; border-top:1px solid color-mix(in srgb, var(--bg) 22%, transparent); margin-top:clamp(32px,4vw,52px); padding-top:22px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; opacity:0.7;">
-        <span>© 2026 BLUWX, provisional wordmark</span>
-        <span>The padel community · global shipping</span>
+        <span>© 2026 Euro Padel</span>
+        <span>Specialist padel equipment · European delivery</span>
       </div>
     </div>
   </footer>
 
   <!-- ===== THUMB-ZONE STICKY CTA (mobile) ===== -->
   <div class="bluwx-thumbcta" style="position:fixed; left:0; right:0; bottom:0; z-index:50; padding:12px clamp(12px,4vw,16px); background:linear-gradient(to top, var(--bg) 62%, transparent);">
-    <a href="#" style="display:flex; align-items:center; justify-content:center; gap:10px; background:var(--accent); color:var(--on-accent); font-family:'Inter',sans-serif; font-weight:600; font-size:16px; padding:16px; border-radius:999px; box-shadow:0 8px 26px rgba(87,185,141,0.4);">Join BLUWX <span style="font-family:'IBM Plex Mono',monospace;">↗</span></a>
+    <a href="Shop.dc.html" style="display:flex; align-items:center; justify-content:center; gap:10px; background:var(--accent); color:var(--on-accent); font-family:'Inter',sans-serif; font-weight:600; font-size:16px; padding:16px; border-radius:999px; box-shadow:0 8px 26px rgba(87,185,141,0.4);">Shop Neuron Padel <span style="font-family:'IBM Plex Mono',monospace;">↗</span></a>
   </div>
 
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { menuOpen: false, theme: "dark", langOpen: false, lang: "EN", compact: false };
+  state = { menuOpen: false, theme: "dark", langOpen: false, lang: "EN", compact: false, cartCount: 0 };
   componentDidMount() {
+    this._offCart = window.CartStore ? window.CartStore.onChange(() => this.setState({ cartCount: window.CartStore.count() })) : null;
+    if (window.CartStore) this.setState({ cartCount: window.CartStore.count() });
     if (window.__bluwxHeaderScrollBound) return;
     window.__bluwxHeaderScrollBound = true;
     this._ownsScrollLock = true;
@@ -352,6 +356,7 @@ class Component extends DCLogic {
     window.addEventListener("scroll", this._onScroll, { passive: true });
   }
   componentWillUnmount() {
+    if (this._offCart) this._offCart();
     if (this._ownsScrollLock) {
       window.removeEventListener("scroll", this._onScroll);
       window.__bluwxHeaderScrollBound = false;
@@ -397,15 +402,12 @@ class Component extends DCLogic {
       toggleTheme: () => this.setState(s => ({ theme: s.theme === "dark" ? "light" : "dark" })),
       menuOpen: this.state.menuOpen,
       toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      cartCount: this.state.cartCount,
       navItems: [
-        { label: "Network", href: "HowItWorks.dc.html" },
         { label: "Shop", href: "Shop.dc.html" },
-        { label: "Directory", href: "Directory.dc.html" },
-        { label: "Blogs", href: "Blog.dc.html" },
-        { label: "Sponsors", href: "Sponsors.dc.html" },
-        { label: "Facility Builders", href: "Facility Builders.dc.html" },
-        { label: "Investors", href: "Investors.dc.html" },
-        { label: "FIP", href: "https://www.padelfip.com/es/" },
+        { label: "Rackets", href: "Shop.dc.html?category=Rackets" },
+        { label: "Apparel", href: "Shop.dc.html?category=Apparel" },
+        { label: "Accessories", href: "Shop.dc.html?category=Accessories" },
       ],
       pillars: [
         { name: "Clubs", code: "NET · 01", img: "uploads/Club.png", objPos: "center", stat: "140+", blurb: "Stocked and supplied across the continent, demo racks, trade pricing and event support." },
@@ -426,26 +428,12 @@ class Component extends DCLogic {
         { name: "Pro+ Balls · Box of 24", code: "BALLS", price: "€7,00", img: "uploads/np-balls.webp" },
       ],
       shopRows: [
-        { brand: "NeuronPadel", items: [
+        { brand: "Neuron Padel", items: [
           { name: "RONIN V1 2026", code: "RACKET", price: "€230,00", img: "uploads/np-ronin-v1.webp" },
           { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€250,00", img: "uploads/np-ronin-sakura.webp" },
           { name: "Performance Pro+ Player Bag", code: "BAG", price: "€125,00", img: "uploads/np-player-bag.webp" },
           { name: "Performance T-Shirt", code: "APPAREL", price: "€25,50", img: "uploads/np-tshirt.webp" },
           { name: "Pro+ Balls · Box of 24", code: "BALLS", price: "€7,00", img: "uploads/np-balls.webp" },
-        ]},
-        { brand: "StarVie", items: [
-          { name: "StarVie Metheora", code: "RACKET", price: "€245,00", img: "uploads/Pala StarVie BASALTO PRO 2025 - Gran Control y Potencia.jpg" },
-          { name: "StarVie Triton", code: "RACKET", price: "€215,00", img: "uploads/Starvie Raptor+ Padelschläger  Padello Shop - Padello.webp" },
-          { name: "StarVie Player Bag", code: "BAG", price: "€95,00", img: "uploads/SB011_2048x.webp" },
-          { name: "StarVie Black Titan", code: "RACKET", price: "€230,00", img: "uploads/121644-pala-starvie-drax-mas-pstdp31000-1500x1500-1.webp" },
-          { name: "StarVie Overgrip Pack · Red", code: "ACCESSORIES", price: "€8,00", img: "uploads/MUÑEQUERA STAVIE ROJA STAR ROJA PACK 2 - MegaPadelStore.webp" },
-        ]},
-        { brand: "FILA · Coco Padel · Macron", items: [
-          { name: "FILA The Agilis", code: "RACKET", price: "€219,00", img: "uploads/racket-fila-1.webp" },
-          { name: "FILA Carbon 3K", code: "RACKET", price: "€235,00", img: "uploads/racket-fila-2.jpg" },
-          { name: "Coco Padel Est. 2021 · Teal", code: "RACKET", price: "€189,00", img: "uploads/racket-coco-1.jpg" },
-          { name: "Macron Training Shoe", code: "FOOTWEAR", price: "€79,00", img: "uploads/shoe-macron-1.jpg" },
-          { name: "Macron Performance Tee", code: "APPAREL", price: "€29,00", img: "uploads/ropa-macron-2.jpg" },
         ]},
       ],
       social: [
@@ -457,31 +445,22 @@ class Component extends DCLogic {
         { tag: "EVENT", slot: "[ league_night ]" },
       ],
       footerCols: [
-        { title: "Network", links: [
-          { label: "Clubs", href: "Directory.dc.html" },
-          { label: "Coaches", href: "Directory.dc.html" },
-          { label: "Influencers", href: "Directory.dc.html" },
-          { label: "Become a partner", href: "#" },
-        ] },
         { title: "Shop", links: [
-          { label: "Rackets", href: "Shop.dc.html" },
-          { label: "Apparel", href: "Shop.dc.html" },
-          { label: "Padel Bags", href: "Shop.dc.html" },
-          { label: "Balls", href: "Shop.dc.html" },
-          { label: "Accessories", href: "Shop.dc.html" },
+          { label: "Rackets", href: "Shop.dc.html?category=Rackets" },
+          { label: "Apparel", href: "Shop.dc.html?category=Apparel" },
+          { label: "Bags & Gear", href: "Shop.dc.html?category=Bags%20%26%20Gear" },
+          { label: "Balls", href: "Shop.dc.html?category=Balls" },
+          { label: "Accessories", href: "Shop.dc.html?category=Accessories" },
         ] },
-        { title: "Community", links: [
-          { label: "Social Club", href: "#" },
-          { label: "Journal", href: "#" },
-        { label: "Investors", href: "Investors.dc.html" },
-          { label: "Events", href: "#" },
-          { label: "Newsletter", href: "#" },
+        { title: "Collection", links: [
+          { label: "RONIN V1", href: "Product.dc.html#ronin" },
+          { label: "RONIN Sakura", href: "Product.dc.html#ronin" },
+          { label: "Neuron Padel", href: "Shop.dc.html" },
         ] },
         { title: "Company", links: [
-          { label: "About", href: "#" },
-          { label: "Stockists", href: "#" },
+          { label: "About Euro Padel", href: "#" },
           { label: "Support", href: "#" },
-          { label: "Careers", href: "#" },
+          { label: "Shipping & returns", href: "#" },
         ] },
       ],
     };
