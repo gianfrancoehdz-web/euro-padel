@@ -211,7 +211,7 @@
               <sc-for list="{{ items }}" as="it" hint-placeholder-count="2">
                 <div style="display:flex; align-items:center; gap:12px;">
                   <div style="position:relative; width:52px; height:52px; flex:none; border-radius:10px; background:#f4f4f1; border:1px solid var(--line); overflow:hidden;">
-                    <img src="{{ it.img }}" alt="{{ it.name }}" style="width:100%; height:100%; object-fit:contain; padding:6px;"/>
+                    <img src="{{ it.img }}" alt="{{ it.name }}" style="width:100%; height:100%; object-fit:contain; padding:6px; transform:scale({{ it.imageScale }});"/>
                     <span style="position:absolute; top:-7px; right:-7px; min-width:19px; height:19px; padding:0 5px; display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--on-accent); border-radius:999px; font-family:'IBM Plex Mono',monospace; font-size:10px;">{{ it.qty }}</span>
                   </div>
                   <div style="flex:1; min-width:0;">
@@ -374,6 +374,7 @@ class Component extends DCLogic {
 
       items: items.map(it => ({
         name: it.name, img: it.img, qty: it.qty,
+        imageScale: it.name === "RONIN V1 2026" ? 1.28 : 1,
         hasVariant: !!it.variantLabel, variantLabel: it.variantLabel,
         lineTotal: euro(it.price * it.qty),
       })),

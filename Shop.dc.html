@@ -241,7 +241,7 @@
           <sc-for list="{{ shownProducts }}" as="prod" hint-placeholder-count="7">
             <a href="{{ prod.href }}" style="display:flex; flex-direction:column; border:1px solid var(--line); background:var(--bg); border-radius:18px; overflow:hidden; transition:transform .2s, border-color .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); border-color:var(--accent); box-shadow:0 16px 34px rgba(0,0,0,0.26);">
               <div style="position:relative; aspect-ratio:3/4; overflow:hidden; background:#f4f4f1; border-bottom:1px solid var(--line);">
-                <img src="{{ prod.img }}" alt="{{ prod.name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:14px;"/>
+                <img src="{{ prod.img }}" alt="{{ prod.name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:14px; transform:scale({{ prod.imageScale }});"/>
                 <span style="position:absolute; top:11px; left:11px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#77776f;">{{ prod.cat }}</span>
                 <sc-if value="{{ prod.showTag }}" hint-placeholder-val="{{ false }}">
                   <span style="position:absolute; top:11px; right:11px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.04em; text-transform:uppercase; padding:4px 8px; border-radius:999px; background:var(--bg); color:{{ prod.tagColor }}; border:1px solid {{ prod.tagColor }};">{{ prod.tag }}</span>
@@ -305,8 +305,8 @@ const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
 
 // ---- DYNAMIC catalog data (one dataset per store; placeholders here) ----
 const PRODUCTS = [
-  { name: "RONIN V1 2026", slug: "ronin", brand: "Neuron Padel", cat: "Rackets", price: 230, stock: "in", new: 10, img: "uploads/np-ronin-v1.webp" },
-  { name: "RONIN V1 Sakura Edition", slug: "ronin-sakura", brand: "Neuron Padel", cat: "Rackets", price: 250, stock: "low", new: 9, img: "uploads/np-ronin-sakura.webp" },
+  { name: "RONIN V1 2026", slug: "ronin", brand: "Neuron Padel", cat: "Rackets", price: 230, stock: "in", new: 10, img: "uploads/np-ronin-v1.webp", imageScale: 1.28 },
+  { name: "RONIN V1 Sakura Edition", slug: "ronin-sakura", brand: "Neuron Padel", cat: "Rackets", price: 250, stock: "low", new: 9, img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
   { name: "Performance Pro+ Player Bag", slug: "bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, stock: "in", new: 8, img: "uploads/np-player-bag.webp" },
   { name: "Performance T-Shirt", slug: "tshirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in", new: 7, img: "uploads/np-tshirt.webp" },
   { name: "Pro+ Shorts", slug: "shorts", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in", new: 6, img: "uploads/np-shorts.webp" },
@@ -470,7 +470,7 @@ class Component extends DCLogic {
 
       shownProducts: list.map(x => ({
         name: x.name, brand: x.brand, cat: x.cat.toUpperCase(),
-        priceLabel: euro(x.price), img: x.img,
+        priceLabel: euro(x.price), img: x.img, imageScale: x.imageScale || 1,
         href: "Product.dc.html#" + x.slug,
         ...tagFor(x.stock),
       })),

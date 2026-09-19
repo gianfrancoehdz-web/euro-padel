@@ -262,7 +262,7 @@
             <sc-for list="{{ row.items }}" as="cat" hint-placeholder-count="5">
               <a href="Shop.dc.html" style="position:relative; display:block; background:var(--bg); border:1px solid var(--line); border-radius:18px; overflow:hidden; transition:transform .2s, border-color .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); border-color:var(--accent); box-shadow:0 16px 34px rgba(0,0,0,0.26);">
                 <div style="aspect-ratio:3/4; position:relative; overflow:hidden; background:#f4f4f1;">
-                  <img src="{{ cat.img }}" alt="{{ cat.name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:14px;"/>
+                  <img src="{{ cat.img }}" alt="{{ cat.name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:14px; transform:scale({{ cat.imageScale }});"/>
                   <div style="position:absolute; top:12px; left:12px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; color:#77776f;">{{ cat.code }}</div>
                 </div>
                 <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; padding:16px;">
@@ -422,16 +422,16 @@ class Component extends DCLogic {
         { n: "48h", l: "EU delivery" },
       ],
       categories: [
-        { name: "RONIN V1 2026", code: "RACKET", price: "€230,00", img: "uploads/np-ronin-v1.webp" },
-        { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€250,00", img: "uploads/np-ronin-sakura.webp" },
+        { name: "RONIN V1 2026", code: "RACKET", price: "€230,00", img: "uploads/np-ronin-v1.webp", imageScale: 1.28 },
+        { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€250,00", img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
         { name: "Performance Pro+ Player Bag", code: "BAG", price: "€125,00", img: "uploads/np-player-bag.webp" },
         { name: "Performance T-Shirt", code: "APPAREL", price: "€25,50", img: "uploads/np-tshirt.webp" },
         { name: "Pro+ Balls · Box of 24", code: "BALLS", price: "€7,00", img: "uploads/np-balls.webp" },
       ],
       shopRows: [
         { brand: "Neuron Padel", items: [
-          { name: "RONIN V1 2026", code: "RACKET", price: "€230,00", img: "uploads/np-ronin-v1.webp" },
-          { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€250,00", img: "uploads/np-ronin-sakura.webp" },
+          { name: "RONIN V1 2026", code: "RACKET", price: "€230,00", img: "uploads/np-ronin-v1.webp", imageScale: 1.28 },
+          { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€250,00", img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
           { name: "Performance Pro+ Player Bag", code: "BAG", price: "€125,00", img: "uploads/np-player-bag.webp" },
           { name: "Performance T-Shirt", code: "APPAREL", price: "€25,50", img: "uploads/np-tshirt.webp" },
           { name: "Pro+ Balls · Box of 24", code: "BALLS", price: "€7,00", img: "uploads/np-balls.webp" },

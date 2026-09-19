@@ -97,7 +97,7 @@
       <!-- ===== GALLERY ===== -->
       <div>
         <div style="position:relative; aspect-ratio:1/1; overflow:hidden; border:1px solid var(--line); border-radius:22px; background:#f4f4f1;">
-          <img src="{{ activeImg }}" alt="{{ name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:clamp(24px,5vw,64px);"/>
+          <img src="{{ activeImg }}" alt="{{ name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:clamp(24px,5vw,64px); transform:scale({{ activeImageScale }});"/>
           <span style="position:absolute; top:16px; left:16px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; color:#77776f;">{{ catLabel }}</span>
           <sc-if value="{{ showTag }}" hint-placeholder-val="{{ false }}">
             <span style="position:absolute; top:16px; right:16px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; padding:5px 10px; border-radius:999px; background:#fff; color:{{ tagColor }}; border:1px solid {{ tagColor }};">{{ tag }}</span>
@@ -107,7 +107,7 @@
         <div class="pd-thumbs" style="margin-top:12px;">
           <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="2">
             <button onClick="{{ g.select }}" style="flex:none; width:76px; height:76px; padding:8px; border:1px solid {{ g.border }}; border-radius:14px; background:#f4f4f1; cursor:pointer;">
-              <img src="{{ g.img }}" alt="" style="width:100%; height:100%; object-fit:contain;"/>
+              <img src="{{ g.img }}" alt="" style="width:100%; height:100%; object-fit:contain; transform:scale({{ g.imageScale }});"/>
             </button>
           </sc-for>
         </div>
@@ -206,14 +206,14 @@ const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
 // Full product records with variant configs. Model variants can swap image + price.
 const CATALOG = {
   ronin: {
-    name: "RONIN V1 2026", brand: "Neuron Padel", cat: "Rackets", price: 230, stock: "in",
+    name: "RONIN V1 2026", brand: "Neuron Padel", cat: "Rackets", price: 230, stock: "in", imageScale: 1.28,
     description: "Carbon-fibre diamond-shape frame built for aggressive attacking play. EVA soft-core for a forgiving sweet spot and controlled power on every smash.",
     gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"],
     variant: {
       label: "Model", type: "model",
       options: [
-        { value: "onyx", label: "Onyx", price: 230, img: "uploads/neuronpadel  RONIN v1-1.webp", gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"] },
-        { value: "sakura", label: "Sakura", price: 250, img: "uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", gallery: ["uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", "uploads/np-ronin-sakura.webp"] },
+        { value: "onyx", label: "Onyx", price: 230, img: "uploads/neuronpadel  RONIN v1-1.webp", imageScale: 1.28, gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"] },
+        { value: "sakura", label: "Sakura", price: 250, img: "uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", imageScale: 1, gallery: ["uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", "uploads/np-ronin-sakura.webp"] },
       ],
     },
     perks: ["Free EU shipping", "2-year warranty", "Ships in 24h"],
@@ -314,7 +314,8 @@ class Component extends DCLogic {
       ...tag,
 
       activeImg: gallery[imgIdx],
-      gallery: gallery.map((img, i) => ({ img, border: i === imgIdx ? accent : line, select: () => this.setState({ imgIdx: i }) })),
+      activeImageScale: opt?.imageScale || p.imageScale || 1,
+      gallery: gallery.map((img, i) => ({ img, imageScale: opt?.imageScale || p.imageScale || 1, border: i === imgIdx ? accent : line, select: () => this.setState({ imgIdx: i }) })),
 
       hasVariants: !!p.variant,
       variantLabel: p.variant ? p.variant.label : "",
