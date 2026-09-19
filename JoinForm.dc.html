@@ -41,34 +41,24 @@
 
   <header style="position:sticky; top:0; z-index:40; padding-top:env(safe-area-inset-top); background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);">
     <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
-      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">BLU<span style="color:var(--accent);">WX</span></a>
+      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.10em; color:var(--fg);">EURO<span style="color:var(--accent);">PADEL</span></a>
       <nav class="bx-navlinks" style="flex:1; align-items:center; justify-content:center; gap:24px; font-size:14px; font-weight:500;">
-        <a href="index.dc.html" style="color:var(--accent);">Home</a>
-        <a href="HowItWorks.dc.html" style="color:var(--fg);">Network</a>
         <a href="Shop.dc.html" style="color:var(--fg);">Shop</a>
-        <a href="Directory.dc.html" style="color:var(--fg);">Directory</a>
         <a href="Blog.dc.html" style="color:var(--fg);">Blogs</a>
         <a href="Sponsors.dc.html" style="color:var(--fg);">Sponsors</a>
-        <a href="Facility Builders.dc.html" style="color:var(--fg);">Facility Builders</a>
-        <a href="Investors.dc.html" style="color:var(--fg);">Investors</a>
-        <a href="https://www.padelfip.com/es/" style="color:var(--fg);">FIP</a>
+        <a href="Shop.dc.html?category=Accessories" style="color:var(--fg);">Accessories</a>
       </nav>
       <div style="display:flex; align-items:center; gap:12px;">
-        <a href="HowItWorks.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--dim);" style-hover="color:var(--accent);">← How it works</a>
+        <a href="Sponsors.dc.html" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--dim);" style-hover="color:var(--accent);">← Sponsors</a>
         <details class="bx-mobnav" style="position:relative;">
           <summary class="bx-mobnav-btn" style="list-style:none; cursor:pointer; border:1px solid var(--fg); width:40px; height:36px; border-radius:12px; display:flex; align-items:center; justify-content:center;" aria-label="Menu">
             <div style="width:16px; height:1.5px; background:var(--fg); box-shadow:0 5px 0 var(--fg), 0 -5px 0 var(--fg);"></div>
           </summary>
           <div style="position:absolute; top:calc(100% + 10px); right:0; min-width:220px; background:var(--bg); border:1px solid var(--line-strong); border-radius:16px; padding:8px 14px; box-shadow:0 16px 40px rgba(0,0,0,0.4); z-index:60;">
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="index.dc.html" style="color:var(--accent);">Home</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="HowItWorks.dc.html" style="color:var(--fg);">Network</a>
             <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Shop.dc.html" style="color:var(--fg);">Shop</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Directory.dc.html" style="color:var(--fg);">Directory</a>
             <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Blog.dc.html" style="color:var(--fg);">Blogs</a>
             <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Sponsors.dc.html" style="color:var(--fg);">Sponsors</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Facility Builders.dc.html" style="color:var(--fg);">Facility Builders</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="Investors.dc.html" style="color:var(--fg);">Investors</a>
-            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; border-bottom:1px solid var(--line);" href="https://www.padelfip.com/es/" style="color:var(--fg);">FIP</a>
+            <a style="display:block; padding:13px 4px; font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500;" href="Shop.dc.html?category=Accessories" style="color:var(--fg);">Accessories</a>
           </div>
         </details>
       </div>
@@ -94,7 +84,7 @@
       <!-- STEP 1 -->
       <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
         <div style="text-align:center;">
-          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);">Join BLUWX</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent);">Join Euro Padel</div>
           <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(30px,5vw,46px); line-height:1.02; letter-spacing:-0.03em; margin:16px 0 0; text-wrap:balance;">Who are you?</h1>
           <p style="font-size:16px; line-height:1.6; color:var(--dim); margin:14px 0 0;">Pick the role that fits you best — you can change it anytime.</p>
         </div>
@@ -242,7 +232,7 @@ const ICONS = { club: "🏟", coach: "🎓", ambassador: "★", player: "🎾" }
 const DESCS = {
   club: "List your club, courts and coaches.",
   coach: "Offer lessons and grow your roster.",
-  ambassador: "Represent BLUWX in your community as an influencer.",
+  ambassador: "Represent Euro Padel in your community as an influencer.",
   player: "Book courts, coaches and gear.",
 };
 const EXTRA = {
