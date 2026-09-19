@@ -374,7 +374,7 @@ class Component extends DCLogic {
 
       items: items.map(it => ({
         name: it.name, img: it.img, qty: it.qty,
-        imageScale: it.name === "RONIN V1 2026" ? 1.28 : 1,
+        imageScale: it.name === "RONIN V1 2026" ? 1.4 : 1,
         hasVariant: !!it.variantLabel, variantLabel: it.variantLabel,
         lineTotal: euro(it.price * it.qty),
       })),
