@@ -305,13 +305,13 @@ const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
 
 // ---- DYNAMIC catalog data (one dataset per store; placeholders here) ----
 const PRODUCTS = [
-  { name: "RONIN V1 2026", slug: "ronin", brand: "Neuron Padel", cat: "Rackets", price: 230, stock: "in", new: 10, img: "uploads/np-ronin-v1.webp", imageScale: 1.4 },
-  { name: "RONIN V1 Sakura Edition", slug: "ronin-sakura", brand: "Neuron Padel", cat: "Rackets", price: 250, stock: "low", new: 9, img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
-  { name: "Performance Pro+ Player Bag", slug: "bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, stock: "in", new: 8, img: "uploads/np-player-bag.webp" },
-  { name: "Performance T-Shirt", slug: "tshirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in", new: 7, img: "uploads/np-tshirt.webp" },
-  { name: "Pro+ Shorts", slug: "shorts", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in", new: 6, img: "uploads/np-shorts.webp" },
-  { name: "Performance Padel Socks", slug: "socks", brand: "Neuron Padel", cat: "Accessories", price: 9, stock: "in", new: 5, img: "uploads/np-socks.webp" },
-  { name: "Pro+ Balls · Box of 24", slug: "balls", brand: "Neuron Padel", cat: "Balls", price: 7, stock: "in", new: 4, img: "uploads/np-balls.webp" },
+  { name: "RONIN V1 2026", slug: "ronin", brand: "Neuron Padel", cat: "Rackets", price: 262, available: true, stock: "in", new: 10, img: "uploads/np-ronin-v1.webp", imageScale: 1.4 },
+  { name: "RONIN V1 Sakura Edition", slug: "ronin-sakura", brand: "Neuron Padel", cat: "Rackets", price: 295, available: true, stock: "low", new: 9, img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
+  { name: "Performance Pro+ Player Bag", slug: "bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, available: false, stock: "in", new: 8, img: "uploads/np-player-bag.webp" },
+  { name: "Performance T-Shirt", slug: "tshirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, available: false, stock: "in", new: 7, img: "uploads/np-tshirt.webp" },
+  { name: "Pro+ Shorts", slug: "shorts", brand: "Neuron Padel", cat: "Apparel", price: 25.5, available: false, stock: "in", new: 6, img: "uploads/np-shorts.webp" },
+  { name: "Performance Padel Socks", slug: "socks", brand: "Neuron Padel", cat: "Accessories", price: 9, available: false, stock: "in", new: 5, img: "uploads/np-socks.webp" },
+  { name: "Pro+ Balls · Box of 24", slug: "balls", brand: "Neuron Padel", cat: "Balls", price: 7, available: false, stock: "in", new: 4, img: "uploads/np-balls.webp" },
 ];
 
 class Component extends DCLogic {
@@ -470,7 +470,7 @@ class Component extends DCLogic {
 
       shownProducts: list.map(x => ({
         name: x.name, brand: x.brand, cat: x.cat.toUpperCase(),
-        priceLabel: euro(x.price), img: x.img, imageScale: x.imageScale || 1,
+        priceLabel: x.available ? euro(x.price) : "Coming soon", img: x.img, imageScale: x.imageScale || 1,
         href: "Product.dc.html#" + x.slug,
         ...tagFor(x.stock),
       })),

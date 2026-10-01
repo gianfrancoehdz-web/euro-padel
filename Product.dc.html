@@ -120,7 +120,7 @@
 
         <div style="display:flex; align-items:baseline; gap:12px; margin-top:16px;">
           <span style="font-family:'IBM Plex Mono',monospace; font-size:clamp(26px,3.5vw,34px); color:var(--fg);">{{ priceLabel }}</span>
-          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--dim);">VAT incl.</span>
+          <sc-if value="{{ isAvailable }}" hint-placeholder-val="{{ true }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--dim);">VAT incl.</span></sc-if>
         </div>
 
         <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:20px 0 0; max-width:46ch; text-wrap:pretty;">{{ description }}</p>
@@ -147,14 +147,15 @@
         </sc-if>
 
         <!-- QUANTITY + ADD -->
-        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:stretch;">
+        <sc-if value="{{ isAvailable }}" hint-placeholder-val="{{ true }}"><div style="display:flex; flex-wrap:wrap; gap:12px; align-items:stretch;">
           <div style="display:flex; align-items:center; border:1px solid var(--line-strong); border-radius:999px; overflow:hidden;">
             <button onClick="{{ dec }}" aria-label="Decrease" style="width:46px; height:52px; background:transparent; border:none; color:var(--fg); font-size:20px; cursor:pointer;">−</button>
             <span style="min-width:38px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:16px;">{{ qty }}</span>
             <button onClick="{{ inc }}" aria-label="Increase" style="width:46px; height:52px; background:transparent; border:none; color:var(--fg); font-size:20px; cursor:pointer;">+</button>
           </div>
           <button onClick="{{ addToCart }}" style="flex:1; min-width:200px; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; letter-spacing:0.01em;" style-hover="filter:brightness(1.06);">Add to Cart · {{ lineTotalLabel }}</button>
-        </div>
+        </div></sc-if>
+        <sc-if value="{{ isComingSoon }}" hint-placeholder-val="{{ false }}"><div style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:16px 20px; text-align:center;">Coming soon</div></sc-if>
 
         <!-- reassurance chips -->
         <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:22px;">
@@ -206,48 +207,48 @@ const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
 // Full product records with variant configs. Model variants can swap image + price.
 const CATALOG = {
   ronin: {
-    name: "RONIN V1 2026", brand: "Neuron Padel", cat: "Rackets", price: 230, stock: "in", imageScale: 1.4,
+    name: "RONIN V1 2026", brand: "Neuron Padel", cat: "Rackets", price: 262, available: true, stock: "in", imageScale: 1.4,
     description: "Carbon-fibre diamond-shape frame built for aggressive attacking play. EVA soft-core for a forgiving sweet spot and controlled power on every smash.",
     gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"],
     variant: {
       label: "Model", type: "model",
       options: [
-        { value: "onyx", label: "Onyx", price: 230, img: "uploads/neuronpadel  RONIN v1-1.webp", imageScale: 1.4, gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"] },
-        { value: "sakura", label: "Sakura", price: 250, img: "uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", imageScale: 1, gallery: ["uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", "uploads/np-ronin-sakura.webp"] },
+        { value: "onyx", label: "Onyx", price: 262, img: "uploads/neuronpadel  RONIN v1-1.webp", imageScale: 1.4, gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"] },
+        { value: "sakura", label: "Sakura", price: 295, img: "uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", imageScale: 1, gallery: ["uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", "uploads/np-ronin-sakura.webp"] },
       ],
     },
     perks: ["Free EU shipping", "2-year warranty", "Ships in 24h"],
   },
   bag: {
-    name: "Performance Pro+ Player Bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, stock: "in",
+    name: "Performance Pro+ Player Bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, available: false, stock: "in",
     description: "Thermal-lined racket compartment for up to 3 paddles, ventilated shoe pocket and padded straps. The tour bag for players who travel to win.",
     gallery: ["uploads/neuronpadel PERFORMANCE PRO+ PLAYER BAG.webp", "uploads/np-player-bag.webp"],
     variant: null,
     perks: ["Free EU shipping", "2-year warranty", "Ships in 24h"],
   },
   tshirt: {
-    name: "Performance T-Shirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in",
+    name: "Performance T-Shirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, available: false, stock: "in",
     description: "Lightweight moisture-wicking jersey with four-way stretch. Keeps you dry through the third set, cut for full range of motion.",
     gallery: ["uploads/PERFORMANCE T-SHIRT.webp", "uploads/np-tshirt.webp"],
     variant: { label: "Size", type: "size", options: ["XS","S","M","L","XL","XXL"].map(s => ({ value: s, label: s })) },
     perks: ["Free EU shipping", "Free 30-day returns", "Ships in 24h"],
   },
   shorts: {
-    name: "Pro+ Shorts", brand: "Neuron Padel", cat: "Apparel", price: 25.5, stock: "in",
+    name: "Pro+ Shorts", brand: "Neuron Padel", cat: "Apparel", price: 25.5, available: false, stock: "in",
     description: "Quick-dry shorts with zip ball pocket and elasticated waist. Engineered for lateral movement and long rallies.",
     gallery: ["uploads/PRO+ SHORTS.webp", "uploads/np-shorts.webp"],
     variant: { label: "Size", type: "size", options: ["XS","S","M","L","XL","XXL"].map(s => ({ value: s, label: s })) },
     perks: ["Free EU shipping", "Free 30-day returns", "Ships in 24h"],
   },
   socks: {
-    name: "Performance Padel Socks", brand: "Neuron Padel", cat: "Accessories", price: 9, stock: "in",
+    name: "Performance Padel Socks", brand: "Neuron Padel", cat: "Accessories", price: 9, available: false, stock: "in",
     description: "Cushioned high-density sole with arch compression and a breathable mesh instep. Sold as a single pair.",
     gallery: ["uploads/PERFORMANCE PADEL SOCKS.webp", "uploads/np-socks.webp"],
     variant: { label: "Size", type: "size", options: [{value:"S",label:"S · 35-38"},{value:"M",label:"M · 39-42"},{value:"L",label:"L · 43-46"}] },
     perks: ["Free EU shipping", "Free 30-day returns", "Ships in 24h"],
   },
   balls: {
-    name: "Pro+ Balls · Box of 24", brand: "Neuron Padel", cat: "Balls", price: 7, stock: "in",
+    name: "Pro+ Balls · Box of 24", brand: "Neuron Padel", cat: "Balls", price: 7, available: false, stock: "in",
     description: "High-pressure felt balls with consistent bounce and durable core. One box holds 8 tubes of 3, enough for a full season of matches.",
     gallery: ["uploads/PRO+ BALLS.webp", "uploads/np-balls.webp"],
     variant: null,
@@ -310,7 +311,9 @@ class Component extends DCLogic {
 
       name: p.name, brand: p.brand, catLabel: p.cat.toUpperCase(),
       description: p.description,
-      priceLabel: euro(price),
+      isAvailable: p.available === true,
+      isComingSoon: p.available !== true,
+      priceLabel: p.available === true ? euro(price) : "Coming soon",
       ...tag,
 
       activeImg: gallery[imgIdx],
