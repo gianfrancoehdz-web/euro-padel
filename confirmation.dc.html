@@ -90,9 +90,9 @@
       </span>
     </div>
 
-    <div class="cf-rise cf-d1" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">Payment successful</div>
-    <h1 class="cf-rise cf-d2" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(34px,6vw,54px); line-height:1.0; letter-spacing:-0.03em; margin:14px 0 0; text-wrap:balance;">Order confirmed!</h1>
-    <p class="cf-rise cf-d3" style="font-size:16px; line-height:1.6; color:var(--dim); margin:16px 0 0; max-width:42ch; text-wrap:pretty;">Thanks for gearing up with Euro Padel. We've sent your order confirmation to <span style="color:var(--fg);">{{ email }}</span>.</p>
+    <div class="cf-rise cf-d1" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">Demo complete</div>
+    <h1 class="cf-rise cf-d2" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(34px,6vw,54px); line-height:1.0; letter-spacing:-0.03em; margin:14px 0 0; text-wrap:balance;">Your order preview</h1>
+    <p class="cf-rise cf-d3" style="font-size:16px; line-height:1.6; color:var(--dim); margin:16px 0 0; max-width:42ch; text-wrap:pretty;">Thanks for exploring Euro Padel. This is a demo summary: no order was placed, no payment was taken and no email was sent.</p>
 
     <!-- ===== ORDER CARD ===== -->
     <div class="cf-rise cf-d4" style="width:100%; max-width:460px; margin-top:clamp(30px,4vw,42px); border:1px solid var(--line); border-radius:20px; background:var(--panel); overflow:hidden;">
@@ -101,7 +101,7 @@
           <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim);">Order number</div>
           <div style="font-family:'IBM Plex Mono',monospace; font-size:20px; letter-spacing:0.04em; color:var(--fg); margin-top:5px;">{{ orderNumber }}</div>
         </div>
-        <span style="flex:none; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:6px 12px;">PAID</span>
+        <span style="flex:none; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:6px 12px;">DEMO</span>
       </div>
 
       <!-- court-line divider -->
@@ -115,10 +115,10 @@
           <span>Items</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ itemCountLabel }}</span>
         </div>
         <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim);">
-          <span>Total paid</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ totalLabel }}</span>
+          <span>Demo total</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ totalLabel }}</span>
         </div>
         <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim);">
-          <span>Estimated delivery</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ deliveryLabel }}</span>
+          <span>Delivery</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">Not scheduled (demo)</span>
         </div>
       </div>
     </div>
@@ -160,29 +160,28 @@ class Component extends DCLogic {
 
   componentDidMount() {
     let order = null;
-    try { order = JSON.parse(localStorage.getItem("bluwx_last_order") || "null"); } catch (e) {}
+    try {
+      localStorage.removeItem("bluwx_last_order");
+      order = JSON.parse(sessionStorage.getItem("europadel_demo_order") || "null");
+    } catch (e) {}
     if (!order) {
       // direct-visit fallback so the page never looks broken
       order = { number: "EP-2026-" + String(Math.floor(100 + Math.random() * 9899)).padStart(5, "0"),
-                email: "your inbox", total: 0, itemCount: 0, date: Date.now() };
+                total: 0, itemCount: 0, date: Date.now() };
     }
     this.setState({ order });
   }
 
   renderVals() {
     const s = this.state, o = s.order;
-    const deliv = new Date((o ? o.date : Date.now()) + 4 * 86400000);
-    const delLabel = deliv.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
     return {
       theme: s.theme,
       themeLabel: s.theme === "dark" ? "LIGHT ☀" : "DARK ☾",
       toggleTheme: () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" })),
 
-      email: o ? o.email : "your inbox",
       orderNumber: o ? o.number : "EP-2026-00000",
       itemCountLabel: o ? (o.itemCount === 1 ? "1 item" : o.itemCount + " items") : ",",
       totalLabel: o ? euro(o.total) : ",",
-      deliveryLabel: delLabel,
     };
   }
 }

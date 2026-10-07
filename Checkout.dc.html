@@ -39,6 +39,10 @@
   .co-input::placeholder { color: var(--dim); letter-spacing: 0.04em; }
   .co-input:focus { border-color: var(--accent); }
   .co-input.co-err { border-color: var(--alert); }
+  .co-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 16px; }
+  .co-field-wide { grid-column:1 / -1; }
+  .co-label { display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim); margin-bottom:10px; }
+  @media (max-width:600px) { .co-fields { grid-template-columns:minmax(0,1fr); } }
   .co-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px,4vw,48px); }
   @media (min-width: 900px) {
     .co-grid { grid-template-columns: 1fr 380px; align-items: start; }
@@ -123,17 +127,21 @@
           <div class="co-step" style="border:1px solid var(--line); border-radius:20px; background:var(--panel); padding:clamp(22px,3.5vw,34px);">
             <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Step 1 of 2</div>
             <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:24px; letter-spacing:-0.02em; margin:0;">Continue as guest</h2>
-            <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:10px 0 24px; max-width:44ch;">Enter your email and we'll send your order confirmation there. No password, no account needed.</p>
+            <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:10px 0 24px; max-width:44ch;">Enter your contact and delivery details. All fields are required. Use sample details: this demo does not save your personal information, place an order or send emails.</p>
 
-            <label style="display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim); margin-bottom:10px;">Email address</label>
-            <input class="co-input {{ emailErrClass }}" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" value="{{ email }}" onInput="{{ setEmail }}" onKeyDown="{{ onEmailKey }}"/>
-            <sc-if value="{{ emailError }}" hint-placeholder-val="{{ false }}">
-              <div style="color:var(--alert); font-family:'IBM Plex Mono',monospace; font-size:12px; margin-top:9px;">⚠ {{ emailErrorMsg }}</div>
-            </sc-if>
+            <div class="co-fields">
+              <sc-for list="{{ contactFields }}" as="field" hint-placeholder-count="7">
+                <div class="{{ field.layoutClass }}">
+                  <label class="co-label" for="{{ field.id }}">{{ field.label }}</label>
+                  <input id="{{ field.id }}" name="{{ field.key }}" class="co-input {{ field.errorClass }}" type="{{ field.type }}" inputmode="{{ field.inputMode }}" autocomplete="{{ field.autocomplete }}" placeholder="{{ field.placeholder }}" maxlength="{{ field.maxLength }}" value="{{ field.value }}" required aria-invalid="{{ field.invalid }}" aria-describedby="{{ field.errorId }}" onInput="{{ field.onInput }}" onKeyDown="{{ onContactKey }}"/>
+                  <div id="{{ field.errorId }}" role="status" style="color:var(--alert); font-family:'IBM Plex Mono',monospace; font-size:12px; margin-top:9px;">{{ field.error }}</div>
+                </div>
+              </sc-for>
+            </div>
 
-            <button onClick="{{ goStep2 }}" style="margin-top:26px; width:100%; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">Continue to payment →</button>
+            <button onClick="{{ goStep2 }}" style="margin-top:26px; width:100%; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">Continue to demo confirmation →</button>
             <div style="display:flex; align-items:center; gap:8px; margin-top:16px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim);">
-              <span style="color:var(--accent);">✦</span> Guest checkout, we never store card data in this demo.
+              <span style="color:var(--accent);">✦</span> Your details stay on this page only. No payment details required.
             </div>
           </div>
         </sc-if>
@@ -143,10 +151,16 @@
           <div class="co-step" style="border:1px solid var(--line); border-radius:20px; background:var(--panel); padding:clamp(22px,3.5vw,34px);">
             <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px;">
               <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);">Step 2 of 2</div>
-              <button onClick="{{ backStep1 }}" style="background:transparent; border:none; color:var(--dim); cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em;" style-hover="color:var(--accent);">← Edit email</button>
+              <button onClick="{{ backStep1 }}" style="background:transparent; border:none; color:var(--dim); cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em;" style-hover="color:var(--accent);">← Edit details</button>
             </div>
-            <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:24px; letter-spacing:-0.02em; margin:0;">Payment</h2>
+            <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:24px; letter-spacing:-0.02em; margin:0;">Demo confirmation</h2>
             <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:10px 0 6px;">Confirming for <span style="color:var(--fg);">{{ email }}</span></p>
+            <div style="font-size:14px; line-height:1.7; color:var(--dim); overflow-wrap:anywhere;">
+              <div style="color:var(--fg);">{{ customerName }}</div>
+              <div>{{ deliveryAddress }}</div>
+              <div>{{ deliveryLocation }}</div>
+              <div>{{ phone }}</div>
+            </div>
 
             <!-- fake card visual -->
             <div style="position:relative; margin:22px 0 26px; aspect-ratio:16/9; max-width:340px; border-radius:16px; background:linear-gradient(135deg, #2A6350 0%, #57B98D 100%); overflow:hidden; box-shadow:0 14px 32px rgba(0,0,0,0.32);">
@@ -155,26 +169,14 @@
                   <span style="width:38px; height:28px; border-radius:6px; background:rgba(14,26,21,0.28);"></span>
                   <span style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.12em;">EUROPADEL</span>
                 </div>
-                <div style="font-family:'IBM Plex Mono',monospace; font-size:15px; letter-spacing:0.14em; color:#0E1A15;">{{ cardDisplay }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace; font-size:15px; letter-spacing:0.14em; color:#0E1A15;">DEMO PREVIEW</div>
                 <div style="display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; color:rgba(14,26,21,0.8);">
-                  <span>{{ nameDisplay }}</span><span>{{ expDisplay }}</span>
+                  <span>No payment details required</span>
                 </div>
               </div>
             </div>
 
-            <label style="display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim); margin-bottom:10px;">Card number</label>
-            <input class="co-input" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" value="{{ card }}" onInput="{{ setCard }}"/>
-
-            <div style="display:flex; gap:14px; margin-top:18px;">
-              <div style="flex:1;">
-                <label style="display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim); margin-bottom:10px;">Expiry</label>
-                <input class="co-input" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" value="{{ exp }}" onInput="{{ setExp }}"/>
-              </div>
-              <div style="flex:1;">
-                <label style="display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim); margin-bottom:10px;">CVC</label>
-                <input class="co-input" inputmode="numeric" autocomplete="cc-csc" placeholder="000" value="{{ cvc }}" onInput="{{ setCvc }}"/>
-              </div>
-            </div>
+            <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:0;">No card number, expiry date or security code is needed. Continue to preview your order summary.</p>
 
             <button onClick="{{ payNow }}" disabled="{{ paying }}" style="margin-top:26px; width:100%; height:54px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:{{ payCursor }}; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; display:inline-flex; align-items:center; justify-content:center; gap:11px; opacity:{{ payOpacity }};" style-hover="filter:brightness(1.06);">
               <sc-if value="{{ paying }}" hint-placeholder-val="{{ false }}">
@@ -183,7 +185,7 @@
               {{ payLabel }}
             </button>
             <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim);">
-              <span style="color:var(--accent);">🔒</span> Demo only, no real charge, no Stripe connection.
+              <span style="color:var(--accent);">🔒</span> Demo only. No payment will be taken.
             </div>
           </div>
         </sc-if>
@@ -234,7 +236,7 @@
               <span>Subtotal</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ subtotalLabel }}</span>
             </div>
             <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim); margin-bottom:16px;">
-              <span>Shipping</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
+              <span>Shipping (provisional)</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--line); padding-top:16px;">
               <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;">Total</span>
@@ -277,36 +279,46 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="">
 const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
-const FREE_SHIP = 90, SHIP_COST = 6.9;
+const SHIP_COST = 15;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const CONTACT_FIELDS = [
+  { key:"email", label:"Email address", type:"email", inputMode:"email", autocomplete:"email", placeholder:"you@example.com", maxLength:254, wide:true },
+  { key:"firstName", label:"First name", autocomplete:"given-name", placeholder:"First name", maxLength:100 },
+  { key:"lastName", label:"Last name", autocomplete:"family-name", placeholder:"Last name", maxLength:100 },
+  { key:"country", label:"Country", autocomplete:"country-name", placeholder:"Country", maxLength:100 },
+  { key:"city", label:"City", autocomplete:"address-level2", placeholder:"City", maxLength:100 },
+  { key:"address", label:"Address", autocomplete:"street-address", placeholder:"Street, house number, apartment", maxLength:250, wide:true },
+  { key:"phone", label:"Phone number", type:"tel", inputMode:"tel", autocomplete:"tel", placeholder:"+49 123 456 789", maxLength:40, wide:true },
+];
 
 class Component extends DCLogic {
-  state = { theme: "dark", step: 1, email: "", emailError: "", card: "", exp: "", cvc: "", paying: false, items: [] };
+  state = { theme: "dark", step: 1, email: "", firstName:"", lastName:"", country:"", city:"", address:"", phone:"", errors:{}, paying: false, items: [] };
 
   componentDidMount() {
+    try { localStorage.removeItem("bluwx_last_order"); } catch (e) {}
     this.setState({ items: window.CartStore ? window.CartStore.get() : [] });
     this._off = window.CartStore ? window.CartStore.onChange((items) => this.setState({ items })) : null;
   }
   componentWillUnmount() { if (this._off) this._off(); if (this._payT) clearTimeout(this._payT); }
 
-  _fmtCard(v) { return v.replace(/\D/g, "").slice(0, 16).replace(/(.{4})/g, "$1 ").trim(); }
-  _fmtExp(v) {
-    const d = v.replace(/\D/g, "").slice(0, 4);
-    return d.length <= 2 ? d : d.slice(0, 2) + "/" + d.slice(2);
-  }
-  _fmtCvc(v) { return v.replace(/\D/g, "").slice(0, 4); }
-
-  _validateEmail() {
-    const ok = EMAIL_RE.test(this.state.email.trim());
-    this.setState({ emailError: ok ? "" : (this.state.email.trim() ? "Enter a valid email address." : "Email is required.") });
-    return ok;
+  _validateContact() {
+    const errors = {};
+    CONTACT_FIELDS.forEach(field => {
+      const value = this.state[field.key].trim();
+      if (!value) errors[field.key] = field.label + " is required.";
+      else if (value.length > field.maxLength) errors[field.key] = "This value is too long.";
+      else if (field.key === "email" && !EMAIL_RE.test(value)) errors.email = "Enter a valid email address.";
+      else if (field.key === "phone" && (!/^\+?[0-9\s().-]+$/.test(value) || value.replace(/\D/g, "").length < 7 || value.replace(/\D/g, "").length > 15)) errors.phone = "Enter a valid phone number, including the country code.";
+    });
+    this.setState({ errors });
+    return Object.keys(errors).length === 0;
   }
 
   renderVals() {
     const s = this.state;
     const items = s.items || [];
     const subtotal = items.reduce((a, it) => a + it.price * it.qty, 0);
-    const shipping = items.length === 0 ? 0 : (subtotal >= FREE_SHIP ? 0 : SHIP_COST);
+    const shipping = items.length === 0 ? 0 : SHIP_COST;
     const total = subtotal + shipping;
 
     const stepDef = (n, label) => {
@@ -326,47 +338,44 @@ class Component extends DCLogic {
       toggleTheme: () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" })),
 
       steps: [
-        { ...stepDef(1, "Identification"), showArrow: true },
-        { ...stepDef(2, "Payment"), showArrow: false },
+        { ...stepDef(1, "Contact & delivery"), showArrow: true },
+        { ...stepDef(2, "Demo confirmation"), showArrow: false },
       ],
 
       isStep1: s.step === 1,
       isStep2: s.step === 2,
 
       email: s.email,
-      setEmail: (e) => this.setState({ email: e.target.value, emailError: "" }),
-      onEmailKey: (e) => { if (e.key === "Enter") { if (this._validateEmail()) this.setState({ step: 2 }); } },
-      emailError: !!s.emailError,
-      emailErrorMsg: s.emailError,
-      emailErrClass: s.emailError ? "co-err" : "",
-      goStep2: () => { if (this._validateEmail()) this.setState({ step: 2 }); },
+      customerName: (s.firstName + " " + s.lastName).trim(),
+      deliveryAddress: s.address,
+      deliveryLocation: s.city + ", " + s.country,
+      phone: s.phone,
+      contactFields: CONTACT_FIELDS.map(field => ({
+        ...field, id:"co-" + field.key, errorId:"co-" + field.key + "-error",
+        type:field.type || "text", inputMode:field.inputMode || "text",
+        layoutClass:field.wide ? "co-field-wide" : "",
+        value:s[field.key], error:s.errors[field.key] || "",
+        invalid:!!s.errors[field.key], errorClass:s.errors[field.key] ? "co-err" : "",
+        onInput:(e) => this.setState(st => ({ [field.key]:e.target.value, errors:{ ...st.errors, [field.key]:"" } })),
+      })),
+      onContactKey: (e) => { if (e.key === "Enter") { e.preventDefault(); if (items.length && this._validateContact()) this.setState({ step: 2 }); } },
+      goStep2: () => { if (items.length && this._validateContact()) this.setState({ step: 2 }); },
       backStep1: () => this.setState({ step: 1 }),
 
-      card: s.card,
-      exp: s.exp,
-      cvc: s.cvc,
-      setCard: (e) => this.setState({ card: this._fmtCard(e.target.value) }),
-      setExp: (e) => this.setState({ exp: this._fmtExp(e.target.value) }),
-      setCvc: (e) => this.setState({ cvc: this._fmtCvc(e.target.value) }),
-      cardDisplay: s.card || "•••• •••• •••• ••••",
-      expDisplay: s.exp || "MM/AA",
-      nameDisplay: (s.email ? s.email.split("@")[0].toUpperCase() : "CARDHOLDER"),
-
       paying: s.paying,
-      payLabel: s.paying ? "Processing…" : "Pay now · " + euro(total),
+      payLabel: s.paying ? "Preparing preview…" : "Complete demo · " + euro(total),
       payCursor: s.paying ? "wait" : "pointer",
       payOpacity: s.paying ? "0.8" : "1",
       payNow: () => {
-        if (s.paying) return;
+        if (s.paying || !items.length || !this._validateContact()) return;
         this.setState({ paying: true });
         this._payT = setTimeout(() => {
           const order = {
-            number: "BLX-2026-" + String(Math.floor(100 + Math.random() * 9899)).padStart(5, "0"),
-            email: s.email.trim(),
-            total: total, itemCount: items.reduce((a, it) => a + it.qty, 0),
+            number: "EP-DEMO-" + String(Math.floor(100 + Math.random() * 9899)).padStart(5, "0"),
+            subtotal: subtotal, shipping: shipping, total: total, itemCount: items.reduce((a, it) => a + it.qty, 0),
             date: Date.now(),
           };
-          try { localStorage.setItem("bluwx_last_order", JSON.stringify(order)); } catch (e) {}
+          try { sessionStorage.setItem("europadel_demo_order", JSON.stringify(order)); } catch (e) {}
           if (window.CartStore) window.CartStore.clear();
           location.href = "confirmation.dc.html";
         }, 2600);

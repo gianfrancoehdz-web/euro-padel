@@ -162,7 +162,7 @@
               <span>Subtotal</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ subtotalLabel }}</span>
             </div>
             <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim); margin-bottom:11px;">
-              <span>Shipping</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
+              <span>Shipping (provisional)</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
             </div>
             <sc-if value="{{ hasDiscount }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--accent); margin-bottom:11px;">
@@ -221,7 +221,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="">
 const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
-const FREE_SHIP = 90, SHIP_COST = 6.9;
+const SHIP_COST = 15;
 
 // map a line item back to its product detail page
 const ID_MAP = {
@@ -244,7 +244,7 @@ class Component extends DCLogic {
     const items = s.items || [];
     const subtotal = items.reduce((a, it) => a + it.price * it.qty, 0);
     const count = items.reduce((a, it) => a + it.qty, 0);
-    const shipping = items.length === 0 ? 0 : (subtotal >= FREE_SHIP ? 0 : SHIP_COST);
+    const shipping = items.length === 0 ? 0 : SHIP_COST;
     const total = subtotal + shipping;
 
     return {
