@@ -1,0 +1,22 @@
+const fs = require('node:fs'), path = require('node:path'), vm = require('node:vm'), assert = require('node:assert/strict');
+const context = { window: { EuroPadelConfig: { apiOrigin: 'https://api.example.com' } }, location: { hostname: 'shop.example.com' }, URL, AbortController, setTimeout, clearTimeout };
+vm.createContext(context);
+vm.runInContext(fs.readFileSync(path.join(__dirname, '../store-catalog.js'), 'utf8'), context);
+const api = context.window.EuroPadelCatalog;
+const product = { id: 10, name: 'Admin title', slug: 'admin-title', is_active: true, availability: 'stock', description: 'Admin description', category_detail: { name: 'Raqueta', is_active: true }, image: '/media/racket.png', variants: [{ id: 42, sku: 'SKU', is_active: true, price: '262.00', stock: 2, attributes: {} }] };
+const adapted = api.adapt(product);
+assert.equal(adapted.name, 'Admin title'); assert.equal(adapted.description, 'Admin description');
+assert.equal(adapted.variant.options[0].variantId, 42); assert.equal(adapted.price, 262);
+assert.equal(adapted.img, 'https://api.example.com/media/racket.png'); assert.equal(adapted.available, true);
+assert.equal(api.adapt({ ...product, availability: 'coming_soon' }).available, false);
+assert.equal(api.adapt({ ...product, availability: 'preorder', preorder_dispatch_date: '2000-01-01' }).available, false);
+assert.throws(() => api.adapt({ ...product, image: 'javascript:alert(1)' }));
+(async () => {
+  context.fetch = async () => ({ ok: true, json: async () => ({ results: [product, { ...product, id: 11, is_active: false }], next: null }) });
+  assert.equal((await api.load()).length, 1);
+  context.fetch = async () => ({ ok: true, json: async () => ({ results: [], next: 'https://attacker.example/api/v1/products/' }) });
+  await assert.rejects(api.load(), /pagination/);
+  context.fetch = async () => ({ ok: false });
+  await assert.rejects(api.load(), /unavailable/);
+  console.log('Catalog adapter tests passed');
+})().catch(e => { console.error(e); process.exitCode = 1; });

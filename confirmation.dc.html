@@ -2,10 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Euro Padel demo order confirmation.">
 <title>Order confirmation | Euro Padel</title>
 <script src="./support.js"></script>
+<script src="./store-config.js"></script>
+<script src="./store-api.js"></script>
+<script src="./cart-store.js"></script>
 </head>
 <body>
 <x-dc>
@@ -81,6 +85,7 @@
   <main style="flex:1; max-width:640px; width:100%; margin:0 auto; padding:clamp(40px,8vw,88px) clamp(16px,4vw,40px) clamp(56px,7vw,96px); display:flex; flex-direction:column; align-items:center; text-align:center;">
 
     <!-- ===== SUCCESS MARK ===== -->
+    <sc-if value="{{ showCheck }}">
     <div style="position:relative; width:104px; height:104px; margin-bottom:clamp(24px,4vw,34px);">
       <span class="cf-halo" style="position:absolute; inset:0; border-radius:999px; background:var(--accent);"></span>
       <span class="cf-ring" style="position:absolute; inset:0; border-radius:999px; background:var(--accent); display:flex; align-items:center; justify-content:center;">
@@ -89,10 +94,12 @@
         </svg>
       </span>
     </div>
+    </sc-if>
 
-    <div class="cf-rise cf-d1" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">Demo complete</div>
-    <h1 class="cf-rise cf-d2" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(34px,6vw,54px); line-height:1.0; letter-spacing:-0.03em; margin:14px 0 0; text-wrap:balance;">Your order preview</h1>
-    <p class="cf-rise cf-d3" style="font-size:16px; line-height:1.6; color:var(--dim); margin:16px 0 0; max-width:42ch; text-wrap:pretty;">Thanks for exploring Euro Padel. This is a demo summary: no order was placed, no payment was taken and no email was sent.</p>
+    <div class="cf-rise cf-d1" style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">{{ statusLabel }}</div>
+    <h1 class="cf-rise cf-d2" style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(34px,6vw,54px); line-height:1.0; letter-spacing:-0.03em; margin:14px 0 0; text-wrap:balance;">{{ heading }}</h1>
+    <p class="cf-rise cf-d3" role="status" style="font-size:16px; line-height:1.6; color:var(--dim); margin:16px 0 0; max-width:42ch; text-wrap:pretty;">{{ message }}</p>
+    <sc-if value="{{ canRetry }}"><button onClick="{{ retry }}" style="margin-top:18px; padding:10px 18px; background:transparent; color:var(--fg); border:1px solid var(--line-strong); border-radius:999px; cursor:pointer;">Check payment status again</button></sc-if>
 
     <!-- ===== ORDER CARD ===== -->
     <div class="cf-rise cf-d4" style="width:100%; max-width:460px; margin-top:clamp(30px,4vw,42px); border:1px solid var(--line); border-radius:20px; background:var(--panel); overflow:hidden;">
@@ -101,7 +108,7 @@
           <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--dim);">Order number</div>
           <div style="font-family:'IBM Plex Mono',monospace; font-size:20px; letter-spacing:0.04em; color:var(--fg); margin-top:5px;">{{ orderNumber }}</div>
         </div>
-        <span style="flex:none; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:6px 12px;">DEMO</span>
+        <span style="flex:none; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em; color:var(--accent); border:1px solid var(--accent); border-radius:999px; padding:6px 12px;">{{ badge }}</span>
       </div>
 
       <!-- court-line divider -->
@@ -115,10 +122,10 @@
           <span>Items</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ itemCountLabel }}</span>
         </div>
         <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim);">
-          <span>Demo total</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ totalLabel }}</span>
+          <span>{{ totalHeading }}</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ totalLabel }}</span>
         </div>
         <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim);">
-          <span>Delivery</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">Not scheduled (demo)</span>
+          <span>Delivery</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ deliveryLabel }}</span>
         </div>
       </div>
     </div>
@@ -130,7 +137,7 @@
     </div>
 
     <div class="cf-rise cf-d4" style="display:flex; align-items:center; gap:8px; margin-top:22px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim);">
-      <span style="color:var(--accent);">✦</span> Visual demo, no real payment was processed.
+      <span style="color:var(--accent);">✦</span> {{ footnote }}
     </div>
   <section style="display:none; border-top:1px solid var(--line); padding-top:clamp(28px,4vw,48px); margin-top:clamp(28px,4vw,48px);">
     <div style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(20px,2.6vw,28px); letter-spacing:-0.01em; color:var(--accent); margin-bottom:20px;">Sponsors</div>
@@ -156,32 +163,75 @@
 const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
 
 class Component extends DCLogic {
-  state = { theme: "dark", order: null };
+  state = { theme: "dark", order: null, real:false, loading:false, error:"" };
 
   componentDidMount() {
+    this._mounted = true;
+    const params = new URLSearchParams(location.search);
+    this._session = params.get("session_id");
+    this._token = params.get("token");
+    const real = !!(this._session || this._token || (window.EuroPadelAPI && window.EuroPadelAPI.enabled()));
+    if (real) {
+      this.setState({ real:true });
+      this._load();
+      return;
+    }
     let order = null;
     try {
       localStorage.removeItem("bluwx_last_order");
       order = JSON.parse(sessionStorage.getItem("europadel_demo_order") || "null");
     } catch (e) {}
-    if (!order) {
-      // direct-visit fallback so the page never looks broken
-      order = { number: "EP-2026-" + String(Math.floor(100 + Math.random() * 9899)).padStart(5, "0"),
-                total: 0, itemCount: 0, date: Date.now() };
-    }
     this.setState({ order });
+  }
+
+  componentWillUnmount() { this._mounted = false; if (this._poll) clearTimeout(this._poll); }
+
+  async _load(count = 0) {
+    if (this.state.loading) return;
+    this.setState({ loading:true, error:"" });
+    try {
+      if (!window.EuroPadelAPI) throw new Error("The payment service is unavailable. Do not repeat the purchase.");
+      const order = await window.EuroPadelAPI.confirmation(this._session, this._token);
+      if (!this._mounted) return;
+      this.setState({ order, loading:false });
+      if (order.status === "paid") {
+        try { await window.EuroPadelAPI.complete(order); } catch (_) {}
+      } else if (order.status === "pending" && count < 5) {
+        this._poll = setTimeout(() => this._load(count + 1), 5000);
+      }
+    } catch (error) {
+      if (this._mounted) this.setState({ loading:false, error:error.message });
+    }
   }
 
   renderVals() {
     const s = this.state, o = s.order;
+    const paid = s.real && o && o.status === "paid";
+    const review = s.real && o && ["oversold", "payment_review"].includes(o.status);
+    const pending = s.real && o && o.status === "pending";
+    const status = s.real ? (o ? o.status.toUpperCase().replace(/_/g, " ") : "UNVERIFIED") : "DEMO";
     return {
       theme: s.theme,
       themeLabel: s.theme === "dark" ? "LIGHT ☀" : "DARK ☾",
       toggleTheme: () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" })),
 
-      orderNumber: o ? o.number : "EP-2026-00000",
-      itemCountLabel: o ? (o.itemCount === 1 ? "1 item" : o.itemCount + " items") : ",",
-      totalLabel: o ? euro(o.total) : ",",
+      showCheck: !!(paid || (!s.real && o)),
+      statusLabel: s.loading ? "Checking payment status" : (s.real ? status : (o ? "Demo complete" : "No demo summary")),
+      heading: s.real ? (paid ? "Payment confirmed" : (review ? "Your order needs review" : "Your order status")) : "Your order preview",
+      message: s.error || (s.real ? (paid ? "Your payment is confirmed by the store. Delivery will be arranged separately." :
+        review ? "The store needs to review your payment or inventory. Please do not pay again." :
+        pending ? "Payment confirmation is pending. Do not repeat the purchase; check the status again shortly." :
+        o ? "This is the current status reported by the store. Contact the store if you need assistance." : "Checking with the store. A return from Stripe alone is not proof of payment.") :
+        "This is a demo summary: no order was placed, no payment was taken and no email was sent."),
+      badge: status,
+      canRetry: s.real && !s.loading && (!o || pending || !!s.error),
+      retry: () => { if (this._poll) clearTimeout(this._poll); this._load(); },
+      totalHeading: s.real ? "Order total" : "Demo total",
+      deliveryLabel: s.real ? "See shipping updates separately" : "Not scheduled (demo)",
+      footnote: s.real ? "Payment status is verified with the store, never from browser storage." : "Visual demo, no real payment was processed.",
+      orderNumber: o ? (s.real ? "EP-" + o.id : o.number) : "—",
+      itemCountLabel: o ? (s.real ? o.items.reduce((n, item) => n + item.quantity, 0) + " items" : o.itemCount + " items") : "—",
+      totalLabel: o ? euro(s.real ? Number(o.total_amount) : o.total) : "—",
     };
   }
 }

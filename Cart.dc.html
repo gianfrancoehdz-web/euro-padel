@@ -6,6 +6,7 @@
 <meta name="description" content="Review your Euro Padel shopping cart.">
 <title>Cart | Euro Padel</title>
 <script src="./support.js"></script>
+<script src="./cart-store.js?v=catalog2"></script>
 </head>
 <body>
 <x-dc>
@@ -13,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="./cart-store.js"></script>
+<script src="./cart-store.js?v=catalog2"></script>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -225,6 +226,8 @@ const SHIP_COST = 15;
 
 // map a line item back to its product detail page
 const ID_MAP = {
+  "SABRE V1": "sabre",
+  "RONIN V1 Sakura Edition": "ronin-sakura",
   "RONIN V1 2026": "ronin", "Performance Pro+ Player Bag": "bag",
   "Performance T-Shirt": "tshirt", "Pro+ Shorts": "shorts",
   "Performance Padel Socks": "socks", "Pro+ Balls · Box of 24": "balls",
@@ -259,8 +262,8 @@ class Component extends DCLogic {
 
       items: items.map(it => ({
         name: it.name, brand: it.brand, img: it.img, qty: it.qty,
-        imageScale: it.name === "RONIN V1 2026" ? 1.4 : 1,
-        href: ID_MAP[it.name] ? "Product.dc.html" : "Shop.dc.html",
+        imageScale: it.name === "RONIN V1 2026" && it.variant !== "sakura" ? 1.07 : 1,
+        href: ID_MAP[it.name] ? "Product.dc.html#" + ID_MAP[it.name] : "Shop.dc.html",
         hasVariant: !!it.variantLabel, variantLabel: it.variantLabel,
         unitLabel: euro(it.price), lineTotal: euro(it.price * it.qty),
         inc: () => window.CartStore.setQty(it.id, it.qty + 1),

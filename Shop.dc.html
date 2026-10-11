@@ -6,6 +6,9 @@
 <meta name="description" content="Shop the Neuron Padel collection at Euro Padel.">
 <title>Shop Neuron Padel | Euro Padel</title>
 <script src="./support.js"></script>
+<script src="./cart-store.js?v=catalog2"></script>
+<script src="./store-config.js"></script>
+<script src="./store-catalog.js"></script>
 </head>
 <body>
 <x-dc>
@@ -13,7 +16,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="./cart-store.js"></script>
+<script src="./cart-store.js?v=catalog2"></script>
+<script src="./store-config.js"></script>
+<script src="./store-catalog.js"></script>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -137,6 +142,7 @@
       <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-top:14px;">
         <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(34px,6vw,64px); line-height:0.98; letter-spacing:-0.025em; margin:0;">Neuron Padel collection</h1>
         <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; letter-spacing:0.06em; color:var(--dim); padding-bottom:6px;">{{ resultCount }} products</span>
+        <span role="status">{{ catalogMessage }}</span>
       </div>
       <!-- promo banner · NEURONPADEL store header -->
       <div class="shop-banner" style="position:relative; width:100%; overflow:hidden; border-radius:20px; margin-top:clamp(16px,2.5vw,22px); background:#141312; border:1px solid var(--line);">
@@ -305,8 +311,9 @@ const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
 
 // ---- DYNAMIC catalog data (one dataset per store; placeholders here) ----
 const PRODUCTS = [
-  { name: "RONIN V1 2026", slug: "ronin", brand: "Neuron Padel", cat: "Rackets", price: 262, available: true, stock: "in", new: 10, img: "uploads/np-ronin-v1.webp", imageScale: 1.4 },
-  { name: "RONIN V1 Sakura Edition", slug: "ronin-sakura", brand: "Neuron Padel", cat: "Rackets", price: 295, available: true, stock: "low", new: 9, img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
+  { name: "SABRE V1", slug: "sabre", brand: "Neuron Padel", cat: "Rackets", price: 289.75, available: true, stock: "preorder", new: 11, img: "uploads/np-sabre-v1-1.png", imageScale: 1.12 },
+  { name: "RONIN V1 2026", slug: "ronin", brand: "Neuron Padel", cat: "Rackets", price: 262, available: true, stock: "in", new: 10, img: "uploads/np-ronin-official-1.jpg", imageScale: 1.46 },
+  { name: "RONIN V1 Sakura Edition", slug: "ronin-sakura", brand: "Neuron Padel", cat: "Rackets", price: 295, available: true, stock: "low", new: 9, img: "uploads/np-sakura-official-1.jpg", imageScale: 1 },
   { name: "Performance Pro+ Player Bag", slug: "bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, available: false, stock: "in", new: 8, img: "uploads/np-player-bag.webp" },
   { name: "Performance T-Shirt", slug: "tshirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, available: false, stock: "in", new: 7, img: "uploads/np-tshirt.webp" },
   { name: "Pro+ Shorts", slug: "shorts", brand: "Neuron Padel", cat: "Apparel", price: 25.5, available: false, stock: "in", new: 6, img: "uploads/np-shorts.webp" },
@@ -318,6 +325,11 @@ class Component extends DCLogic {
   state = { theme: "dark", filterOpen: false, bannerOpen: false, cats: [], brands: [], price: "all", inStock: false, sort: "relevance", cartCount: 0, menuOpen: false, langOpen: false, lang: "EN", compact: false };
 
   componentDidMount() {
+    if (window.EuroPadelCatalog?.configured()) {
+      this.setState({ catalog: [], catalogMessage: "Loading catalog…" });
+      window.EuroPadelCatalog.load().then(catalog => this.setState({ catalog, catalogMessage: "" }))
+        .catch(() => this.setState({ catalog: [], catalogMessage: "Catalog temporarily unavailable. Please reload." }));
+    }
     this.setState({ cartCount: window.CartStore ? window.CartStore.count() : 0 });
     this._off = window.CartStore ? window.CartStore.onChange(() => this.setState({ cartCount: window.CartStore.count() })) : null;
     try {
@@ -369,22 +381,24 @@ class Component extends DCLogic {
     const accent = "var(--accent)", dim = "var(--dim)", fg = "var(--fg)", line = "var(--line)", alert = "var(--alert)";
 
     // ---- filter ----
-    let list = PRODUCTS.filter(x =>
+    const products = s.catalog || PRODUCTS;
+    let list = products.filter(x =>
       (s.cats.length === 0 || s.cats.includes(x.cat)) &&
       (s.brands.length === 0 || s.brands.includes(x.brand)) &&
       (s.price === "all" || (s.price === "lt50" && x.price < 50) || (s.price === "50to150" && x.price >= 50 && x.price <= 150) || (s.price === "gt150" && x.price > 150)) &&
-      (!s.inStock || x.stock !== "out")
+      (!s.inStock || (x.available && ["in", "low"].includes(x.stock)))
     );
     // ---- sort ----
     if (s.sort === "price-asc") list = [...list].sort((a, b) => a.price - b.price);
     else if (s.sort === "price-desc") list = [...list].sort((a, b) => b.price - a.price);
     else if (s.sort === "newest") list = [...list].sort((a, b) => b.new - a.new);
 
-    const tagFor = (stock) => stock === "low" ? { showTag: true, tag: "Low stock", tagColor: alert }
+    const tagFor = (stock) => stock === "preorder" ? { showTag: true, tag: "New model", tagColor: accent }
+      : stock === "low" ? { showTag: true, tag: "Low stock", tagColor: alert }
       : stock === "out" ? { showTag: true, tag: "Sold out", tagColor: dim }
       : { showTag: false, tag: "", tagColor: dim };
 
-    const catCount = (c) => PRODUCTS.filter(x => x.cat === c).length;
+    const catCount = (c) => products.filter(x => x.cat === c).length;
 
     const compact = s.compact;
     const TRANS = "transition: top .4s cubic-bezier(.4,0,.2,1), width .4s cubic-bezier(.4,0,.2,1), border-radius .4s ease, background .3s ease;";
@@ -439,8 +453,7 @@ class Component extends DCLogic {
       bannerOpen: s.bannerOpen,
       closeBanner: () => this.setState({ bannerOpen: false }),
       bannerChips: [
-        { icon: "✦", label: "Free EU shipping over €90" },
-        { icon: "✦", label: "2-year warranty" },
+        { icon: "✦", label: "EU shipping · €15 provisional" },
         { icon: "✦", label: "Pro-tested by Carlos Martí Vañó" },
       ],
 
@@ -468,10 +481,11 @@ class Component extends DCLogic {
       toggleStock: (e) => this.setState({ inStock: e.target.checked }),
       clearAll: () => this.setState({ cats: [], brands: [], price: "all", inStock: false }),
 
+      catalogMessage: s.catalogMessage || "",
       shownProducts: list.map(x => ({
         name: x.name, brand: x.brand, cat: x.cat.toUpperCase(),
         priceLabel: x.available ? euro(x.price) : "Coming soon", img: x.img, imageScale: x.imageScale || 1,
-        href: "Product.dc.html#" + x.slug,
+        href: x.productId ? "Product.dc.html?id=" + x.productId : "Product.dc.html#" + x.slug,
         ...tagFor(x.stock),
       })),
 

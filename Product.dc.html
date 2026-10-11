@@ -6,14 +6,19 @@
 <meta name="description" content="Explore Neuron Padel equipment at Euro Padel.">
 <title>Neuron Padel products | Euro Padel</title>
 <script src="./support.js"></script>
+<script src="./cart-store.js?v=catalog2"></script>
+<script src="./store-config.js"></script>
+<script src="./store-catalog.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
+<script src="./cart-store.js?v=catalog2"></script>
+<script src="./store-config.js"></script>
+<script src="./store-catalog.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="./cart-store.js"></script>
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -107,7 +112,7 @@
         <div class="pd-thumbs" style="margin-top:12px;">
           <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="2">
             <button onClick="{{ g.select }}" style="flex:none; width:76px; height:76px; padding:8px; border:1px solid {{ g.border }}; border-radius:14px; background:#f4f4f1; cursor:pointer;">
-              <img src="{{ g.img }}" alt="" style="width:100%; height:100%; object-fit:contain; transform:scale({{ g.imageScale }});"/>
+              <img src="{{ g.img }}" alt="" loading="lazy" decoding="async" style="width:100%; height:100%; object-fit:contain; transform:scale({{ g.imageScale }});"/>
             </button>
           </sc-for>
         </div>
@@ -124,6 +129,22 @@
         </div>
 
         <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:20px 0 0; max-width:46ch; text-wrap:pretty;">{{ description }}</p>
+        <sc-if value="{{ isProvisionalPrice }}" hint-placeholder-val="{{ false }}">
+          <p style="font-size:13px; line-height:1.6; color:var(--dim); margin:12px 0 0;">Provisional price · Demo purchase only. The manufacturer currently lists this model for pre-order; Euro Padel delivery availability is not confirmed.</p>
+        </sc-if>
+        <sc-if value="{{ hasSpecifications }}" hint-placeholder-val="{{ false }}">
+          <section style="margin-top:24px; border-top:1px solid var(--line); padding-top:18px;" aria-label="Product specifications">
+            <h2 style="font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; margin:0 0 14px;">Specifications</h2>
+            <dl style="margin:0; font-size:13px; line-height:1.6;">
+              <sc-for list="{{ specifications }}" as="spec" hint-placeholder-count="10">
+                <div style="display:grid; grid-template-columns:minmax(90px,1fr) minmax(0,2fr); gap:16px; padding:9px 0; border-bottom:1px solid var(--line);">
+                  <dt style="color:var(--dim);">{{ spec.label }}</dt>
+                  <dd style="margin:0; color:var(--fg);">{{ spec.value }}</dd>
+                </div>
+              </sc-for>
+            </dl>
+          </section>
+        </sc-if>
 
         <!-- court-line divider -->
         <svg viewBox="0 0 1200 30" preserveAspectRatio="none" style="width:100%; height:20px; display:block; margin:26px 0;" aria-hidden="true">
@@ -201,30 +222,76 @@
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;productId&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ronin&quot;,&quot;options&quot;:[&quot;ronin&quot;,&quot;bag&quot;,&quot;tshirt&quot;,&quot;shorts&quot;,&quot;socks&quot;,&quot;balls&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;productId&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;ronin&quot;,&quot;options&quot;:[&quot;sabre&quot;,&quot;ronin&quot;,&quot;bag&quot;,&quot;tshirt&quot;,&quot;shorts&quot;,&quot;socks&quot;,&quot;balls&quot;],&quot;tsType&quot;:&quot;string&quot;}}">
 const euro = (n) => "€" + n.toFixed(2).replace(".", ",");
+const RONIN_GALLERY = Array.from({ length:10 }, (_, i) => `uploads/np-ronin-official-${i + 1}.jpg`);
+const SAKURA_GALLERY = Array.from({ length:5 }, (_, i) => `uploads/np-sakura-official-${i + 1}.jpg`);
+const RONIN_DESCRIPTION = "A hybrid racket designed to combine controlled placement with attacking power. Its 18K aluminized carbon face, Kevlar-reinforced frame and Multi-EVA core support a balanced response in both defence and attack.";
+const SAKURA_DESCRIPTION = "A lighter Ronin edition focused on quick handling, control and power. An 18K aluminized carbon face pairs with a carbon Speed Frame and Balance EVA core for a responsive, manoeuvrable feel.";
+const RONIN_SPECS = [
+  { label:"Face", value:"18K aluminized carbon" },
+  { label:"Frame", value:"Carbon fibre reinforced with Kevlar" },
+  { label:"Core", value:"neuronCORE™ Multi-EVA" },
+  { label:"Surface", value:"Raised 3D texture; exposed carbon weave" },
+  { label:"Weight", value:"360–375 g" },
+  { label:"Balance", value:"Mid / hybrid" },
+  { label:"Shape", value:"Hybrid teardrop" },
+  { label:"Thickness", value:"38 mm" },
+  { label:"Grip & strap", value:"White anti-slip grip; adjustable, removable strap" },
+];
+const SAKURA_SPECS = [
+  { label:"Face", value:"18K aluminized carbon" },
+  { label:"Frame", value:"Carbon fibre Speed Frame" },
+  { label:"Core", value:"Balance EVA" },
+  { label:"Surface", value:"Raised 3D texture; matte/satin frame" },
+  { label:"Weight", value:"350–360 g" },
+  { label:"Balance", value:"Mid / hybrid" },
+  { label:"Shape", value:"Hybrid teardrop" },
+  { label:"Thickness", value:"38 mm" },
+  { label:"Grip & strap", value:"White anti-slip grip; adjustable, removable strap" },
+];
 
 // Full product records with variant configs. Model variants can swap image + price.
 const CATALOG = {
+  sabre: {
+    name: "SABRE V1", brand: "Neuron Padel", cat: "Rackets", price: 289.75, available: true, stock: "preorder", provisionalPrice: false, imageScale: 1,
+    description: "An attacking racket for intermediate and advanced players. A 24K aluminized carbon face and Multi-EVA core give a firm, responsive feel, while the textured surface supports spin and the extended handle accommodates two-handed backhands.",
+    gallery: ["uploads/np-sabre-v1-1.png", "uploads/np-sabre-v1-2.png", "uploads/np-sabre-v1-3.png", "uploads/np-sabre-v1-4.png", "uploads/np-sabre-v1-5.png", "uploads/np-sabre-v1-6.png"],
+    variant: null,
+    specifications: [
+      { label:"Face", value:"24K aluminized carbon" },
+      { label:"Frame", value:"Reinforced carbon fibre" },
+      { label:"Core", value:"neuronCORE™ Multi-EVA" },
+      { label:"Surface", value:"Rough finish with raised 3D texture" },
+      { label:"Weight", value:"350–370 g" },
+      { label:"Balance", value:"High" },
+      { label:"Shape", value:"Diamond" },
+      { label:"Thickness", value:"38 mm" },
+      { label:"Handle length", value:"15 cm" },
+      { label:"Grip & strap", value:"White anti-slip grip; adjustable, removable strap" },
+    ],
+    perks: ["EU shipping · €15 provisional", "Neuron Padel collection"],
+  },
   ronin: {
-    name: "RONIN V1 2026", brand: "Neuron Padel", cat: "Rackets", price: 262, available: true, stock: "in", imageScale: 1.4,
-    description: "Carbon-fibre diamond-shape frame built for aggressive attacking play. EVA soft-core for a forgiving sweet spot and controlled power on every smash.",
-    gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"],
+    name: "RONIN V1 2026", brand: "Neuron Padel", cat: "Rackets", price: 262, available: true, stock: "in", imageScale: 1.07,
+    description: RONIN_DESCRIPTION,
+    specifications: RONIN_SPECS,
+    gallery: RONIN_GALLERY,
     variant: {
       label: "Model", type: "model",
       options: [
-        { value: "onyx", label: "Onyx", price: 262, img: "uploads/neuronpadel  RONIN v1-1.webp", imageScale: 1.4, gallery: ["uploads/neuronpadel  RONIN v1-1.webp", "uploads/np-ronin-v1.webp"] },
-        { value: "sakura", label: "Sakura", price: 295, img: "uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", imageScale: 1, gallery: ["uploads/neuronpadel  RONIN v1 SAKURA EDITION-1.webp", "uploads/np-ronin-sakura.webp"] },
+        { value: "onyx", label: "Onyx", name:"RONIN V1 2026", price: 262, img: RONIN_GALLERY[0], imageScale: 1.07, gallery: RONIN_GALLERY, description:RONIN_DESCRIPTION, specifications:RONIN_SPECS },
+        { value: "sakura", label: "Sakura", name:"RONIN V1 Sakura Edition", price: 295, img: SAKURA_GALLERY[0], imageScale: 1, gallery: SAKURA_GALLERY, description:SAKURA_DESCRIPTION, specifications:SAKURA_SPECS },
       ],
     },
-    perks: ["Free EU shipping", "2-year warranty", "Ships in 24h"],
+    perks: ["EU shipping · €15 provisional", "Neuron Padel collection"],
   },
   bag: {
     name: "Performance Pro+ Player Bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, available: false, stock: "in",
     description: "Thermal-lined racket compartment for up to 3 paddles, ventilated shoe pocket and padded straps. The tour bag for players who travel to win.",
     gallery: ["uploads/neuronpadel PERFORMANCE PRO+ PLAYER BAG.webp", "uploads/np-player-bag.webp"],
     variant: null,
-    perks: ["Free EU shipping", "2-year warranty", "Ships in 24h"],
+    perks: ["Neuron Padel collection"],
   },
   tshirt: {
     name: "Performance T-Shirt", brand: "Neuron Padel", cat: "Apparel", price: 25.5, available: false, stock: "in",
@@ -260,7 +327,19 @@ class Component extends DCLogic {
   state = { theme: "dark", productId: null, variant: null, qty: 1, imgIdx: 0, cartCount: 0, toast: null };
 
   componentDidMount() {
-    const SELLABLE_IDS = ["ronin", "bag", "tshirt", "shorts", "socks", "balls"];
+    if (window.EuroPadelCatalog?.configured()) {
+      this._remote = { name: "Loading product…", brand: "Neuron Padel", cat: "", price: 0, available: false, gallery: [""], perks: [] };
+      const params = new URLSearchParams(location.search), requested = params.get("id"), slug = location.hash.slice(1);
+      const aliases = { sabre: "sabre-v1", ronin: "ronin-v1-2026", "ronin-sakura": "ronin-v1-sakura-edition" };
+      window.EuroPadelCatalog.load().then(products => {
+        const found = products.find(p => requested ? String(p.productId) === requested : p.slug === (aliases[slug] || slug));
+        if (!found) throw new Error("Not found");
+        this._remote = found;
+        const selected = found.variant?.options.find(v => v.available) || found.variant?.options[0];
+        this.setState({ variant: selected?.value || null, imgIdx: 0 });
+      }).catch(() => { this._remote = { ...this._remote, name: "Product unavailable", description: "Please return to the shop and try again.", available: false }; this.setState({ variant: null }); });
+    }
+    const SELLABLE_IDS = Object.keys(CATALOG);
     const hash = (typeof location !== "undefined" ? location.hash.replace("#", "") : "");
     const requestedId = hash === "ronin-sakura" ? "ronin" : hash;
     const id = (requestedId && SELLABLE_IDS.includes(requestedId)) ? requestedId
@@ -272,7 +351,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() { if (this._off) this._off(); if (this._toastT) clearTimeout(this._toastT); }
 
-  _prod() { return CATALOG[this.state.productId] || CATALOG.ronin; }
+  _prod() { return this._remote || CATALOG[this.state.productId] || CATALOG.ronin; }
   _activeOpt() {
     const p = this._prod();
     if (!p.variant) return null;
@@ -296,8 +375,12 @@ class Component extends DCLogic {
     const accent = "var(--accent)", line = "var(--line)", fg = "var(--fg)", dim = "var(--dim)", alert = "var(--alert)";
     const imgIdx = Math.min(s.imgIdx, gallery.length - 1);
     const variantStr = opt ? opt.label : "";
+    const productName = opt?.name || p.name;
+    const specifications = opt?.specifications || p.specifications || [];
+    const firstImageScale = opt?.imageScale || p.imageScale || 1;
 
-    const tag = p.stock === "low" ? { showTag: true, tag: "Low stock", tagColor: alert }
+    const tag = p.stock === "preorder" ? { showTag: true, tag: "New model", tagColor: accent }
+      : p.stock === "low" ? { showTag: true, tag: "Low stock", tagColor: alert }
       : p.stock === "out" ? { showTag: true, tag: "Sold out", tagColor: dim }
       : { showTag: false, tag: "", tagColor: dim };
 
@@ -309,16 +392,19 @@ class Component extends DCLogic {
       cartCount: s.cartCount,
       cartBadgeRef: (el) => { this._badge = el; },
 
-      name: p.name, brand: p.brand, catLabel: p.cat.toUpperCase(),
-      description: p.description,
-      isAvailable: p.available === true,
-      isComingSoon: p.available !== true,
-      priceLabel: p.available === true ? euro(price) : "Coming soon",
+      name: productName, brand: p.brand, catLabel: p.cat.toUpperCase(),
+      description: opt?.description || p.description,
+      isProvisionalPrice: p.provisionalPrice === true,
+      hasSpecifications: specifications.length > 0,
+      specifications,
+      isAvailable: (opt?.available ?? p.available) === true,
+      isComingSoon: (opt?.available ?? p.available) !== true,
+      priceLabel: (opt?.available ?? p.available) === true ? euro(price) : "Coming soon",
       ...tag,
 
       activeImg: gallery[imgIdx],
-      activeImageScale: opt?.imageScale || p.imageScale || 1,
-      gallery: gallery.map((img, i) => ({ img, imageScale: opt?.imageScale || p.imageScale || 1, border: i === imgIdx ? accent : line, select: () => this.setState({ imgIdx: i }) })),
+      activeImageScale: imgIdx === 0 ? firstImageScale : 1,
+      gallery: gallery.map((img, i) => ({ img, imageScale: i === 0 ? firstImageScale : 1, border: i === imgIdx ? accent : line, select: () => this.setState({ imgIdx: i }) })),
 
       hasVariants: !!p.variant,
       variantLabel: p.variant ? p.variant.label : "",
@@ -338,10 +424,11 @@ class Component extends DCLogic {
 
       addToCart: () => {
         if (!window.CartStore) return;
-        window.CartStore.add({ name: p.name, brand: p.brand, variant: opt ? opt.value : "",
-          variantLabel: opt ? (p.variant.label + ": " + opt.label) : "", price, img: gallery[0] }, s.qty);
+        if ((opt?.available ?? p.available) !== true) return;
+        window.CartStore.add({ name: productName, brand: p.brand, variant: opt ? opt.value : "",
+          variantLabel: opt ? (p.variant.label + ": " + opt.label) : "", productId: p.productId, variantId: opt?.variantId, price, img: gallery[0] }, s.qty);
         if (this._badge) { this._badge.classList.remove("pd-cart-pop"); void this._badge.offsetWidth; this._badge.classList.add("pd-cart-pop"); }
-        const label = p.name + (opt ? " · " + opt.label : "") + " × " + s.qty;
+        const label = productName + (opt ? " · " + opt.label : "") + " × " + s.qty;
         this.setState({ toast: label });
         if (this._toastT) clearTimeout(this._toastT);
         this._toastT = setTimeout(() => this.setState({ toast: null }), 3200);

@@ -1,0 +1,8 @@
+.git/
+.vercel/
+.env
+.env.*
+tests/
+*.md
+dev-server.py
+__pycache__/

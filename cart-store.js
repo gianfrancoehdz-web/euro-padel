@@ -1,7 +1,7 @@
 // BLUWX cart — localStorage-backed store shared across Product / Cart / header.
 // No backend. Items keyed by product + variant.
 // Idempotent: guarded so re-evaluation (multiple helmet includes) never re-declares.
-if (typeof window !== "undefined" && window.CartStore) {
+if (typeof window !== "undefined" && window.CartStore && window.CartStore.VERSION === 2) {
   // already defined — no-op
 } else {
 (function () {
@@ -27,6 +27,7 @@ function lineId(name, variant) {
 }
 
 const CartStore = {
+  VERSION: 2,
   KEY,
   get() { return read(); },
   count() { return read().reduce((n, it) => n + it.qty, 0); },
@@ -37,9 +38,9 @@ const CartStore = {
     const items = read();
     const id = lineId(item.name, item.variant);
     const existing = items.find(x => x.id === id);
-    if (existing) existing.qty += qty;
+    if (existing) { existing.qty += qty; existing.productId = item.productId; existing.variantId = item.variantId; existing.price = item.price; existing.img = item.img; }
     else items.push({ id, name: item.name, brand: item.brand, variant: item.variant || "",
-                      variantLabel: item.variantLabel || "", price: item.price, img: item.img, qty });
+                      variantLabel: item.variantLabel || "", productId: item.productId, variantId: item.variantId, price: item.price, img: item.img, qty });
     write(items);
     return read();
   },

@@ -7,6 +7,8 @@
 <title>Euro Padel | Neuron Padel equipment</title>
 <script src="./support.js"></script>
 <script src="./cart-store.js"></script>
+<script src="./store-config.js"></script>
+<script src="./store-catalog.js"></script>
 </head>
 <body>
 <x-dc>
@@ -249,6 +251,7 @@
 
     <!-- ===== SHOP · CATEGORIES (platform function) ===== -->
     <section style="padding:clamp(16px,3vw,32px) 0 clamp(32px,5vw,56px);">
+      <p role="status">{{ catalogMessage }}</p>
       <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom:22px;">
         <div>
           <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(26px,3.4vw,42px); letter-spacing:-0.02em; margin:12px 0 0;">The Neuron Padel collection.</h2>
@@ -262,7 +265,7 @@
             <sc-for list="{{ row.items }}" as="cat" hint-placeholder-count="5">
               <a href="Shop.dc.html" style="position:relative; display:block; background:var(--bg); border:1px solid var(--line); border-radius:18px; overflow:hidden; transition:transform .2s, border-color .2s, box-shadow .2s;" style-hover="transform:translateY(-6px); border-color:var(--accent); box-shadow:0 16px 34px rgba(0,0,0,0.26);">
                 <div style="aspect-ratio:3/4; position:relative; overflow:hidden; background:#f4f4f1;">
-                  <img src="{{ cat.img }}" alt="{{ cat.name }}" style="position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:14px; transform:scale({{ cat.imageScale }});"/>
+                  <img src="{{ cat.img }}" alt="{{ cat.name }}" style="{{ cat.imageStyle }}"/>
                   <div style="position:absolute; top:12px; left:12px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; color:#77776f;">{{ cat.code }}</div>
                 </div>
                 <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; padding:16px;">
@@ -328,9 +331,30 @@
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
+// Visible body bounds in the official front photos, excluding shadow/strap.
+// All bodies run from 14% to 87.5% of the card, independent of card width.
+const HOME_RACKET_BOUNDS = {
+  "SABRE V1": { imageHeight:1126, top:137, bottom:1001 },
+  "RONIN V1 2026": { imageHeight:1200, top:126, bottom:1059 },
+  "RONIN V1 Sakura Edition": { imageHeight:1800, top:170, bottom:1668 },
+};
+function homeProductMedia(product) {
+  const bounds = product.productId ? null : HOME_RACKET_BOUNDS[product.name];
+  if (!bounds) return { ...product, imageStyle:`position:absolute; inset:0; width:100%; height:100%; object-fit:contain; padding:14px; transform:scale(${product.imageScale || 1});` };
+  const bodyHeight = bounds.bottom - bounds.top;
+  const height = 73.5 * bounds.imageHeight / bodyHeight;
+  const top = 14 - 73.5 * bounds.top / bodyHeight;
+  return { ...product, bodyBounds:bounds, imageStyle:`position:absolute; left:50%; top:${top}%; height:${height}%; width:auto; max-width:none; padding:0; transform:translateX(-50%);` };
+}
+
 class Component extends DCLogic {
   state = { menuOpen: false, theme: "dark", langOpen: false, lang: "EN", compact: false, cartCount: 0 };
   componentDidMount() {
+    if (window.EuroPadelCatalog?.configured()) {
+      this.setState({ catalog: [], catalogMessage: "Loading catalog…" });
+      window.EuroPadelCatalog.load().then(catalog => this.setState({ catalog, catalogMessage: "" }))
+        .catch(() => this.setState({ catalog: [], catalogMessage: "Catalog temporarily unavailable. Please reload." }));
+    }
     this._offCart = window.CartStore ? window.CartStore.onChange(() => this.setState({ cartCount: window.CartStore.count() })) : null;
     if (window.CartStore) this.setState({ cartCount: window.CartStore.count() });
     if (window.__bluwxHeaderScrollBound) return;
@@ -422,20 +446,23 @@ class Component extends DCLogic {
         { n: "48h", l: "EU delivery" },
       ],
       categories: [
-        { name: "RONIN V1 2026", code: "RACKET", price: "€262,00", img: "uploads/np-ronin-v1.webp", imageScale: 1.4 },
-        { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€295,00", img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
+        { name: "SABRE V1", code: "RACKET", price: "€289,75", img: "uploads/np-sabre-v1-1.png", imageScale: 1.12 },
+        { name: "RONIN V1 2026", code: "RACKET", price: "€262,00", img: "uploads/np-ronin-official-1.jpg", imageScale: 1.46 },
+        { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€295,00", img: "uploads/np-sakura-official-1.jpg", imageScale: 1 },
         { name: "Performance Pro+ Player Bag", code: "BAG", price: "Coming soon", img: "uploads/np-player-bag.webp" },
         { name: "Performance T-Shirt", code: "APPAREL", price: "Coming soon", img: "uploads/np-tshirt.webp" },
         { name: "Pro+ Balls · Box of 24", code: "BALLS", price: "Coming soon", img: "uploads/np-balls.webp" },
       ],
-      shopRows: [
+      catalogMessage: this.state.catalogMessage || "",
+      shopRows: this.state.catalog ? [{ brand: "Neuron Padel", items: this.state.catalog.map(p => homeProductMedia({ ...p, code: p.cat.toUpperCase(), price: p.available ? "€" + p.price.toFixed(2).replace(".", ",") : "Coming soon" })) }] : [
         { brand: "Neuron Padel", items: [
-          { name: "RONIN V1 2026", code: "RACKET", price: "€262,00", img: "uploads/np-ronin-v1.webp", imageScale: 1.4 },
-          { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€295,00", img: "uploads/np-ronin-sakura.webp", imageScale: 1 },
+          { name: "SABRE V1", code: "RACKET", price: "€289,75", img: "uploads/np-sabre-v1-1.png", imageScale: 1.12 },
+          { name: "RONIN V1 2026", code: "RACKET", price: "€262,00", img: "uploads/np-ronin-official-1.jpg", imageScale: 1.46 },
+          { name: "RONIN V1 Sakura Edition", code: "RACKET", price: "€295,00", img: "uploads/np-sakura-official-1.jpg", imageScale: 1 },
           { name: "Performance Pro+ Player Bag", code: "BAG", price: "Coming soon", img: "uploads/np-player-bag.webp" },
           { name: "Performance T-Shirt", code: "APPAREL", price: "Coming soon", img: "uploads/np-tshirt.webp" },
           { name: "Pro+ Balls · Box of 24", code: "BALLS", price: "Coming soon", img: "uploads/np-balls.webp" },
-        ]},
+        ].map(homeProductMedia)},
       ],
       social: [
         { tag: "@bluwx", slot: "[ match_clip ]" },
@@ -454,6 +481,7 @@ class Component extends DCLogic {
           { label: "Accessories", href: "Shop.dc.html?category=Accessories" },
         ] },
         { title: "Collection", links: [
+          { label: "SABRE V1", href: "Product.dc.html#sabre" },
           { label: "RONIN V1", href: "Product.dc.html#ronin" },
           { label: "RONIN Sakura", href: "Product.dc.html#ronin" },
           { label: "Neuron Padel", href: "Shop.dc.html" },
