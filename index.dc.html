@@ -47,6 +47,17 @@
     .bluwx-body { padding-bottom: 0 !important; }
   }
   @keyframes bluwxfade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (max-width: 767px) {
+    .ep-home-hero { display:grid; grid-template-columns:minmax(0,1fr); background:#161512; padding-top:88px !important; padding-bottom:24px; }
+    .ep-home-hero .ep-hero-copy { display:contents; }
+    .ep-home-hero .ep-hero-image { grid-area:1 / 1; align-self:start; position:relative !important; inset:auto !important; width:100%; height:auto !important; object-fit:contain !important; }
+    .ep-home-hero .ep-hero-copy h1 { grid-area:1 / 1; align-self:center; z-index:1; width:58%; max-width:12ch !important; margin:0 !important; padding:12px 0 12px 16px; font-size:clamp(26px,6.8vw,48px) !important; line-height:1.04 !important; text-shadow:0 2px 14px rgba(0,0,0,.7); }
+    .ep-home-hero .ep-hero-copy > div:first-child { grid-area:2 / 1; margin:22px 16px 0; }
+    .ep-home-hero .ep-hero-copy > p { grid-area:3 / 1; margin:12px 16px 0 !important; }
+    .ep-home-hero .ep-hero-copy > div:last-child { grid-area:4 / 1; margin:20px 16px 0 !important; gap:10px !important; }
+    .ep-home-hero .ep-hero-copy > div:last-child a { padding:13px 18px !important; font-size:14px !important; }
+    .ep-home-hero .ep-hero-shade, .ep-home-hero .ep-hero-glow { display:none; }
+  }
 </style>
 </helmet>
 
@@ -104,13 +115,13 @@
   </header>
 
   <!-- ===== HERO · PLATFORM STATEMENT ===== -->
-  <section style="position:relative; overflow:hidden; border-bottom:1px solid var(--line); padding-top:clamp(80px,10vw,112px);">
-    <img src="uploads/europadel-hero-neuron-moon.png" alt="Neuron Padel racket in a moonlit mountain landscape" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;">
-    <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(12,13,15,0.78) 0%, rgba(12,13,15,0.60) 34%, rgba(12,13,15,0.20) 61%, rgba(12,13,15,0.04) 100%), linear-gradient(180deg, rgba(12,13,15,0.20) 0%, transparent 42%, rgba(22,21,18,0.72) 100%);"></div>
-    <div style="position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 30% 58% at 72% 48%, rgba(102,171,255,0.16) 0%, rgba(54,117,210,0.08) 36%, transparent 72%); mix-blend-mode:screen;"></div>
+  <section class="ep-home-hero" style="position:relative; overflow:hidden; border-bottom:1px solid var(--line); padding-top:clamp(80px,10vw,112px);">
+    <img class="ep-hero-image" src="uploads/europadel-hero-neuron-moon.png" alt="Neuron Padel racket in a moonlit mountain landscape" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;">
+    <div class="ep-hero-shade" style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(12,13,15,0.78) 0%, rgba(12,13,15,0.60) 34%, rgba(12,13,15,0.20) 61%, rgba(12,13,15,0.04) 100%), linear-gradient(180deg, rgba(12,13,15,0.20) 0%, transparent 42%, rgba(22,21,18,0.72) 100%);"></div>
+    <div class="ep-hero-glow" style="position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 30% 58% at 72% 48%, rgba(102,171,255,0.16) 0%, rgba(54,117,210,0.08) 36%, transparent 72%); mix-blend-mode:screen;"></div>
     <span style="display:none; position:absolute; top:130px; left:50%; transform:translateX(-50%); z-index:2; opacity:0.7; font-family:'IBM Plex Mono',monospace; font-size:33px; letter-spacing:0.1em; text-transform:uppercase; color:#FF0000; background:rgba(14,13,11,0.65); padding:10px 24px; border-radius:999px; border:2px solid rgba(255,0,0,0.5);">DEMO</span>
     <span style="display:none; position:absolute; bottom:14px; right:16px; z-index:2; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.06em; color:rgba(246,244,239,0.6);">TEMP · placeholder photo</span>
-    <div style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(56px,10vw,120px) clamp(16px,4vw,40px) clamp(48px,7vw,96px);">
+    <div class="ep-hero-copy" style="position:relative; max-width:1280px; margin:0 auto; padding:clamp(56px,10vw,120px) clamp(16px,4vw,40px) clamp(48px,7vw,96px);">
       <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent);">Specialist padel equipment</div>
       <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(44px,8.5vw,104px); line-height:0.94; letter-spacing:-0.025em; margin:20px 0 0; max-width:16ch; text-wrap:balance; color:#F6F4EF;">Built for the way you play.</h1>
       <p style="font-size:clamp(16px,1.6vw,19px); line-height:1.5; color:rgba(246,244,239,0.78); max-width:52ch; margin:24px 0 0;">Euro Padel is a specialist online store for players who care about their equipment. Discover our focused collection from Neuron Padel.</p>

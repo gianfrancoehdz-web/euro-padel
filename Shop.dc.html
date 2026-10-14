@@ -55,6 +55,9 @@
   .shop-banner { aspect-ratio: 16 / 10; }
   .shop-banner-content { padding: clamp(20px,5vw,40px); max-width: 100%; }
   .shop-banner-logo { height: 72px; }
+  @media (max-width: 767px) {
+    .shop-banner > img { object-position:28% center !important; }
+  }
   @media (min-width: 640px) {
     .shop-banner { aspect-ratio: 21 / 8; }
     .shop-banner-logo { height: 96px; }
