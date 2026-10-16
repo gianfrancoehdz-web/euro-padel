@@ -25,6 +25,7 @@ function setup() {
     },
   };
   vm.createContext(context);
+  vm.runInContext(fs.readFileSync(path.join(root, 'shipping-countries.js'), 'utf8'), context);
   vm.runInContext(fs.readFileSync(path.join(root, 'store-api.js'), 'utf8'), context);
   return {context, api:context.window.EuroPadelAPI, storage, calls, cart:() => cart};
 }

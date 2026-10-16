@@ -23,7 +23,8 @@
   }
   function payload(items, contact) {
     if (!items.length) throw new Error("Your cart is empty.");
-    if (!/^(spain|españa|es)$/i.test(contact.country.trim())) throw new Error("Shipping is available to Spain only.");
+    const country = window.EuroPadelShipping && window.EuroPadelShipping.countryCode(contact.country);
+    if (!country) throw new Error("Select a country in the European Union.");
     return {
       email: contact.email.trim().toLowerCase(),
       items: items.map(item => {
@@ -33,7 +34,7 @@
         return { product_variant_id: id, quantity: item.qty };
       }).sort((a, b) => a.product_variant_id - b.product_variant_id),
       delivery: {
-        first_name: contact.firstName.trim(), last_name: contact.lastName.trim(), country: "ES",
+        first_name: contact.firstName.trim(), last_name: contact.lastName.trim(), country,
         city: contact.city.trim(), address: contact.address.trim(), postal_code: contact.postalCode.trim(),
         phone: contact.phone.trim().replace(/[\s().-]/g, ""),
       },

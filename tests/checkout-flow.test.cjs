@@ -15,6 +15,7 @@ function component(file, api) {
     DCLogic:class {setState(value) {Object.assign(this.state, typeof value === 'function' ? value(this.state) : value);}},
   };
   vm.createContext(context);
+  vm.runInContext(fs.readFileSync(path.join(root, 'shipping-countries.js'), 'utf8'), context);
   vm.runInContext(script + '\nthis.instance = new Component();', context);
   return {instance:context.instance, context, storage};
 }
@@ -28,6 +29,10 @@ async function run() {
   checkout.state.postalCode = '28001';
   assert.equal(checkout._validateContact(), true);
   checkout.state.country = 'France';
+  assert.equal(checkout._validateContact(), true);
+  checkout.state.country = 'Italy';
+  assert.equal(checkout._validateContact(), true);
+  checkout.state.country = 'GB';
   assert.equal(checkout._validateContact(), false);
   checkout.state.country = 'Spain';
   const failed = component('Checkout.dc.html', {enabled:() => true, start:async () => {throw new Error('Retry same details');}});
@@ -63,6 +68,6 @@ async function run() {
   assert.equal(verified.instance.renderVals().showCheck, false);
   assert.match(verified.instance.renderVals().message, /do not pay again/);
   assert.equal(completed, 1);
-  console.log('PASS: postal code, Spain-only validation, recoverable checkout errors, no invented orders, pending/paid/review confirmation states.');
+  console.log('PASS: postal code, EU validation, recoverable checkout errors, no invented orders, pending/paid/review confirmation states.');
 }
 run().catch(error => {console.error(error); process.exitCode = 1;});

@@ -9,13 +9,15 @@
 <script src="./support.js"></script>
 <script src="./cart-store.js?v=catalog2"></script>
 <script src="./store-config.js"></script>
-<script src="./store-api.js?v=catalog2"></script>
+<script src="./shipping-countries.js"></script>
+<script src="./store-api.js?v=eu1"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <script src="./store-config.js"></script>
-<script src="./store-api.js?v=catalog2"></script>
+<script src="./shipping-countries.js"></script>
+<script src="./store-api.js?v=eu1"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -292,9 +294,9 @@ const CONTACT_FIELDS = [
   { key:"email", label:"Email address", type:"email", inputMode:"email", autocomplete:"email", placeholder:"you@example.com", maxLength:254, wide:true },
   { key:"firstName", label:"First name", autocomplete:"given-name", placeholder:"First name", maxLength:100 },
   { key:"lastName", label:"Last name", autocomplete:"family-name", placeholder:"Last name", maxLength:100 },
-  { key:"country", label:"Country (Spain only)", autocomplete:"country-name", placeholder:"Spain", maxLength:100 },
+  { key:"country", label:"Country (European Union)", autocomplete:"country-name", placeholder:"Italy, Spain, France…", maxLength:100 },
   { key:"city", label:"City", autocomplete:"address-level2", placeholder:"City", maxLength:100 },
-  { key:"postalCode", label:"Postal code", inputMode:"numeric", autocomplete:"postal-code", placeholder:"28001", maxLength:5 },
+  { key:"postalCode", label:"Postal code", inputMode:"text", autocomplete:"postal-code", placeholder:"Postal code", maxLength:12 },
   { key:"address", label:"Address", autocomplete:"street-address", placeholder:"Street, house number, apartment", maxLength:250, wide:true },
   { key:"phone", label:"Phone number", type:"tel", inputMode:"tel", autocomplete:"tel", placeholder:"+34 600 123 456", maxLength:40, wide:true },
 ];
@@ -316,8 +318,8 @@ class Component extends DCLogic {
       if (!value) errors[field.key] = field.label + " is required.";
       else if (value.length > field.maxLength) errors[field.key] = "This value is too long.";
       else if (field.key === "email" && !EMAIL_RE.test(value)) errors.email = "Enter a valid email address.";
-      else if (field.key === "country" && !/^(spain|españa|es)$/i.test(value)) errors.country = "Shipping is currently available to Spain only.";
-      else if (field.key === "postalCode" && !/^[0-9]{5}$/.test(value)) errors.postalCode = "Enter a five-digit Spanish postal code.";
+      else if (field.key === "country" && !window.EuroPadelShipping.countryCode(value)) errors.country = "Select a country in the European Union (English name or two-letter code).";
+      else if (field.key === "postalCode" && !/^[A-Za-z0-9][A-Za-z0-9 -]{1,11}$/.test(value)) errors.postalCode = "Enter a valid postal code.";
       else if (field.key === "phone" && (!/^\+?[0-9\s().-]+$/.test(value) || value.replace(/\D/g, "").length < 7 || value.replace(/\D/g, "").length > 15)) errors.phone = "Enter a valid phone number, including the country code.";
     });
     this.setState({ errors });
@@ -360,7 +362,7 @@ class Component extends DCLogic {
       customerName: (s.firstName + " " + s.lastName).trim(),
       deliveryAddress: s.address,
       deliveryLocation: s.postalCode + " " + s.city + ", " + s.country,
-      contactNotice: connected ? "Enter your contact and delivery details. Shipping is currently available to Spain only." : "Enter sample contact and delivery details. This demo does not save personal information, place an order or send emails.",
+      contactNotice: connected ? "Shipping across the European Union. Flat shipping: €15 (provisional). Enter the country name in English or its two-letter code." : "European Union shipping: €15 (provisional). Enter sample details only. This demo does not place an order or send emails.",
       continueLabel: connected ? "Review order →" : "Continue to demo confirmation →",
       detailsNotice: connected ? "Payment details are collected securely by Stripe, not on this page." : "Your details stay on this page only. No payment details required.",
       confirmationHeading: connected ? "Review your order" : "Demo confirmation",
