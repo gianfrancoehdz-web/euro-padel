@@ -39,6 +39,9 @@ async function run() {
   await assert.rejects(unavailable.api.start(items, contact), /only accepts Stripe test/);
   assert.equal(unavailable.storage.size, 0);
   const test = setup();
+  const promo = setup();
+  await promo.api.start(items, {...contact, promoCode:' carchia5 '});
+  assert.equal(JSON.parse(promo.calls[0].options.body).promo_code, 'CARCHIA5');
   await test.api.start(items, contact);
   const body = JSON.parse(test.calls[0].options.body);
   assert.equal(body.items[0].product_variant_id, 42);

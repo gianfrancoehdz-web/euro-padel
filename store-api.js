@@ -27,6 +27,7 @@
     if (!country) throw new Error("Select a country in the European Union.");
     return {
       email: contact.email.trim().toLowerCase(),
+      promo_code: String(contact.promoCode || "").trim().toUpperCase(),
       items: items.map(item => {
         const id = item.variantId || (config().variantIds || {})[JSON.stringify([item.name, item.variant || ""])];
         if (!Number.isSafeInteger(id) || id <= 0) throw new Error("A cart item is not connected to the current catalog. Remove it from your cart and add it again from the shop. No payment was started.");

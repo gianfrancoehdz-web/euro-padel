@@ -244,6 +244,15 @@
             <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim); margin-bottom:10px;">
               <span>Subtotal</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ subtotalLabel }}</span>
             </div>
+            <label for="co-promo" style="display:block; font-size:14px; margin:18px 0 8px;">Discount code</label>
+            <div style="display:flex; gap:8px;">
+              <input id="co-promo" class="co-input" style="min-width:0; flex:1;" maxlength="40" autocomplete="off" value="{{ promoInput }}" onInput="{{ onPromoInput }}" disabled="{{ paying }}">
+              <button type="button" onClick="{{ applyPromo }}" disabled="{{ paying }}" style="background:var(--accent); color:var(--on-accent); border:0; border-radius:8px; padding:10px 16px; cursor:pointer;">Apply</button>
+            </div>
+            <p role="status" style="font-size:13px; color:var(--dim);">{{ promoMessage }}</p>
+            <sc-if value="{{ hasDiscount }}">
+              <div style="display:flex; justify-content:space-between; color:var(--accent); margin-bottom:14px;"><span>CARCHIA5 · 5% on products</span><span>−{{ discountLabel }}</span></div>
+            </sc-if>
             <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim); margin-bottom:16px;">
               <span>Shipping (provisional)</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
             </div>
@@ -302,7 +311,7 @@ const CONTACT_FIELDS = [
 ];
 
 class Component extends DCLogic {
-  state = { theme: "dark", step: 1, email: "", firstName:"", lastName:"", country:"Spain", city:"", postalCode:"", address:"", phone:"", errors:{}, paymentError:"", paying: false, items: [] };
+  state = { theme: "dark", step: 1, email: "", firstName:"", lastName:"", country:"Spain", city:"", postalCode:"", address:"", phone:"", errors:{}, paymentError:"", paying: false, items: [], promoInput:"", promoCode:"", promoMessage:"" };
 
   componentDidMount() {
     try { localStorage.removeItem("bluwx_last_order"); } catch (e) {}
@@ -331,7 +340,9 @@ class Component extends DCLogic {
     const items = s.items || [];
     const subtotal = items.reduce((a, it) => a + it.price * it.qty, 0);
     const shipping = items.length === 0 ? 0 : SHIP_COST;
-    const total = subtotal + shipping;
+    const discountedSubtotal = s.promoCode === "CARCHIA5" ? items.reduce((a, it) => a + Math.round(Math.round(it.price * 100) * 95 / 100) * it.qty, 0) / 100 : subtotal;
+    const discount = Math.round((subtotal - discountedSubtotal) * 100) / 100;
+    const total = discountedSubtotal + shipping;
     const connected = !!(window.EuroPadelAPI && window.EuroPadelAPI.enabled());
 
     const stepDef = (n, label) => {
@@ -346,6 +357,16 @@ class Component extends DCLogic {
     };
 
     return {
+      promoInput: s.promoInput,
+      promoMessage: s.promoMessage,
+      hasDiscount: discount > 0,
+      discountLabel: euro(discount),
+      onPromoInput: (e) => { if (!s.paying) this.setState({promoInput:e.target.value, promoCode:"", promoMessage:""}); },
+      applyPromo: () => {
+        if (s.paying) return;
+        const code = s.promoInput.trim().toUpperCase();
+        this.setState({promoCode:code === "CARCHIA5" ? code : "", promoMessage:code === "CARCHIA5" ? "5% applied to products. Shipping is unchanged. Final amount verified by the store." : code ? "This discount code is not valid." : "Discount removed."});
+      },
       theme: s.theme,
       themeLabel: s.theme === "dark" ? "LIGHT ☀" : "DARK ☾",
       toggleTheme: () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" })),

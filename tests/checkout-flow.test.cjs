@@ -35,6 +35,16 @@ async function run() {
   checkout.state.country = 'GB';
   assert.equal(checkout._validateContact(), false);
   checkout.state.country = 'Spain';
+  checkout.renderVals().onPromoInput({target:{value:' carchia5 '}});
+  checkout.renderVals().applyPromo();
+  assert.equal(checkout.state.promoCode, 'CARCHIA5');
+  assert.equal(checkout.renderVals().hasDiscount, true);
+  assert.equal(checkout.renderVals().discountLabel, '€13,10');
+  assert.equal(checkout.renderVals().shippingLabel, '€15,00');
+  assert.equal(checkout.renderVals().totalLabel, '€263,90');
+  checkout.renderVals().onPromoInput({target:{value:'FAKE'}});
+  checkout.renderVals().applyPromo();
+  assert.equal(checkout.renderVals().hasDiscount, false);
   const failed = component('Checkout.dc.html', {enabled:() => true, start:async () => {throw new Error('Retry same details');}});
   Object.assign(failed.instance.state, checkout.state);
   await failed.instance.renderVals().payNow();
