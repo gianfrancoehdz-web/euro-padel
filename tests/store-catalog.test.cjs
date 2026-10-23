@@ -9,6 +9,11 @@ assert.equal(adapted.name, 'Admin title'); assert.equal(adapted.description, 'Ad
 assert.equal(adapted.variant.options[0].variantId, 42); assert.equal(adapted.price, 262);
 assert.equal(adapted.img, 'https://api.example.com/media/racket.png'); assert.equal(adapted.available, true);
 assert.equal(api.adapt({ ...product, availability: 'coming_soon' }).available, false);
+const seeded = { ...product, image: '', availability: 'coming_soon', variants: [{...product.variants[0], sku: 'NP-SABRE-V1', stock: 0}] };
+assert.equal(api.adapt(seeded).img, '/uploads/np-sabre-v1-1.png');
+assert.equal(api.adapt(seeded).gallery.length, 6);
+assert.equal(api.adapt(seeded).available, false);
+assert.equal(api.adapt({...seeded, image: 'https://res.cloudinary.com/example/image/upload/admin.png'}).img, 'https://res.cloudinary.com/example/image/upload/admin.png');
 assert.equal(api.adapt({ ...product, availability: 'preorder', preorder_dispatch_date: '2000-01-01' }).available, false);
 assert.throws(() => api.adapt({ ...product, image: 'javascript:alert(1)' }));
 (async () => {

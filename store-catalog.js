@@ -2,6 +2,18 @@
   "use strict";
   if (window.EuroPadelCatalog) return;
   const configured = () => Boolean((window.EuroPadelConfig || {}).apiOrigin);
+  // Existing official storefront photos cover seeded items until admin uploads.
+  // Only imagery is a fallback: prices, availability and stock always use the API.
+  const seededPhotos = {
+    "NP-SABRE-V1": ["np-sabre-v1-{}.png", 6],
+    "NP-RONIN-V1-2026": ["np-ronin-official-{}.jpg", 10],
+    "NP-RONIN-V1-SAKURA": ["np-sakura-official-{}.jpg", 5],
+    "NP-BAG-PROPLUS": ["np-player-bag.webp", 1],
+    "NP-TSHIRT-PERF": ["np-tshirt.webp", 1],
+    "NP-SHORTS-PROPLUS": ["np-shorts.webp", 1],
+    "NP-SOCKS-PERF": ["np-socks.webp", 1],
+    "NP-BALLS-PROPLUS": ["np-balls.webp", 1],
+  };
   function origin() {
     const u = new URL(window.EuroPadelConfig.apiOrigin);
     const local = h => ["localhost", "127.0.0.1"].includes(h);
@@ -31,12 +43,16 @@
     const first = variants.find(v => v.available) || variants[0];
     const gallery = (p.gallery || []).map(g => image(g.image)).filter(Boolean);
     if (p.image) gallery.unshift(image(p.image));
+    if (!gallery.length) {
+      const fallback = (p.variants || []).map(v => seededPhotos[v.sku]).find(Boolean);
+      if (fallback) for (let i = 1; i <= fallback[1]; i++) gallery.push("/uploads/" + fallback[0].replace("{}", i));
+    }
     const cat = ({ Raqueta: "Rackets", Ropa: "Apparel", Bolso: "Bags & Gear", Accesorios: "Accessories" })[p.category_detail?.name] || p.category_detail?.name || "Accessories";
     return { productId: p.id, name: p.name, slug: p.slug, brand: "Neuron Padel", cat,
       price: first?.price || 0, available: first?.available || false, stock: first?.stock || "out", new: p.id,
       img: gallery[0] || "", gallery: gallery.length ? gallery : [""], description: p.description || "",
       variant: variants.length ? { label: "Variant", options: variants } : null,
-      perks: ["Spain shipping · €15 provisional"], specifications: [], imageScale: 1 };
+      perks: ["EU shipping · €15 provisional"], specifications: [], imageScale: 1 };
   }
   async function load() {
     let next = origin() + "/api/v1/products/", rows = [], seen = new Set();
