@@ -163,7 +163,7 @@
               <span>Subtotal</span><span style="font-family:'IBM Plex Mono',monospace; color:var(--fg);">{{ subtotalLabel }}</span>
             </div>
             <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim); margin-bottom:11px;">
-              <span>Shipping (provisional)</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
+              <span>Shipping</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
             </div>
             <sc-if value="{{ hasDiscount }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--accent); margin-bottom:11px;">
@@ -182,7 +182,7 @@
             </div>
 
             <button onClick="{{ checkout }}" style="width:100%; height:54px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">Checkout →</button>
-            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim); text-align:center; margin-top:12px;">Secure demo checkout · no real payment</div>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim); text-align:center; margin-top:12px;">Availability and final total are checked before payment.</div>
           </div>
         </aside>
       </div>
@@ -194,7 +194,7 @@
         <div style="max-width:420px; width:100%; border:1px solid var(--accent); border-radius:22px; background:var(--panel); padding:clamp(28px,5vw,40px); text-align:center;">
           <span style="display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:999px; background:var(--accent); color:var(--on-accent); font-size:28px; margin-bottom:20px;">✓</span>
           <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:26px; margin:0; letter-spacing:-0.02em;">Order placed</h2>
-          <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:12px 0 0;">This is a visual demo, no payment was taken. Your cart has been cleared.</p>
+          <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:12px 0 0;">Your cart is empty. Browse the collection to add products.</p>
           <a href="Shop.dc.html" style="margin-top:24px; display:inline-flex; align-items:center; gap:9px; background:var(--accent); color:var(--on-accent); border-radius:999px; padding:13px 26px; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px;" style-hover="filter:brightness(1.06);">Back to shop →</a>
         </div>
       </div>
@@ -285,3 +285,4 @@ class Component extends DCLogic {
 </script>
 </body>
 </html>
+

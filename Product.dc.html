@@ -129,9 +129,6 @@
         </div>
 
         <p style="font-size:15px; line-height:1.6; color:var(--dim); margin:20px 0 0; max-width:46ch; text-wrap:pretty;">{{ description }}</p>
-        <sc-if value="{{ isProvisionalPrice }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:13px; line-height:1.6; color:var(--dim); margin:12px 0 0;">Provisional price · Demo purchase only. The manufacturer currently lists this model for pre-order; Euro Padel delivery availability is not confirmed.</p>
-        </sc-if>
         <sc-if value="{{ hasSpecifications }}" hint-placeholder-val="{{ false }}">
           <section style="margin-top:24px; border-top:1px solid var(--line); padding-top:18px;" aria-label="Product specifications">
             <h2 style="font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500; margin:0 0 14px;">Specifications</h2>
@@ -254,7 +251,7 @@ const SAKURA_SPECS = [
 // Full product records with variant configs. Model variants can swap image + price.
 const CATALOG = {
   sabre: {
-    name: "SABRE V1", brand: "Neuron Padel", cat: "Rackets", price: 289.75, available: true, stock: "preorder", provisionalPrice: false, imageScale: 1,
+    name: "SABRE V1", brand: "Neuron Padel", cat: "Rackets", price: 289.75, available: true, stock: "preorder", imageScale: 1,
     description: "An attacking racket for intermediate and advanced players. A 24K aluminized carbon face and Multi-EVA core give a firm, responsive feel, while the textured surface supports spin and the extended handle accommodates two-handed backhands.",
     gallery: ["uploads/np-sabre-v1-1.png", "uploads/np-sabre-v1-2.png", "uploads/np-sabre-v1-3.png", "uploads/np-sabre-v1-4.png", "uploads/np-sabre-v1-5.png", "uploads/np-sabre-v1-6.png"],
     variant: null,
@@ -270,7 +267,7 @@ const CATALOG = {
       { label:"Handle length", value:"15 cm" },
       { label:"Grip & strap", value:"White anti-slip grip; adjustable, removable strap" },
     ],
-    perks: ["EU shipping · €15 provisional", "Neuron Padel collection"],
+    perks: ["EU shipping · €15", "Neuron Padel collection"],
   },
   ronin: {
     name: "RONIN V1 2026", brand: "Neuron Padel", cat: "Rackets", price: 262, available: true, stock: "in", imageScale: 1.07,
@@ -284,7 +281,7 @@ const CATALOG = {
         { value: "sakura", label: "Sakura", name:"RONIN V1 Sakura Edition", price: 295, img: SAKURA_GALLERY[0], imageScale: 1, gallery: SAKURA_GALLERY, description:SAKURA_DESCRIPTION, specifications:SAKURA_SPECS },
       ],
     },
-    perks: ["EU shipping · €15 provisional", "Neuron Padel collection"],
+    perks: ["EU shipping · €15", "Neuron Padel collection"],
   },
   bag: {
     name: "Performance Pro+ Player Bag", brand: "Neuron Padel", cat: "Bags & Gear", price: 125, available: false, stock: "in",
@@ -394,7 +391,6 @@ class Component extends DCLogic {
 
       name: productName, brand: p.brand, catLabel: p.cat.toUpperCase(),
       description: opt?.description || p.description,
-      isProvisionalPrice: p.provisionalPrice === true,
       hasSpecifications: specifications.length > 0,
       specifications,
       isAvailable: (opt?.available ?? p.available) === true,
@@ -441,3 +437,4 @@ class Component extends DCLogic {
 </script>
 </body>
 </html>
+

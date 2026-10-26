@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Euro Padel demo order confirmation.">
+<meta name="description" content="Check your Euro Padel order status.">
 <title>Order confirmation | Euro Padel</title>
 <script src="./support.js"></script>
 <script src="./store-config.js"></script>
@@ -179,7 +179,7 @@ class Component extends DCLogic {
     let order = null;
     try {
       localStorage.removeItem("bluwx_last_order");
-      order = JSON.parse(sessionStorage.getItem("europadel_demo_order") || "null");
+      sessionStorage.removeItem("europadel_demo_order");
     } catch (e) {}
     this.setState({ order });
   }
@@ -209,26 +209,26 @@ class Component extends DCLogic {
     const paid = s.real && o && o.status === "paid";
     const review = s.real && o && ["oversold", "payment_review"].includes(o.status);
     const pending = s.real && o && o.status === "pending";
-    const status = s.real ? (o ? o.status.toUpperCase().replace(/_/g, " ") : "UNVERIFIED") : "DEMO";
+    const status = s.real ? (o ? o.status.toUpperCase().replace(/_/g, " ") : "UNVERIFIED") : "UNVERIFIED";
     return {
       theme: s.theme,
       themeLabel: s.theme === "dark" ? "LIGHT ☀" : "DARK ☾",
       toggleTheme: () => this.setState(st => ({ theme: st.theme === "dark" ? "light" : "dark" })),
 
-      showCheck: !!(paid || (!s.real && o)),
-      statusLabel: s.loading ? "Checking payment status" : (s.real ? status : (o ? "Demo complete" : "No demo summary")),
-      heading: s.real ? (paid ? "Payment confirmed" : (review ? "Your order needs review" : "Your order status")) : "Your order preview",
+      showCheck: !!paid,
+      statusLabel: s.loading ? "Checking payment status" : status,
+      heading: s.real ? (paid ? "Payment confirmed" : (review ? "Your order needs review" : "Your order status")) : "No verified order",
       message: s.error || (s.real ? (paid ? "Your payment is confirmed by the store. Delivery will be arranged separately." :
         review ? "The store needs to review your payment or inventory. Please do not pay again." :
         pending ? "Payment confirmation is pending. Do not repeat the purchase; check the status again shortly." :
         o ? "This is the current status reported by the store. Contact the store if you need assistance." : "Checking with the store. A return from Stripe alone is not proof of payment.") :
-        "This is a demo summary: no order was placed, no payment was taken and no email was sent."),
+        "There is no verified order linked to this page. If you have already paid, use the confirmation link from your checkout and do not pay again."),
       badge: status,
       canRetry: s.real && !s.loading && (!o || pending || !!s.error),
       retry: () => { if (this._poll) clearTimeout(this._poll); this._load(); },
-      totalHeading: s.real ? "Order total" : "Demo total",
-      deliveryLabel: s.real ? "See shipping updates separately" : "Not scheduled (demo)",
-      footnote: s.real ? "Payment status is verified with the store, never from browser storage." : "Visual demo, no real payment was processed.",
+      totalHeading: "Order total",
+      deliveryLabel: s.real ? "See shipping updates separately" : "No verified shipment",
+      footnote: "Payment status is verified with the store, never from browser storage.",
       orderNumber: o ? (s.real ? "EP-" + o.id : o.number) : "—",
       itemCountLabel: o ? (s.real ? o.items.reduce((n, item) => n + item.quantity, 0) + " items" : o.itemCount + " items") : "—",
       totalLabel: o ? euro(s.real ? Number(o.total_amount) : o.total) : "—",

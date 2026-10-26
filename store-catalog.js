@@ -52,7 +52,7 @@
       price: first?.price || 0, available: first?.available || false, stock: first?.stock || "out", new: p.id,
       img: gallery[0] || "", gallery: gallery.length ? gallery : [""], description: p.description || "",
       variant: variants.length ? { label: "Variant", options: variants } : null,
-      perks: ["EU shipping · €15 provisional"], specifications: [], imageScale: 1 };
+      perks: ["EU shipping · €15"], specifications: [], imageScale: 1 };
   }
   async function load() {
     let next = origin() + "/api/v1/products/", rows = [], seen = new Set();
@@ -74,3 +74,4 @@
   }
   window.EuroPadelCatalog = Object.freeze({ configured, load, adapt });
 })();
+

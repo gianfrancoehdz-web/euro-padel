@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Euro Padel demo checkout.">
+<meta name="description" content="Euro Padel secure checkout.">
 <title>Checkout | Euro Padel</title>
 <script src="./support.js"></script>
 <script src="./cart-store.js?v=catalog2"></script>
@@ -81,7 +81,7 @@
         <a href="Shop.dc.html?category=Accessories" style="color:var(--fg);">Accessories</a>
       </nav>
       <div style="display:flex; align-items:center; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; color:var(--dim);">
-        <span style="display:inline-flex; align-items:center; gap:6px;"><span style="color:var(--accent);">🔒</span> Secure demo checkout</span>
+        <span style="display:inline-flex; align-items:center; gap:6px;"><span style="color:var(--accent);">🔒</span> Secure checkout</span>
         <button class="bx-themebtn" onClick="{{ toggleTheme }}" aria-label="Toggle theme" style="border:1px solid var(--line-strong); background:transparent; color:var(--fg); font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.06em; padding:7px 12px; cursor:pointer; border-radius:999px;" style-hover="border-color:var(--accent); color:var(--accent);">{{ themeLabel }}</button>
         <details class="bx-mobnav" style="position:relative;">
           <summary class="bx-mobnav-btn" style="list-style:none; cursor:pointer; border:1px solid var(--fg); width:40px; height:36px; border-radius:12px; display:flex; align-items:center; justify-content:center;" aria-label="Menu">
@@ -147,7 +147,7 @@
               </sc-for>
             </div>
 
-            <button onClick="{{ goStep2 }}" style="margin-top:26px; width:100%; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">{{ continueLabel }}</button>
+            <button onClick="{{ goStep2 }}" disabled="{{ checkoutUnavailable }}" style="margin-top:26px; width:100%; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">{{ continueLabel }}</button>
             <div style="display:flex; align-items:center; gap:8px; margin-top:16px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim);">
               <span style="color:var(--accent);">✦</span> {{ detailsNotice }}
             </div>
@@ -254,7 +254,7 @@
               <div style="display:flex; justify-content:space-between; color:var(--accent); margin-bottom:14px;"><span>CARCHIA5 · 5% on products</span><span>−{{ discountLabel }}</span></div>
             </sc-if>
             <div style="display:flex; justify-content:space-between; font-size:14px; color:var(--dim); margin-bottom:16px;">
-              <span>Shipping (provisional)</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
+              <span>Shipping</span><span style="font-family:'IBM Plex Mono',monospace; color:{{ shippingColor }};">{{ shippingLabel }}</span>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--line); padding-top:16px;">
               <span style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;">Total</span>
@@ -373,7 +373,7 @@ class Component extends DCLogic {
 
       steps: [
         { ...stepDef(1, "Contact & delivery"), showArrow: true },
-        { ...stepDef(2, connected ? "Review & payment" : "Demo confirmation"), showArrow: false },
+        { ...stepDef(2, "Review & payment"), showArrow: false },
       ],
 
       isStep1: s.step === 1,
@@ -383,13 +383,14 @@ class Component extends DCLogic {
       customerName: (s.firstName + " " + s.lastName).trim(),
       deliveryAddress: s.address,
       deliveryLocation: s.postalCode + " " + s.city + ", " + s.country,
-      contactNotice: connected ? "Shipping across the European Union. Flat shipping: €15 (provisional). Enter the country name in English or its two-letter code." : "European Union shipping: €15 (provisional). Enter sample details only. This demo does not place an order or send emails.",
-      continueLabel: connected ? "Review order →" : "Continue to demo confirmation →",
-      detailsNotice: connected ? "Payment details are collected securely by Stripe, not on this page." : "Your details stay on this page only. No payment details required.",
-      confirmationHeading: connected ? "Review your order" : "Demo confirmation",
-      cardCaption: connected ? "STRIPE CHECKOUT" : "DEMO PREVIEW",
-      paymentNotice: connected ? "Continue to Stripe to review the server-calculated total and pay securely. No card details are collected on this website." : "No card number, expiry date or security code is needed. Continue to preview your order summary.",
-      paymentFootnote: connected ? "Final availability and prices are validated by the store." : "Demo only. No payment will be taken.",
+      checkoutUnavailable: !connected,
+      contactNotice: connected ? "Shipping across the European Union. Flat shipping: €15. Enter the country name in English or its two-letter code." : "Online checkout is opening soon. Your cart is saved. Please do not enter personal details yet; no order or payment can be submitted.",
+      continueLabel: connected ? "Review order →" : "Checkout opening soon",
+      detailsNotice: "Payment details are collected securely by Stripe, not on this page.",
+      confirmationHeading: "Review your order",
+      cardCaption: "STRIPE CHECKOUT",
+      paymentNotice: connected ? "Continue to Stripe to review the server-calculated total and pay securely. No card details are collected on this website." : "Online checkout is not open yet. Your cart has been kept.",
+      paymentFootnote: connected ? "Final availability and prices are validated by the store." : "No order or payment can be submitted yet.",
       paymentError: s.paymentError,
       phone: s.phone,
       contactFields: CONTACT_FIELDS.map(field => ({
@@ -400,15 +401,16 @@ class Component extends DCLogic {
         invalid:!!s.errors[field.key], errorClass:s.errors[field.key] ? "co-err" : "",
         onInput:(e) => this.setState(st => ({ [field.key]:e.target.value, errors:{ ...st.errors, [field.key]:"" } })),
       })),
-      onContactKey: (e) => { if (e.key === "Enter") { e.preventDefault(); if (items.length && this._validateContact()) this.setState({ step: 2 }); } },
-      goStep2: () => { if (items.length && this._validateContact()) this.setState({ step: 2 }); },
+      onContactKey: (e) => { if (e.key === "Enter") { e.preventDefault(); if (connected && items.length && this._validateContact()) this.setState({ step: 2 }); } },
+      goStep2: () => { if (connected && items.length && this._validateContact()) this.setState({ step: 2 }); },
       backStep1: () => this.setState({ step: 1 }),
 
       paying: s.paying,
-      payLabel: s.paying ? (connected ? "Opening secure checkout…" : "Preparing preview…") : (connected ? "Continue to Stripe" : "Complete demo · " + euro(total)),
+      payLabel: s.paying ? "Opening secure checkout…" : (connected ? "Continue to Stripe" : "Checkout opening soon"),
       payCursor: s.paying ? "wait" : "pointer",
       payOpacity: s.paying ? "0.8" : "1",
       payNow: async () => {
+        if (!connected) { this.setState({paymentError:"Online checkout is not open yet. Your cart has been kept."}); return; }
         if (s.paying || !items.length || !this._validateContact()) return;
         this.setState({ paying: true, paymentError:"" });
         if (connected) {
@@ -418,16 +420,6 @@ class Component extends DCLogic {
           } catch (error) { this.setState({ paying:false, paymentError:error.message }); }
           return;
         }
-        this._payT = setTimeout(() => {
-          const order = {
-            number: "EP-DEMO-" + String(Math.floor(100 + Math.random() * 9899)).padStart(5, "0"),
-            subtotal: subtotal, shipping: shipping, total: total, itemCount: items.reduce((a, it) => a + it.qty, 0),
-            date: Date.now(),
-          };
-          try { sessionStorage.setItem("europadel_demo_order", JSON.stringify(order)); } catch (e) {}
-          if (window.CartStore) window.CartStore.clear();
-          location.href = "confirmation.dc.html";
-        }, 2600);
       },
 
       items: items.map(it => ({
@@ -448,3 +440,4 @@ class Component extends DCLogic {
 </script>
 </body>
 </html>
+

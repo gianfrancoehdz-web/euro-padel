@@ -10,7 +10,7 @@ function component(file, api) {
   const storage = new Map();
   const context = {URLSearchParams, location:{search:'', href:''},
     localStorage:{removeItem:() => {}},
-    sessionStorage:{getItem:key => storage.get(key) || null, setItem:(key,value) => storage.set(key,value)},
+    sessionStorage:{getItem:key => storage.get(key) || null, setItem:(key,value) => storage.set(key,value), removeItem:key => storage.delete(key)},
     window:{EuroPadelAPI:api}, setTimeout:() => 1, clearTimeout:() => {},
     DCLogic:class {setState(value) {Object.assign(this.state, typeof value === 'function' ? value(this.state) : value);}},
   };
@@ -45,6 +45,12 @@ async function run() {
   checkout.renderVals().onPromoInput({target:{value:'FAKE'}});
   checkout.renderVals().applyPromo();
   assert.equal(checkout.renderVals().hasDiscount, false);
+  checkout.renderVals().goStep2();
+  assert.equal(checkout.state.step, 1);
+  assert.equal(checkout.renderVals().checkoutUnavailable, true);
+  await checkout.renderVals().payNow();
+  assert.match(checkout.state.paymentError, /not open yet/);
+  assert.equal(checkout.state.items.length, 1);
   const failed = component('Checkout.dc.html', {enabled:() => true, start:async () => {throw new Error('Retry same details');}});
   Object.assign(failed.instance.state, checkout.state);
   await failed.instance.renderVals().payNow();
@@ -57,6 +63,11 @@ async function run() {
   direct.instance.componentDidMount();
   assert.equal(direct.instance.renderVals().orderNumber, '—');
   assert.equal(direct.instance.renderVals().showCheck, false); // No invented order on direct visits.
+  direct.storage.set('europadel_demo_order', JSON.stringify({number:'EP-DEMO-OLD', total:16}));
+  direct.instance.componentDidMount();
+  assert.equal(direct.instance.renderVals().showCheck, false);
+  assert.equal(direct.instance.renderVals().heading, 'No verified order');
+  assert.equal(direct.storage.has('europadel_demo_order'), false);
   let completed = 0;
   const verified = component('confirmation.dc.html', {enabled:() => true,
     confirmation:async () => ({id:7, status:'pending', total_amount:'277.00', items:[{quantity:1}]}),
