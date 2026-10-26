@@ -71,6 +71,8 @@
       if (readiness.available !== true) throw new Error("Stripe checkout is not configured yet. No payment or order was created.");
       if (["localhost", "127.0.0.1"].includes(location.hostname) && readiness.mode !== "test")
         throw new Error("Local checkout only accepts Stripe test mode.");
+      if (!["localhost", "127.0.0.1"].includes(location.hostname) && readiness.mode !== "live")
+        throw new Error("Online checkout is not ready for live payments. No payment or order was created.");
     }
     const body = payload(items, contact);
     const hash = await digest(body);

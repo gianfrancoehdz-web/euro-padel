@@ -39,6 +39,13 @@ async function run() {
   await assert.rejects(unavailable.api.start(items, contact), /only accepts Stripe test/);
   assert.equal(unavailable.storage.size, 0);
   const test = setup();
+  const online = setup();
+  online.context.location = {origin:'https://www.euro-padel.eu', hostname:'www.euro-padel.eu'};
+  online.context.window.EuroPadelConfig.requireCheckoutReadiness = true;
+  online.context.window.EuroPadelConfig.apiOrigin = 'https://europadel-api.onrender.com';
+  online.context.fetch = async () => ({ok:true, json:async () => ({available:true, mode:'test'})});
+  await assert.rejects(online.api.start(items, contact), /not ready for live payments/);
+  assert.equal(online.storage.size, 0);
   const promo = setup();
   await promo.api.start(items, {...contact, promoCode:' carchia5 '});
   assert.equal(JSON.parse(promo.calls[0].options.body).promo_code, 'CARCHIA5');
@@ -110,7 +117,7 @@ async function run() {
   assert.equal(config.EuroPadelConfig.apiOrigin, 'https://europadel-api.onrender.com');
   const publicConfig = {location:{hostname:'www.euro-padel.eu'}};
   vm.runInNewContext(fs.readFileSync(path.join(root, 'store-config.js'), 'utf8'), {window:publicConfig});
-  assert.equal(publicConfig.EuroPadelConfig.checkoutEnabled, false);
+  assert.equal(publicConfig.EuroPadelConfig.checkoutEnabled, true);
   assert.equal(publicConfig.EuroPadelConfig.apiOrigin, 'https://europadel-api.onrender.com');
   console.log('PASS: server-only prices, contact mapping, stable retries, private storage, disabled payments, redirects, expiry and verified confirmation.');
 }
