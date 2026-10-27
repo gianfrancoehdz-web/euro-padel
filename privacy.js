@@ -89,11 +89,11 @@
     root.innerHTML = `
       <aside id="ep-cookie-banner" class="ep-cookie-banner" aria-labelledby="ep-cookie-title" hidden>
         <div class="ep-cookie-copy"><h2 id="ep-cookie-title">Your privacy, your choice</h2>
-        <p>We use essential storage for your basket, checkout and privacy choices. External videos stay off unless you allow them. We do not use advertising or analytics trackers.</p>
+        <p>Essential storage keeps your basket and privacy choices. Optional YouTube videos stay off unless you allow them. No advertising or analytics trackers.</p>
         <p class="ep-privacy-links"><a href="./Cookies.dc.html">Cookies & storage</a><a href="./Privacy.dc.html">Privacy notice</a></p></div>
         <div class="ep-cookie-actions"><button type="button" data-privacy="reject">Reject optional</button><button type="button" data-privacy="accept">Accept optional</button><button type="button" data-privacy="open">Configure</button></div>
       </aside>
-      <nav class="ep-privacy-footer" aria-label="Legal and privacy"><a href="./Terms.dc.html">Terms of sale</a><a href="./Returns.dc.html">Returns & product issues</a><a href="./Privacy.dc.html">Privacy</a><a href="./Cookies.dc.html">Cookies</a><button type="button" data-privacy="open">Privacy settings</button></nav>
+      <nav class="ep-privacy-footer" aria-label="Legal and privacy"><strong>Customer information</strong><div><a href="./Terms.dc.html">Terms & conditions</a><a href="./Returns.dc.html">Returns & product issues</a><a href="./Privacy.dc.html">Privacy notice</a><a href="./Cookies.dc.html">Cookies & storage</a><button type="button" data-privacy="open">Cookie preferences</button></div></nav>
       <p id="ep-privacy-status" class="ep-sr-only" role="status" aria-live="polite"></p>
       <dialog id="ep-privacy-dialog" aria-labelledby="ep-privacy-heading" aria-describedby="ep-privacy-description">
         <div class="ep-dialog-heading"><h2 id="ep-privacy-heading">Privacy preferences</h2><button type="button" id="ep-privacy-close" aria-label="Close privacy preferences">✕</button></div>
@@ -104,6 +104,44 @@
         <div class="ep-cookie-actions"><button type="button" data-privacy="reject">Reject optional</button><button type="button" data-privacy="accept">Accept optional</button><button type="button" id="ep-privacy-save">Save choices</button></div>
       </dialog>`;
     document.body.appendChild(root);
+    const legalFooter = root.querySelector('.ep-privacy-footer');
+    const maintenance = document.createElement('aside');
+    maintenance.className = 'ep-maintenance';
+    maintenance.setAttribute('aria-label', 'Store maintenance');
+    maintenance.innerHTML = '<strong>Online ordering is temporarily paused.</strong><span>We are updating the store. Please come back later. For existing orders, <a href="mailto:europadel@yahoo.com">contact customer service</a>.</span>';
+    function placePageInformation() {
+      document.querySelectorAll('.ep-privacy-footer').forEach(node => {if (node !== legalFooter) node.remove();});
+      document.querySelectorAll('.ep-maintenance').forEach(node => {if (node !== maintenance) node.remove();});
+      const host = document.querySelector('#dc-root .sc-host > div') || document.body;
+      const footer = host.querySelector('footer') || host;
+      if (legalFooter.parentElement !== footer) footer.appendChild(legalFooter);
+      if (window.EuroPadelConfig?.maintenance === true && maintenance.parentElement !== host) host.prepend(maintenance);
+    }
+    placePageInformation();
+    if (document.body.classList.contains('ep-legal')) {
+      const main = document.querySelector('main');
+      const headings = Array.from(main.querySelectorAll('h2'));
+      const contents = document.createElement('nav');
+      contents.className = 'ep-legal-contents';
+      contents.setAttribute('aria-label', 'On this page');
+      const title = document.createElement('strong'); title.textContent = 'On this page'; contents.append(title);
+      headings.forEach((heading, index) => {
+        if (!heading.id) heading.id = 'section-' + (index + 1);
+        const link = document.createElement('a'); link.href = '#' + heading.id; link.textContent = heading.textContent; contents.append(link);
+      });
+      if (headings.length) main.insertBefore(contents, headings[0]);
+      main.querySelectorAll('table').forEach(table => {
+        table.setAttribute('role', 'table');
+        const labels = Array.from(table.querySelectorAll('th')).map(cell => cell.textContent);
+        table.querySelectorAll('tr').forEach(row => {
+          row.setAttribute('role', 'row');
+          row.querySelectorAll('td').forEach((cell, index) => {
+            cell.setAttribute('role', 'cell');
+            cell.setAttribute('data-label', labels[index] || '');
+          });
+        });
+      });
+    }
     banner = document.getElementById('ep-cookie-banner');
     dialog = document.getElementById('ep-privacy-dialog');
     status = document.getElementById('ep-privacy-status');
@@ -112,12 +150,13 @@
       if (action === 'open') open(); else save(action === 'accept');
     }));
     document.getElementById('ep-privacy-close').addEventListener('click', close);
+    legalFooter.querySelector('button').addEventListener('click', open);
     document.getElementById('ep-privacy-save').addEventListener('click', () => save(document.getElementById('ep-media-choice').checked));
     dialog.addEventListener('cancel', event => {event.preventDefault(); close();});
     document.querySelectorAll('[data-open-privacy]').forEach(button => button.addEventListener('click', open));
     window.addEventListener('storage', event => {if (event.key === KEY || event.key === null) {memory = null; refresh();}});
     document.addEventListener('visibilitychange', refresh);
-    new MutationObserver(syncMedia).observe(document.body, {subtree:true,childList:true,attributes:true,attributeFilter:['data-ep-media-src']});
+    new MutationObserver(() => {placePageInformation(); syncMedia();}).observe(document.body, {subtree:true,childList:true,attributes:true,attributeFilter:['data-ep-media-src']});
     refresh();
   }
   window.EuroPadelPrivacy = Object.freeze({KEY, VERSION, read, save, open, allowsMedia:allowed});

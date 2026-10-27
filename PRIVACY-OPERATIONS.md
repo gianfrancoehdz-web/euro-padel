@@ -17,6 +17,20 @@ photo-reference descriptions below are historical and superseded by this change.
 Privacy suite passes; old guarantee heading/anchor search is clear. No new visual
 review, commit, push or deployment.
 
+
+## Mobile readability and maintenance — 27 October
+
+Shared legal links now mounted inside the actual rendered page/footer, with clone
+deduplication for the DC runtime. Legal pages: 17px body, comfortable line height,
+section index, 44px links, stacked storage table on small screens. Compact consent
+banner retains equal accept/reject actions and optional media remains off by default.
+Maintenance flag True, checkout False; cart checkout blocked, catalog API skipped
+and maintenance notice shown. Backend and DB stay suspended; reactivation requires
+explicit authorization and exposed owner credential renewal/revocation first.
+Four Node suites pass; browser 393x852 emulation confirms single footer, working
+preferences dialog, legal navigation and no page horizontal overflow. This is not
+a physical iPhone/Safari test. Publication status recorded in root report.
+
 ## Seller document update — 27 October
 
 Additional photo reference: expanded Terms statutory conformity section and added

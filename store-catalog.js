@@ -55,6 +55,7 @@
       perks: ["EU shipping · €15"], specifications: [], imageScale: 1 };
   }
   async function load() {
+    if (window.EuroPadelConfig?.maintenance === true) throw new Error('Online ordering is temporarily paused.');
     let next = origin() + "/api/v1/products/", rows = [], seen = new Set();
     const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 15000);
     try {

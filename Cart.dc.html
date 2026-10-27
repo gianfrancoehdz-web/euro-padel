@@ -182,7 +182,7 @@
               <span style="font-family:'IBM Plex Mono',monospace; font-size:24px; color:var(--fg);">{{ totalLabel }}</span>
             </div>
 
-            <button onClick="{{ checkout }}" style="width:100%; height:54px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">Checkout →</button>
+            <button onClick="{{ checkout }}" disabled="{{ orderingPaused }}" style="width:100%; min-height:54px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">{{ checkoutLabel }}</button>
             <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim); text-align:center; margin-top:12px;">Availability and final total are checked before payment.</div>
           </div>
         </aside>
@@ -278,7 +278,9 @@ class Component extends DCLogic {
       hasDiscount: false, discountName: "", discountLabel: "",
       totalLabel: euro(total),
 
-      checkout: () => { location.href = "Checkout.dc.html"; },
+      orderingPaused: window.EuroPadelConfig?.maintenance === true,
+      checkoutLabel: window.EuroPadelConfig?.maintenance === true ? "Ordering temporarily paused" : "Checkout →",
+      checkout: () => { if (window.EuroPadelConfig?.checkoutEnabled === true) location.href = "Checkout.dc.html"; },
       checkedOut: s.checkedOut,
     };
   }
