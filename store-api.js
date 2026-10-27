@@ -44,6 +44,7 @@
     };
   }
   async function request(path, options) {
+    const emailRequest = path.startsWith("checkout/email/");
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), 15000);
     try {
@@ -51,6 +52,14 @@
         ...options, signal: controller.signal, credentials: "omit", cache: "no-store", referrerPolicy: "no-referrer",
       });
       if (!response.ok) {
+        if (emailRequest) {
+          const wait = Math.min(3600,Math.max(60,Number(response.headers?.get("Retry-After"))||60));
+          const error = new Error(response.status === 429 ? "Too many code requests or attempts. Please wait before trying again."
+            : response.status >= 500 ? "We could not send or verify the code. Please wait and try again."
+            : "The email or code could not be verified. Check the code, or request a new one if it has expired.");
+          error.retryAfter = wait;
+          throw error;
+        }
         if (response.status === 429) throw new Error("Too many attempts. Wait a minute, then retry the same checkout.");
         throw new Error(response.status >= 500 ? "Payment status could not be verified. Retry with the same details; do not start another purchase." :
           "The request could not be accepted. Check the details or contact the store before starting another purchase.");
@@ -58,6 +67,7 @@
       return await response.json();
     } catch (error) {
       if (error.name === "AbortError" || error instanceof TypeError) {
+        if (emailRequest) throw new Error("The verification connection was interrupted. Wait a minute before requesting another code.");
         throw new Error("Connection interrupted. Retry with the same details; your payment status is not yet known.");
       }
       throw error;
@@ -73,6 +83,11 @@
         throw new Error("Local checkout only accepts Stripe test mode.");
       if (!["localhost", "127.0.0.1"].includes(location.hostname) && readiness.mode !== "live")
         throw new Error("Online checkout is not ready for live payments. No payment or order was created.");
+      if (readiness.email_verification_required === true && (!contact.verificationId || !contact.verificationToken)) {
+        const error = new Error("Verify your email before continuing to payment.");
+        error.code = "email_verification_required";
+        throw error;
+      }
     }
     const body = payload(items, contact);
     const hash = await digest(body);
@@ -90,7 +105,8 @@
       catch (_) { throw new Error("Enable session storage to safely recover checkout attempts."); }
     }
     const result = await request("checkout/start/", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...body, request_id: attempt.id }) });
+      body: JSON.stringify({ ...body, request_id: attempt.id,
+        ...(contact.verificationId && contact.verificationToken ? {verification_id:contact.verificationId, verification_token:contact.verificationToken} : {}) }) });
     const target = new URL(result.checkout_url);
     if (target.protocol !== "https:" || target.hostname !== "checkout.stripe.com" || target.username || target.password) {
       throw new Error("The payment redirect could not be verified. Contact the store.");
@@ -118,5 +134,17 @@
     if (window.CartStore && attempt.cartHash === await digest(cartShape(window.CartStore.get()))) window.CartStore.clear();
     sessionStorage.removeItem(KEY);
   }
-  window.EuroPadelAPI = { enabled, start, confirmation, complete };
+  async function sendEmailCode(email) {
+    return request("checkout/email/send/", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email.trim().toLowerCase()})});
+  }
+  async function verifyEmailCode(email, challengeId, code) {
+    return request("checkout/email/verify/", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email.trim().toLowerCase(),challenge_id:challengeId,code})});
+  }
+  async function emailVerificationRequired() {
+    const status = await request("checkout/start/", {method:"GET"});
+    if (status.available !== true) throw new Error("Checkout is temporarily unavailable. Your cart has been kept.");
+    // Older releases omit this capability. New backends enforce proof server-side.
+    return status.email_verification_required === true;
+  }
+  window.EuroPadelAPI = { enabled, start, confirmation, complete, sendEmailCode, verifyEmailCode, emailVerificationRequired };
 })();

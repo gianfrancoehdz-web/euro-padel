@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./assets/fonts/fonts.css">
+<script src="./privacy-resources.js"></script>
+<script defer src="./privacy.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
@@ -9,9 +13,6 @@
 <x-dc>
 
 <helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -196,7 +197,7 @@
 
           <label style="display:flex; align-items:flex-start; gap:10px; margin-top:6px; font-size:13px; line-height:1.5; color:var(--dim); cursor:pointer;">
             <input type="checkbox" style="margin-top:2px; accent-color:var(--accent);">
-            <span>I agree to the Terms of Service and Privacy Policy.</span>
+            <span>I agree to the <a href="./Terms.dc.html" style="text-decoration:underline;">Terms of sale where applicable</a> and have read the <a href="./Privacy.dc.html" style="text-decoration:underline;">Privacy notice</a>.</span>
           </label>
 
           <button type="submit" style="display:inline-flex; align-items:center; justify-content:center; background:var(--accent); color:var(--on-accent); font-weight:600; font-size:15px; padding:15px 28px; border-radius:999px; border:none; cursor:pointer; font-family:inherit; margin-top:8px;" style-hover="filter:brightness(1.06);">Create account</button>

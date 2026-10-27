@@ -1,0 +1,43 @@
+#ep-privacy {font:400 14px/1.55 'Inter',Arial,sans-serif;color:#f6f4ef;--ep-line:#625e54;--ep-panel:#201f1b;}
+#ep-privacy *, .ep-media-consent * {box-sizing:border-box;}
+#ep-privacy [hidden] {display:none!important;}
+#ep-privacy h2 {font:600 clamp(20px,3vw,25px)/1.2 'Space Grotesk',Arial,sans-serif;margin:0 0 12px;}
+#ep-privacy p {margin:8px 0 12px;max-width:78ch;}
+#ep-privacy a {color:inherit;text-decoration:underline;text-underline-offset:3px;}
+#ep-privacy a:hover {color:#96d9b8;}
+#ep-privacy button, .ep-media-consent button {font:600 14px/1.3 'Inter',Arial,sans-serif;cursor:pointer;min-height:44px;border:1px solid #898477;border-radius:7px;background:#292821;color:#f6f4ef;padding:12px 17px;}
+#ep-privacy button:hover, .ep-media-consent button:hover {background:#38372e;border-color:#b9b3a5;}
+#ep-privacy :focus-visible, .ep-media-consent :focus-visible {outline:3px solid #96d9b8;outline-offset:4px;}
+.ep-cookie-banner {position:fixed;bottom:16px;left:16px;right:16px;z-index:2147483000;background:#201f1b;border:1px solid #625e54;border-top:3px solid #57b98d;border-radius:12px;padding:24px;display:flex;align-items:center;gap:28px;box-shadow:0 12px 40px #0006;max-height:calc(100dvh - 32px);overflow:auto;}
+.ep-cookie-copy {flex:1;min-width:0;}
+.ep-cookie-actions {display:flex;flex-wrap:wrap;gap:10px;}
+.ep-cookie-actions button {flex:1;white-space:nowrap;}
+.ep-privacy-links {display:flex;flex-wrap:wrap;gap:20px;font-size:13px;}
+.ep-privacy-footer {background:#201f1b;color:#f6f4ef;border-top:1px solid #625e54;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:14px 24px;padding:20px 16px max(96px,env(safe-area-inset-bottom));}
+#ep-privacy .ep-privacy-footer button {border:0;padding:8px;background:transparent;text-decoration:underline;}
+#ep-privacy-dialog {background:#201f1b;color:#f6f4ef;border:1px solid #898477;border-radius:14px;padding:26px;width:min(640px,calc(100% - 28px));max-height:calc(100dvh - 36px);overflow:auto;font:inherit;}
+#ep-privacy-dialog::backdrop {background:#000b;}
+.ep-dialog-heading {display:flex;align-items:flex-start;justify-content:space-between;gap:14px;}
+#ep-privacy .ep-dialog-heading button {min-width:44px;padding:8px;}
+.ep-privacy-category {border-top:1px solid #625e54;padding:18px 0;}
+#ep-privacy h3 {font-size:16px;margin:0;display:flex;justify-content:space-between;gap:16px;}
+#ep-privacy h3 span {font-size:13px;font-weight:400;color:#96d9b8;}
+.ep-privacy-category label {display:flex;justify-content:space-between;align-items:center;min-height:44px;gap:18px;}
+.ep-privacy-category input {accent-color:#57b98d;width:24px;height:24px;cursor:pointer;}
+.ep-sr-only {position:absolute!important;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.ep-media-consent {position:absolute;inset:45px 16px 16px;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px;color:#f6f4ef;background:#201f1b;text-align:center;font:14px/1.5 'Inter',Arial,sans-serif;}
+.ep-legal {margin:0;background:#161512;color:#f6f4ef;font:16px/1.7 'Inter',Arial,sans-serif;}
+.ep-legal header,.ep-legal main {max-width:960px;margin:auto;padding:28px 24px;}
+.ep-legal main {padding-bottom:64px;}
+.ep-legal h1,.ep-legal h2 {font-family:'Space Grotesk',Arial,sans-serif;line-height:1.25;}
+.ep-legal h1 {font-size:clamp(30px,6vw,48px);margin:16px 0;}
+.ep-legal h2 {font-size:24px;margin-top:36px;}
+.ep-legal a {color:#96d9b8;text-underline-offset:3px;}
+.ep-legal button {font:inherit;min-height:44px;padding:8px 14px;border:1px solid #898477;border-radius:7px;background:#292821;color:#f6f4ef;cursor:pointer;}
+.ep-legal code {overflow-wrap:anywhere;font-size:13px;}
+.ep-legal table {border-collapse:collapse;width:100%;font-size:14px;}
+.ep-legal td,.ep-legal th {text-align:left;padding:12px;border-bottom:1px solid #625e54;vertical-align:top;overflow-wrap:anywhere;}
+.ep-table-scroll {overflow:auto;}
+.ep-legal-notice {border-left:3px solid #57b98d;padding:12px 18px;background:#201f1b;}
+@media(max-width:1000px){.ep-cookie-banner{align-items:stretch;flex-direction:column;gap:10px;}.ep-cookie-actions button{white-space:normal;}}
+@media(max-width:480px){.ep-cookie-banner{bottom:8px;left:8px;right:8px;padding:18px;max-height:calc(100dvh - 16px);}.ep-cookie-actions{display:grid;grid-template-columns:1fr 1fr;}.ep-cookie-actions button:last-child{grid-column:1 / -1;}#ep-privacy-dialog{padding:20px;}}

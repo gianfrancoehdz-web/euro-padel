@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./assets/fonts/fonts.css">
+<script src="./privacy-resources.js"></script>
+<script defer src="./privacy.js"></script>
 <meta charset="utf-8">
 <meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,9 +22,6 @@
 <script src="./store-config.js"></script>
 <script src="./shipping-countries.js"></script>
 <script src="./store-api.js?v=eu1"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="./cart-store.js?v=catalog2"></script>
 <style>
   * { box-sizing: border-box; }
@@ -147,9 +148,22 @@
               </sc-for>
             </div>
 
-            <button onClick="{{ goStep2 }}" disabled="{{ checkoutUnavailable }}" style="margin-top:26px; width:100%; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">{{ continueLabel }}</button>
+            <sc-if value="{{ emailRequired }}" hint-placeholder-val="{{ true }}">
+            <section aria-labelledby="co-verify-heading" style="margin-top:24px;padding:20px;border:1px solid var(--line);border-radius:12px;">
+              <h3 id="co-verify-heading" style="margin:0 0 10px;font-size:18px;">Verify your email</h3>
+              <p style="font-size:14px;color:var(--dim);line-height:1.6;">We will send a six-digit code before you continue to payment. It expires in 10 minutes. This does not create an account or subscribe you to marketing.</p>
+              <button type="button" onClick="{{ sendEmailCode }}" disabled="{{ emailSendDisabled }}" style="min-height:44px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer;">{{ emailSendLabel }}</button>
+              <sc-if value="{{ showCodeInput }}" hint-placeholder-val="{{ false }}">
+                <label for="co-email-code" class="co-label" style="margin-top:18px;">Confirmation code</label>
+                <input id="co-email-code" class="co-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" value="{{ emailCode }}" onInput="{{ onEmailCodeInput }}" aria-describedby="co-email-status"/>
+                <button type="button" onClick="{{ verifyEmailCode }}" disabled="{{ emailBusy }}" style="min-height:44px;margin-top:10px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer;">Confirm email</button>
+              </sc-if>
+              <p id="co-email-status" role="status" aria-live="polite" style="font-size:14px;line-height:1.5;margin-bottom:0;">{{ emailStatus }}</p>
+            </section>
+            </sc-if>
+            <button onClick="{{ goStep2 }}" disabled="{{ reviewDisabled }}" style="margin-top:26px; width:100%; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">{{ continueLabel }}</button>
             <div style="display:flex; align-items:center; gap:8px; margin-top:16px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim);">
-              <span style="color:var(--accent);">✦</span> {{ detailsNotice }}
+              <span style="color:var(--accent);">✦</span> {{ detailsNotice }} <a href="./Privacy.dc.html" style="text-decoration:underline;">Privacy notice</a>.
             </div>
           </div>
         </sc-if>
@@ -187,7 +201,8 @@
             <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:0;">{{ paymentNotice }}</p>
             <p role="alert" style="color:var(--alert); font-size:14px; line-height:1.6;">{{ paymentError }}</p>
 
-            <button onClick="{{ payNow }}" disabled="{{ paying }}" style="margin-top:26px; width:100%; height:54px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:{{ payCursor }}; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; display:inline-flex; align-items:center; justify-content:center; gap:11px; opacity:{{ payOpacity }};" style-hover="filter:brightness(1.06);">
+            <p style="font-size:13px;line-height:1.6;color:var(--dim);margin-top:22px;">By continuing to payment, you agree to the <a href="./Terms.dc.html" target="_blank" rel="noopener" style="text-decoration:underline;">Terms of sale</a>. Read our <a href="./Privacy.dc.html" target="_blank" rel="noopener" style="text-decoration:underline;">Privacy notice</a>. Optional cookies and media are a separate choice.</p>
+            <button onClick="{{ payNow }}" disabled="{{ paying }}" style="margin-top:16px; width:100%; height:54px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:{{ payCursor }}; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; display:inline-flex; align-items:center; justify-content:center; gap:11px; opacity:{{ payOpacity }};" style-hover="filter:brightness(1.06);">
               <sc-if value="{{ paying }}" hint-placeholder-val="{{ false }}">
                 <span style="width:18px; height:18px; border-radius:999px; border:2px solid rgba(14,26,21,0.35); border-top-color:var(--on-accent); animation:co-spin .7s linear infinite; display:inline-block;"></span>
               </sc-if>
@@ -311,14 +326,26 @@ const CONTACT_FIELDS = [
 ];
 
 class Component extends DCLogic {
-  state = { theme: "dark", step: 1, email: "", firstName:"", lastName:"", country:"Spain", city:"", postalCode:"", address:"", phone:"", errors:{}, paymentError:"", paying: false, items: [], promoInput:"", promoCode:"", promoMessage:"" };
+  state = { theme: "dark", step: 1, email: "", firstName:"", lastName:"", country:"Spain", city:"", postalCode:"", address:"", phone:"", errors:{}, paymentError:"", paying: false, items: [], promoInput:"", promoCode:"", promoMessage:"",
+    emailRequired:true,emailBusy:false,emailChallenge:"",emailCode:"",emailStatus:"",verificationId:"",verificationToken:"",verifiedEmail:"",verificationExpires:0,emailResendAt:0 };
 
   componentDidMount() {
     try { localStorage.removeItem("bluwx_last_order"); } catch (e) {}
     this.setState({ items: window.CartStore ? window.CartStore.get() : [] });
     this._off = window.CartStore ? window.CartStore.onChange((items) => this.setState({ items })) : null;
+    if (window.EuroPadelAPI?.enabled() && window.EuroPadelAPI.emailVerificationRequired) {
+      window.EuroPadelAPI.emailVerificationRequired().then(required=>{
+        if(!this._unmounted)this.setState({emailRequired:required});
+      }).catch(error=>{if(!this._unmounted)this.setState({emailStatus:error.message});});
+    }
   }
-  componentWillUnmount() { if (this._off) this._off(); if (this._payT) clearTimeout(this._payT); }
+  componentWillUnmount() { this._unmounted=true; if (this._off) this._off(); if (this._payT) clearTimeout(this._payT); if (this._emailTimer) clearTimeout(this._emailTimer); if (this._verificationTimer) clearTimeout(this._verificationTimer); }
+
+  _emailVerified() {
+    const s=this.state;
+    if(s.emailRequired === false)return true;
+    return !!s.verificationToken && s.verifiedEmail === s.email.trim().toLowerCase() && s.verificationExpires > Date.now();
+  }
 
   _validateContact() {
     const errors = {};
@@ -357,6 +384,47 @@ class Component extends DCLogic {
     };
 
     return {
+      emailRequired:s.emailRequired,
+      emailBusy:s.emailBusy,
+      emailCode:s.emailCode,
+      emailStatus:s.emailStatus,
+      reviewDisabled:!connected || !this._emailVerified(),
+      emailSendDisabled:!connected || s.emailBusy || Date.now()<s.emailResendAt || this._emailVerified(),
+      emailSendLabel:s.emailBusy ? "Please wait…" : this._emailVerified() ? "Email confirmed" : Date.now()<s.emailResendAt ? "Please wait before requesting another code" : s.emailChallenge ? "Send a new code" : "Send confirmation code",
+      showCodeInput:!!s.emailChallenge && !this._emailVerified(),
+      onEmailCodeInput:e=>this.setState({emailCode:e.target.value.replace(/\D/g,"").slice(0,6)}),
+      sendEmailCode:async()=>{
+        if (!connected || s.emailBusy || Date.now()<s.emailResendAt || this._emailVerified()) return;
+        if (!EMAIL_RE.test(s.email.trim())) {this.setState({emailStatus:"Enter a valid email address first."});return;}
+        const email=s.email.trim().toLowerCase();
+        this.setState({emailBusy:true,emailStatus:"Sending your code…"});
+        try {
+          const result=await window.EuroPadelAPI.sendEmailCode(email);
+          if(this.state.email.trim().toLowerCase()!==email)return;
+          this.setState({emailChallenge:result.challenge_id,emailCode:"",emailResendAt:Date.now()+result.resend_after*1000,emailStatus:"Code sent. Check your inbox and spam folder."});
+          clearTimeout(this._emailTimer);
+          this._emailTimer=setTimeout(()=>this.setState({emailResendAt:0}),result.resend_after*1000);
+        } catch(error){
+          const wait=(error.retryAfter||60)*1000;
+          this.setState({emailStatus:error.message,emailResendAt:Date.now()+wait});
+          clearTimeout(this._emailTimer);this._emailTimer=setTimeout(()=>this.setState({emailResendAt:0}),wait);
+        }
+        finally{this.setState({emailBusy:false});}
+      },
+      verifyEmailCode:async()=>{
+        if(s.emailBusy||!s.emailChallenge)return;
+        if(!/^\d{6}$/.test(s.emailCode)){this.setState({emailStatus:"Enter the six-digit code from your email."});return;}
+        const email=s.email.trim().toLowerCase(),challenge=s.emailChallenge;
+        this.setState({emailBusy:true});
+        try{
+          const result=await window.EuroPadelAPI.verifyEmailCode(email,challenge,s.emailCode);
+          if(this.state.email.trim().toLowerCase()!==email||this.state.emailChallenge!==challenge)return;
+          this.setState({verificationId:result.challenge_id,verificationToken:result.verification_token,verifiedEmail:email,verificationExpires:Date.now()+result.expires_in*1000,emailCode:"",emailStatus:"Email confirmed. You can review your order."});
+          clearTimeout(this._verificationTimer);
+          this._verificationTimer=setTimeout(()=>this.setState({verificationId:"",verificationToken:"",verificationExpires:0,step:1,emailStatus:"Your verification expired. Request a new code to continue."}),result.expires_in*1000);
+        }catch(error){this.setState({emailStatus:error.message});}
+        finally{this.setState({emailBusy:false});}
+      },
       promoInput: s.promoInput,
       promoMessage: s.promoMessage,
       hasDiscount: discount > 0,
@@ -399,10 +467,11 @@ class Component extends DCLogic {
         layoutClass:field.wide ? "co-field-wide" : "",
         value:s[field.key], error:s.errors[field.key] || "",
         invalid:!!s.errors[field.key], errorClass:s.errors[field.key] ? "co-err" : "",
-        onInput:(e) => this.setState(st => ({ [field.key]:e.target.value, errors:{ ...st.errors, [field.key]:"" } })),
+        onInput:(e) => this.setState(st => ({ [field.key]:e.target.value, errors:{ ...st.errors, [field.key]:"" },
+          ...(field.key==="email" ? {verificationId:"",verificationToken:"",verifiedEmail:"",verificationExpires:0,emailChallenge:"",emailCode:"",emailStatus:""} : {}) })),
       })),
-      onContactKey: (e) => { if (e.key === "Enter") { e.preventDefault(); if (connected && items.length && this._validateContact()) this.setState({ step: 2 }); } },
-      goStep2: () => { if (connected && items.length && this._validateContact()) this.setState({ step: 2 }); },
+      onContactKey: (e) => { if (e.key === "Enter") { e.preventDefault(); if (connected && items.length && this._emailVerified() && this._validateContact()) this.setState({ step: 2 }); } },
+      goStep2: () => { if (connected && items.length && this._emailVerified() && this._validateContact()) this.setState({ step: 2 }); },
       backStep1: () => this.setState({ step: 1 }),
 
       paying: s.paying,
@@ -411,13 +480,15 @@ class Component extends DCLogic {
       payOpacity: s.paying ? "0.8" : "1",
       payNow: async () => {
         if (!connected) { this.setState({paymentError:"Online checkout is not open yet. Your cart has been kept."}); return; }
+        if (!this._emailVerified()) {this.setState({step:1,emailStatus:"Verify your email before continuing to payment."});return;}
         if (s.paying || !items.length || !this._validateContact()) return;
         this.setState({ paying: true, paymentError:"" });
         if (connected) {
           try {
             const result = await window.EuroPadelAPI.start(items, s);
             location.href = result.checkout_url;
-          } catch (error) { this.setState({ paying:false, paymentError:error.message }); }
+          } catch (error) { this.setState({ paying:false, paymentError:error.message,
+            ...(error.code==="email_verification_required" ? {emailRequired:true,step:1,emailStatus:error.message} : {}) }); }
           return;
         }
       },

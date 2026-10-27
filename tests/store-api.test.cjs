@@ -30,6 +30,28 @@ function setup() {
   return {context, api:context.window.EuroPadelAPI, storage, calls, cart:() => cart};
 }
 async function run() {
+  const proof = setup();
+  proof.context.window.EuroPadelConfig.requireCheckoutReadiness = true;
+  const proofPosts=[];
+  proof.context.fetch = async (url,options) => {
+    if(options.method==='GET') return {ok:true,json:async()=>({available:true,mode:'test',email_verification_required:true})};
+    proofPosts.push(JSON.parse(options.body));
+    return {ok:true,json:async()=>({order_id:7,checkout_url:'https://checkout.stripe.com/c/pay/cs_test'})};
+  };
+  await assert.rejects(proof.api.start(items,contact),/Verify your email/);
+  assert.equal(proof.storage.size,0);assert.equal(proofPosts.length,0);
+  await proof.api.start(items,{...contact,verificationId:'challenge-one',verificationToken:'private-proof-one'});
+  await proof.api.start(items,{...contact,verificationId:'challenge-two',verificationToken:'private-proof-two'});
+  assert.equal(proofPosts[0].request_id,proofPosts[1].request_id);
+  assert.equal(proofPosts[1].verification_token,'private-proof-two');
+  assert.ok(!proof.storage.get(KEY).includes('private-proof'));
+  const staged=setup();staged.context.window.EuroPadelConfig.requireCheckoutReadiness=true;
+  staged.context.fetch=async (url,options)=>({ok:true,json:async()=>options.method==='GET'
+    ? {available:true,mode:'test'} : {order_id:7,checkout_url:'https://checkout.stripe.com/c/pay/cs_test'}});
+  assert.equal(await staged.api.emailVerificationRequired(),false);
+  await staged.api.start(items,contact);
+  staged.context.fetch=async()=>({ok:true,json:async()=>({available:true,mode:'test',email_verification_required:true})});
+  await assert.rejects(staged.api.start(items,contact),error=>error.code==='email_verification_required');
   const unavailable = setup();
   unavailable.context.window.EuroPadelConfig.requireCheckoutReadiness = true;
   unavailable.context.fetch = async () => ({ ok: true, json: async () => ({ available: false, mode: 'disabled' }) });
