@@ -139,8 +139,8 @@ async function run() {
   assert.equal(config.EuroPadelConfig.apiOrigin, 'https://europadel-api.onrender.com');
   const publicConfig = {location:{hostname:'www.euro-padel.eu'}};
   vm.runInNewContext(fs.readFileSync(path.join(root, 'store-config.js'), 'utf8'), {window:publicConfig});
-  assert.equal(publicConfig.EuroPadelConfig.checkoutEnabled, false);
-  assert.equal(publicConfig.EuroPadelConfig.maintenance, true);
+  assert.equal(publicConfig.EuroPadelConfig.checkoutEnabled, true);
+  assert.equal(publicConfig.EuroPadelConfig.maintenance, false);
   assert.equal(publicConfig.EuroPadelConfig.apiOrigin, 'https://europadel-api.onrender.com');
   console.log('PASS: server-only prices, contact mapping, stable retries, private storage, disabled payments, redirects, expiry and verified confirmation.');
 }

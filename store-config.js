@@ -1,7 +1,7 @@
 // Public configuration only. Never put Stripe keys or database credentials here.
 window.EuroPadelConfig = Object.freeze({
-  maintenance: true,
-  checkoutEnabled: false,
+  maintenance: false,
+  checkoutEnabled: ["localhost", "127.0.0.1", "www.euro-padel.eu", "euro-padel.eu"].includes(window.location?.hostname),
   requireCheckoutReadiness: true,
   // Production checkout also requires live-mode readiness from the backend.
   apiOrigin: ["localhost", "127.0.0.1"].includes(window.location?.hostname)

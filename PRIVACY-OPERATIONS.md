@@ -18,6 +18,16 @@ Privacy suite passes; old guarantee heading/anchor search is clear. No new visua
 review, commit, push or deployment.
 
 
+
+## Reopening authorised — 28 October
+
+User explicitly requests reopening after owner credential rotation/revocation.
+Maintenance false, checkout enabled only on existing approved public/local hosts.
+Backend readiness and mandatory email proof still gate payment. No credentials
+changed by frontend. Four Node suites pass. Prior mobile legal/footer improvements
+remain. Production status and limitations recorded in root report; no new real
+email or purchase test authorised/performed by this release.
+
 ## Mobile readability and maintenance — 27 October
 
 Shared legal links now mounted inside the actual rendered page/footer, with clone
