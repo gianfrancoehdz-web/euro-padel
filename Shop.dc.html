@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -83,7 +84,7 @@
   <!-- ===== FIXED · HEADER ===== -->
   <header style="{{ headerStyle }}">
     <div style="{{ headerInnerStyle }}">
-      <a href="index.dc.html" style="{{ logoStyle }}">EURO<span style="color:var(--accent);">PADEL</span></a>
+      <a href="index.dc.html" style="{{ logoStyle }}">EURO<span style="color:#57B98D;">PADEL</span></a>
       <nav class="shop-navlinks" style="{{ navStyle }}">
         <sc-for list="{{ navItems }}" as="link" hint-placeholder-count="5">
           <a href="{{ link.href }}" style="padding:4px 0; color:{{ link.color }}; transition:color .18s;" style-hover="color:var(--accent);">{{ link.label }}</a>
@@ -326,7 +327,7 @@ const PRODUCTS = [
 ];
 
 class Component extends DCLogic {
-  state = { theme: "dark", filterOpen: false, bannerOpen: false, cats: [], brands: [], price: "all", inStock: false, sort: "relevance", cartCount: 0, menuOpen: false, langOpen: false, lang: "EN", compact: false };
+  state = { theme: "light", filterOpen: false, bannerOpen: false, cats: [], brands: [], price: "all", inStock: false, sort: "relevance", cartCount: 0, menuOpen: false, langOpen: false, lang: "EN", compact: false };
 
   componentDidMount() {
     if (window.EuroPadelCatalog?.configured()) {

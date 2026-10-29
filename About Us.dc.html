@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -174,7 +175,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { theme: "dark", compact: false };
+  state = { theme: "light", compact: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

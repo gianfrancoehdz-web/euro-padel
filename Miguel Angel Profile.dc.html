@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -234,7 +235,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;coachTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coach&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;coachName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Miguel Ángel&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ubud, Indonesia&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;10+ Years experience&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;🇪🇸 Spanish · English&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;I'm the Founder and Head Coach of TAO Padel Academy in Bali. My passion is helping players reach their full potential through a structured methodology based on tactics, decision-making, and a deep understanding of the game. I believe great coaching is about adapting to every player, creating the right learning environment, and developing not only better athletes but smarter competitors.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;MIGUEL5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each coach has a personalized shop, a discount code reserved for their students, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

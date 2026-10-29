@@ -67,11 +67,15 @@ async function run() {
     start:async()=>{payments++;return {checkout_url:'https://checkout.stripe.com/c/pay/test'};}});
   const checked=emailCheck.instance;
   Object.assign(checked.state,checkout.state,{step:1});
-  checked.renderVals().goStep2();assert.equal(checked.state.step,1);
+  checked.renderVals().goStep2();assert.equal(checked.state.step,1.5);
+  assert.equal(checked.renderVals().isVerification,true);
+  assert.equal(checked.renderVals().codeConfirmDisabled,true);
   await checked.renderVals().payNow();assert.equal(payments,0);
   await checked.renderVals().sendEmailCode();assert.equal(sends,1);
+  assert.equal(checked.renderVals().codeConfirmDisabled,true);
   await checked.renderVals().sendEmailCode();assert.equal(sends,1);
   checked.renderVals().onEmailCodeInput({target:{value:'123456'}});
+  assert.equal(checked.renderVals().codeConfirmDisabled,false);
   await checked.renderVals().verifyEmailCode();assert.equal(verifies,1);
   checked.renderVals().goStep2();assert.equal(checked.state.step,2);
   checked.renderVals().contactFields.find(f=>f.key==='email').onInput({target:{value:'changed@example.com'}});

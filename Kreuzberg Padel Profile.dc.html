@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -317,7 +318,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kreuzberg Padel&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Berlin, DE&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;5 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Founded 2020&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Kreuzberg Padel was one of the first dedicated padel facilities in the city and remains a central point for the local community. The club runs a competitive women's team alongside open play and coaching for all levels.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Berlin, Germany&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;members&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;280+ members&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;KREUZBERG15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

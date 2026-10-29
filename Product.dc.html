@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -37,10 +38,22 @@
     --dim: #6E6A62; --accent: #26433A; --on-accent: #F6F4EF; --alert: #B26B1E;
   }
   a:hover { color: var(--accent); }
-  .pd-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px,4vw,56px); }
-  .pd-thumbs { display: flex; flex-direction: row; gap: 10px; }
+  .pd-grid { display: grid; grid-template-columns: minmax(0,1fr); gap: clamp(24px,4vw,56px); }
+  .pd-grid > * { min-width:0; max-width:100%; }
+  .pd-thumbs { display: flex; flex-direction: row; flex-wrap:wrap; gap: 10px; min-width:0; }
+  .pd-info {min-width:0; overflow-wrap:anywhere;}
+  @media (max-width:600px) {
+    .pd-body header > div {gap:10px!important;}
+    .pd-body header > div > a:first-child {font-size:18px!important;letter-spacing:.08em!important;white-space:nowrap;}
+    .pd-body header > div > div {gap:10px!important;}
+    .pd-thumbs {gap:8px;}
+    .pd-thumbs button {width:64px!important;height:64px!important;}
+    .pd-buy-actions {flex-direction:column;}
+    .pd-buy-actions > div {align-self:flex-start;}
+    .pd-buy-actions > button {flex:auto!important;width:100%;min-width:0!important;min-height:52px;}
+  }
   @media (min-width: 900px) {
-    .pd-grid { grid-template-columns: 1.05fr 0.95fr; align-items: start; }
+    .pd-grid { grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr); align-items: start; }
     .pd-info { position: sticky; top: 96px; }
   }
   @keyframes pd-cartpop { 0%{transform:scale(1);} 40%{transform:scale(1.5);} 100%{transform:scale(1);} }
@@ -60,7 +73,7 @@
   <!-- ===== HEADER ===== -->
   <header style="position:sticky; top:0; z-index:40; padding-top:env(safe-area-inset-top); background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);">
     <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
-      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">EURO<span style="color:var(--accent);">PADEL</span></a>
+      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">EURO<span style="color:#57B98D;">PADEL</span></a>
       <nav class="bx-navlinks" style="flex:1; align-items:center; justify-content:center; gap:24px; font-size:14px; font-weight:500;">
         <a href="index.dc.html" style="color:var(--accent);">Home</a>
         <a href="Shop.dc.html" style="color:var(--fg);">Shop</a>
@@ -124,7 +137,7 @@
         <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent);">{{ brand }}</div>
         <h1 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:clamp(30px,4.5vw,46px); line-height:1.02; letter-spacing:-0.025em; margin:10px 0 0; text-wrap:balance;">{{ name }}</h1>
 
-        <div style="display:flex; align-items:baseline; gap:12px; margin-top:16px;">
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin-top:16px;">
           <span style="font-family:'IBM Plex Mono',monospace; font-size:clamp(26px,3.5vw,34px); color:var(--fg);">{{ priceLabel }}</span>
           <sc-if value="{{ isAvailable }}" hint-placeholder-val="{{ true }}"><span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--dim);">VAT incl.</span></sc-if>
         </div>
@@ -166,7 +179,7 @@
         </sc-if>
 
         <!-- QUANTITY + ADD -->
-        <sc-if value="{{ isAvailable }}" hint-placeholder-val="{{ true }}"><div style="display:flex; flex-wrap:wrap; gap:12px; align-items:stretch;">
+        <sc-if value="{{ isAvailable }}" hint-placeholder-val="{{ true }}"><div class="pd-buy-actions" style="display:flex; flex-wrap:wrap; gap:12px; align-items:stretch;">
           <div style="display:flex; align-items:center; border:1px solid var(--line-strong); border-radius:999px; overflow:hidden;">
             <button onClick="{{ dec }}" aria-label="Decrease" style="width:46px; height:52px; background:transparent; border:none; color:var(--fg); font-size:20px; cursor:pointer;">−</button>
             <span style="min-width:38px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:16px;">{{ qty }}</span>
@@ -322,7 +335,7 @@ const CATALOG = {
 };
 
 class Component extends DCLogic {
-  state = { theme: "dark", productId: null, variant: null, qty: 1, imgIdx: 0, cartCount: 0, toast: null };
+  state = { theme: "light", productId: null, variant: null, qty: 1, imgIdx: 0, cartCount: 0, toast: null };
 
   componentDidMount() {
     if (window.EuroPadelCatalog?.configured()) {

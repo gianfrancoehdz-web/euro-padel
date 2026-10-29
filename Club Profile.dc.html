@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -315,7 +316,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante Padel Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante, ES&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;8 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Open since 2014&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A neighbourhood club a few streets back from the marina, built around eight glass courts and a terrace where matches are argued over long after they finish. Members range from Saturday-morning beginners to the regional league squad, everyone shares the same ball machine and the same coffee.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Carrer del Doctor Just 12, 03005 Alicante, Spain&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ALICANTE15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

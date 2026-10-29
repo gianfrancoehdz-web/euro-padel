@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -285,7 +286,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;playerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Player&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;playerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Mattia Settimi&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Born 2012&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;IT · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Mattia is one of the rising names on the U14 padel circuit, currently ranked No. 74. Competing across international junior tournaments, he's built his game around speed, aggression at the net, and a relentless competitive drive.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;MATTIA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, videoOpen: false, photoOpen: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, videoOpen: false, photoOpen: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

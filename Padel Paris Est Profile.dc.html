@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -317,7 +318,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Padel Paris Est&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Paris, FR&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;8 indoor courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Founded 2021&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Padel Paris Est opened its doors five years ago in the east of the city and has grown into one of the busiest clubs in the Île-de-France region. With eight indoor courts and a full coaching staff, it runs everything from beginner clinics to competitive league play.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Paris, France&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;members&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;400+ members&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;PARISEST15&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

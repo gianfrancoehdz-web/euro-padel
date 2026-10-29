@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -277,7 +278,7 @@ const DATA = {
 const CITIES = ["Ubud, Bali", "Alicante", "Madrid", "Milán", "Roma", "París", "Berlín"];
 
 class Component extends DCLogic {
-  state = { theme: "dark", tab: "clubs", cities: [], menuOpen: false, cartCount: 0, compact: false, nearCity: "Ubud, Bali", playerCat: null };
+  state = { theme: "light", tab: "clubs", cities: [], menuOpen: false, cartCount: 0, compact: false, nearCity: "Ubud, Bali", playerCat: null };
   nearRef = React.createRef();
   popularRef = React.createRef();
   newRef = React.createRef();

@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -75,7 +76,7 @@
   <!-- ===== HEADER / NAV ===== -->
   <header style="{{ headerStyle }}">
     <div style="{{ headerInnerStyle }}">
-      <a href="index.dc.html" style="{{ logoStyle }}">EURO<span style="color:var(--accent);">PADEL</span></a>
+      <a href="index.dc.html" style="{{ logoStyle }}">EURO<span style="color:#57B98D;">PADEL</span></a>
       <nav class="bluwx-navlinks" style="{{ navStyle }}">
         <sc-for list="{{ navItems }}" as="link" hint-placeholder-count="5">
           <a href="{{ link.href }}" style="padding:4px 0; color:var(--fg); transition:color .18s;" style-hover="color:var(--accent);">{{ link.label }}</a>
@@ -359,7 +360,7 @@ function homeProductMedia(product) {
 }
 
 class Component extends DCLogic {
-  state = { menuOpen: false, theme: "dark", langOpen: false, lang: "EN", compact: false, cartCount: 0 };
+  state = { menuOpen: false, theme: "light", langOpen: false, lang: "EN", compact: false, cartCount: 0 };
   componentDidMount() {
     if (window.EuroPadelCatalog?.configured()) {
       this.setState({ catalog: [], catalogMessage: "Loading catalog…" });

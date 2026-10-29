@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -291,7 +292,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;playerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Player&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;playerName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Zara Settimi&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Alicante, IT&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Competing since 2023&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;IT · EN · ES&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Zara trains at Universal Padel Academy and competes on the U12 circuit, where she's built a reputation for reading the game well beyond her age. Sponsored by NEURONPADEL, she balances school with daily sessions on court, chasing a spot on Italy's national youth roster.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ZARA5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each player has a personalized shop, a discount code reserved for their fans, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, videoOpen: false, photoOpen: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, videoOpen: false, photoOpen: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

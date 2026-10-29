@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -264,7 +265,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;coachTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coach&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;coachName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Élise Moreau&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;location&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lyon, FR&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;since&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Coaching since 2019&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;languages&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;FR · EN&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;bio&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Élise played on the WPT circuit for six seasons before retiring to coach full-time. She runs the junior academy at Padel Club Lyon and is known for rebuilding players' backhands from scratch.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ELISE5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each coach has a personalized shop, a discount code reserved for their students, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {

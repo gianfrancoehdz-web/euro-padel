@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -73,7 +74,7 @@
   <!-- ===== HEADER ===== -->
   <header style="position:sticky; top:0; z-index:40; padding-top:env(safe-area-inset-top); background:color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line);">
     <div style="max-width:1280px; margin:0 auto; padding:0 clamp(16px,4vw,40px); height:64px; display:flex; align-items:center; justify-content:space-between; gap:20px;">
-      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">EURO<span style="color:var(--accent);">PADEL</span></a>
+      <a href="index.dc.html" style="font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:22px; letter-spacing:0.14em; color:var(--fg);">EURO<span style="color:#57B98D;">PADEL</span></a>
       <nav class="bx-navlinks" style="flex:1; align-items:center; justify-content:center; gap:24px; font-size:14px; font-weight:500;">
         <a href="index.dc.html" style="color:var(--accent);">Home</a>
         <a href="Shop.dc.html" style="color:var(--fg);">Shop</a>
@@ -134,33 +135,23 @@
         <!-- STEP 1 · IDENTIFICATION -->
         <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
           <div class="co-step" style="border:1px solid var(--line); border-radius:20px; background:var(--panel); padding:clamp(22px,3.5vw,34px);">
-            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Step 1 of 2</div>
-            <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:24px; letter-spacing:-0.02em; margin:0;">Continue as guest</h2>
+            <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;">Contact and delivery</div>
+            <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:24px; letter-spacing:-0.02em; margin:0;">Contact</h2>
             <p style="font-size:14px; line-height:1.6; color:var(--dim); margin:10px 0 24px; max-width:44ch;">{{ contactNotice }}</p>
 
             <div class="co-fields">
               <sc-for list="{{ contactFields }}" as="field" hint-placeholder-count="8">
                 <div class="{{ field.layoutClass }}">
+                  <sc-if value="{{ field.isCountry }}"><h2 style="font-size:24px;margin:20px 0;">Delivery</h2></sc-if>
                   <label class="co-label" for="{{ field.id }}">{{ field.label }}</label>
-                  <input id="{{ field.id }}" name="{{ field.key }}" class="co-input {{ field.errorClass }}" type="{{ field.type }}" inputmode="{{ field.inputMode }}" autocomplete="{{ field.autocomplete }}" placeholder="{{ field.placeholder }}" maxlength="{{ field.maxLength }}" value="{{ field.value }}" required aria-invalid="{{ field.invalid }}" aria-describedby="{{ field.errorId }}" onInput="{{ field.onInput }}" onKeyDown="{{ onContactKey }}"/>
+                  <sc-if value="{{ field.isCountry }}"><select id="{{ field.id }}" class="co-input" autocomplete="country" value="{{ field.value }}" onChange="{{ field.onInput }}"><sc-for list="{{ countries }}" as="c"><option value="{{ c.name }}">{{ c.name }}</option></sc-for></select></sc-if>
+                  <sc-if value="{{ field.isText }}"><input id="{{ field.id }}" name="{{ field.key }}" class="co-input {{ field.errorClass }}" type="{{ field.type }}" inputmode="{{ field.inputMode }}" autocomplete="{{ field.autocomplete }}" placeholder="{{ field.placeholder }}" maxlength="{{ field.maxLength }}" value="{{ field.value }}" required aria-invalid="{{ field.invalid }}" aria-describedby="{{ field.errorId }}" onInput="{{ field.onInput }}" onKeyDown="{{ onContactKey }}"/></sc-if>
+                  <sc-if value="{{ field.isAddress }}"><div class="co-address-options" aria-label="Address suggestions"><sc-for list="{{ addressSuggestions }}" as="suggestion"><button type="button" onClick="{{ suggestion.choose }}">{{ suggestion.label }}</button></sc-for></div><p class="co-address-help" role="status">{{ addressStatus }}</p><a class="co-attribution" href="https://www.geoapify.com/" target="_blank" rel="noopener noreferrer">Powered by Geoapify</a> · <a class="co-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">© OpenStreetMap contributors</a><label class="co-label" for="co-apartment">Apartment, suite, etc. (optional)</label><input id="co-apartment" class="co-input" autocomplete="address-line2" maxlength="80" value="{{ apartment }}" onInput="{{ onApartment }}"/></sc-if>
                   <div id="{{ field.errorId }}" role="status" style="color:var(--alert); font-family:'IBM Plex Mono',monospace; font-size:12px; margin-top:9px;">{{ field.error }}</div>
                 </div>
               </sc-for>
             </div>
 
-            <sc-if value="{{ emailRequired }}" hint-placeholder-val="{{ true }}">
-            <section aria-labelledby="co-verify-heading" style="margin-top:24px;padding:20px;border:1px solid var(--line);border-radius:12px;">
-              <h3 id="co-verify-heading" style="margin:0 0 10px;font-size:18px;">Verify your email</h3>
-              <p style="font-size:14px;color:var(--dim);line-height:1.6;">We will send a six-digit code before you continue to payment. It expires in 10 minutes. This does not create an account or subscribe you to marketing.</p>
-              <button type="button" onClick="{{ sendEmailCode }}" disabled="{{ emailSendDisabled }}" style="min-height:44px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer;">{{ emailSendLabel }}</button>
-              <sc-if value="{{ showCodeInput }}" hint-placeholder-val="{{ false }}">
-                <label for="co-email-code" class="co-label" style="margin-top:18px;">Confirmation code</label>
-                <input id="co-email-code" class="co-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" value="{{ emailCode }}" onInput="{{ onEmailCodeInput }}" aria-describedby="co-email-status"/>
-                <button type="button" onClick="{{ verifyEmailCode }}" disabled="{{ emailBusy }}" style="min-height:44px;margin-top:10px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer;">Confirm email</button>
-              </sc-if>
-              <p id="co-email-status" role="status" aria-live="polite" style="font-size:14px;line-height:1.5;margin-bottom:0;">{{ emailStatus }}</p>
-            </section>
-            </sc-if>
             <button onClick="{{ goStep2 }}" disabled="{{ reviewDisabled }}" style="margin-top:26px; width:100%; height:52px; background:var(--accent); color:var(--on-accent); border:none; border-radius:999px; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;" style-hover="filter:brightness(1.06);">{{ continueLabel }}</button>
             <div style="display:flex; align-items:center; gap:8px; margin-top:16px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--dim);">
               <span style="color:var(--accent);">✦</span> {{ detailsNotice }} <a href="./Privacy.dc.html" style="text-decoration:underline;">Privacy notice</a>.
@@ -168,11 +159,27 @@
           </div>
         </sc-if>
 
+            <sc-if value="{{ isVerification }}" hint-placeholder-val="{{ false }}">
+            <section aria-labelledby="co-verify-heading" class="co-verification co-step" tabindex="-1" style="padding:32px;border:1px solid var(--line);border-radius:8px;">
+              <h3 id="co-verify-heading" style="margin:0 0 10px;font-size:18px;">Verify your email</h3>
+              <p>We will send your code to <strong>{{ email }}</strong>.</p>
+              <p style="font-size:14px;color:var(--dim);line-height:1.6;">We will send a six-digit code before you continue to payment. It expires in 10 minutes. This does not create an account or subscribe you to marketing.</p>
+              <button type="button" onClick="{{ sendEmailCode }}" disabled="{{ emailSendDisabled }}" style="min-height:44px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer;">{{ emailSendLabel }}</button>
+              <sc-if value="{{ showCodeInput }}" hint-placeholder-val="{{ false }}">
+                <label for="co-email-code" class="co-label" style="margin-top:18px;">Confirmation code</label>
+                <input id="co-email-code" class="co-input" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" value="{{ emailCode }}" onInput="{{ onEmailCodeInput }}" aria-describedby="co-email-status"/>
+                <button type="button" onClick="{{ verifyEmailCode }}" disabled="{{ codeConfirmDisabled }}" style="min-height:44px;margin-top:10px;padding:10px 16px;border:1px solid var(--line-strong);border-radius:8px;background:var(--bg);color:var(--fg);cursor:pointer;">Confirm and continue</button>
+              </sc-if>
+              <p id="co-email-status" role="status" aria-live="polite" style="font-size:14px;line-height:1.5;margin-bottom:0;">{{ emailStatus }}</p>
+              <button type="button" onClick="{{ backStep1 }}" class="co-back">Back to contact and delivery</button>
+            </section>
+            </sc-if>
+
         <!-- STEP 2 · PAYMENT -->
         <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
           <div class="co-step" style="border:1px solid var(--line); border-radius:20px; background:var(--panel); padding:clamp(22px,3.5vw,34px);">
             <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px;">
-              <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);">Step 2 of 2</div>
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);">Review and payment</div>
               <button onClick="{{ backStep1 }}" style="background:transparent; border:none; color:var(--dim); cursor:pointer; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.04em;" style-hover="color:var(--accent);">← Edit details</button>
             </div>
             <h2 style="font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:24px; letter-spacing:-0.02em; margin:0;">{{ confirmationHeading }}</h2>
@@ -316,20 +323,21 @@ const SHIP_COST = 15;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const CONTACT_FIELDS = [
   { key:"email", label:"Email address", type:"email", inputMode:"email", autocomplete:"email", placeholder:"you@example.com", maxLength:254, wide:true },
+  { key:"country", label:"Country (European Union)", autocomplete:"country-name", placeholder:"Italy, Spain, France…", maxLength:100, wide:true },
   { key:"firstName", label:"First name", autocomplete:"given-name", placeholder:"First name", maxLength:100 },
   { key:"lastName", label:"Last name", autocomplete:"family-name", placeholder:"Last name", maxLength:100 },
-  { key:"country", label:"Country (European Union)", autocomplete:"country-name", placeholder:"Italy, Spain, France…", maxLength:100 },
-  { key:"city", label:"City", autocomplete:"address-level2", placeholder:"City", maxLength:100 },
+  { key:"address", label:"Address", autocomplete:"address-line1", placeholder:"Street and house number", maxLength:250, wide:true },
   { key:"postalCode", label:"Postal code", inputMode:"text", autocomplete:"postal-code", placeholder:"Postal code", maxLength:12 },
-  { key:"address", label:"Address", autocomplete:"street-address", placeholder:"Street, house number, apartment", maxLength:250, wide:true },
+  { key:"city", label:"City", autocomplete:"address-level2", placeholder:"City", maxLength:100 },
   { key:"phone", label:"Phone number", type:"tel", inputMode:"tel", autocomplete:"tel", placeholder:"+34 600 123 456", maxLength:40, wide:true },
 ];
 
 class Component extends DCLogic {
-  state = { theme: "dark", step: 1, email: "", firstName:"", lastName:"", country:"Spain", city:"", postalCode:"", address:"", phone:"", errors:{}, paymentError:"", paying: false, items: [], promoInput:"", promoCode:"", promoMessage:"",
+  state = { theme: "light", step: 1, email: "", firstName:"", lastName:"", country:"Spain", apartment:"", addressSuggestions:[], addressStatus:"You can also enter your address manually.", clock:0, city:"", postalCode:"", address:"", phone:"", errors:{}, paymentError:"", paying: false, items: [], promoInput:"", promoCode:"", promoMessage:"",
     emailRequired:true,emailBusy:false,emailChallenge:"",emailCode:"",emailStatus:"",verificationId:"",verificationToken:"",verifiedEmail:"",verificationExpires:0,emailResendAt:0 };
 
   componentDidMount() {
+    this._clock=setInterval(()=>{if(!this._unmounted)this.setState({clock:Date.now()});},1000);
     try { localStorage.removeItem("bluwx_last_order"); } catch (e) {}
     this.setState({ items: window.CartStore ? window.CartStore.get() : [] });
     this._off = window.CartStore ? window.CartStore.onChange((items) => this.setState({ items })) : null;
@@ -339,7 +347,35 @@ class Component extends DCLogic {
       }).catch(error=>{if(!this._unmounted)this.setState({emailStatus:error.message});});
     }
   }
-  componentWillUnmount() { this._unmounted=true; if (this._off) this._off(); if (this._payT) clearTimeout(this._payT); if (this._emailTimer) clearTimeout(this._emailTimer); if (this._verificationTimer) clearTimeout(this._verificationTimer); }
+  componentWillUnmount() { clearInterval(this._clock); clearTimeout(this._addressTimer); this._addressAbort?.abort(); this._unmounted=true; if (this._off) this._off(); if (this._payT) clearTimeout(this._payT); if (this._emailTimer) clearTimeout(this._emailTimer); if (this._verificationTimer) clearTimeout(this._verificationTimer); }
+
+
+  _continueContact() {
+    if (!window.EuroPadelAPI?.enabled() || !this.state.items.length || !this._validateContact()) return;
+    this.setState({step:this._emailVerified()?2:1.5});
+    setTimeout(()=>window.document?.querySelector('.co-verification')?.focus(),0);
+    window.scrollTo?.({top:0,behavior:"smooth"});
+  }
+  _lookupAddress(value) {
+    clearTimeout(this._addressTimer); this._addressAbort?.abort();
+    const country=window.EuroPadelShipping.countryCode(this.state.country);
+    this.setState({addressSuggestions:[],addressStatus:"You can also enter your address manually."});
+    if(value.trim().length<3||!country)return;
+    this._addressTimer=setTimeout(async()=>{
+      const controller=new AbortController(); this._addressAbort=controller;
+      const timeout=setTimeout(()=>controller.abort(),6000);
+      try {
+        const response=await fetch(window.EuroPadelConfig.apiOrigin+"/api/v1/checkout/address/suggest/",{
+          method:"POST",headers:{"Content-Type":"application/json"},credentials:"omit",signal:controller.signal,
+          body:JSON.stringify({text:value.trim(),country})});
+        const data=await response.json();
+        if(this._unmounted||controller.signal.aborted||this.state.address!==value||window.EuroPadelShipping.countryCode(this.state.country)!==country)return;
+        this.setState({addressSuggestions:response.ok&&Array.isArray(data.suggestions)?data.suggestions:[],
+          addressStatus:response.ok&&data.available?"Select a suggestion or keep typing your address.":"Suggestions unavailable. Please enter the address manually."});
+      }catch(error){if(!this._unmounted&&!controller.signal.aborted)this.setState({addressStatus:"Suggestions unavailable. Please enter the address manually."});}
+      finally{clearTimeout(timeout);}
+    },400);
+  }
 
   _emailVerified() {
     const s=this.state;
@@ -349,6 +385,7 @@ class Component extends DCLogic {
 
   _validateContact() {
     const errors = {};
+    if([this.state.address,this.state.apartment].filter(Boolean).join(", ").length>250)errors.address="Street and apartment together must be 250 characters or fewer.";
     CONTACT_FIELDS.forEach(field => {
       const value = this.state[field.key].trim();
       if (!value) errors[field.key] = field.label + " is required.";
@@ -375,7 +412,7 @@ class Component extends DCLogic {
     const stepDef = (n, label) => {
       const done = s.step > n, active = s.step === n;
       return {
-        label, mark: done ? "✓" : String(n),
+        label, mark: done ? "✓" : String(n===1.5?2:n===2?3:1),
         color: active || done ? "var(--fg)" : "var(--dim)",
         border: active || done ? "var(--accent)" : "var(--line-strong)",
         bg: done ? "var(--accent)" : (active ? "color-mix(in srgb, var(--accent) 22%, transparent)" : "transparent"),
@@ -388,10 +425,16 @@ class Component extends DCLogic {
       emailBusy:s.emailBusy,
       emailCode:s.emailCode,
       emailStatus:s.emailStatus,
-      reviewDisabled:!connected || !this._emailVerified(),
+      reviewDisabled:!connected,
+      isVerification:s.step===1.5,
+      codeConfirmDisabled:s.emailBusy||!s.emailChallenge||!/^\d{6}$/.test(s.emailCode),
+      countries:window.EuroPadelShipping.countries.map(([code,name])=>({code,name})),
+      apartment:s.apartment, onApartment:e=>this.setState({apartment:e.target.value}),
+      addressStatus:s.addressStatus,
+      addressSuggestions:s.addressSuggestions.map(item=>({...item,choose:()=>{this._addressAbort?.abort();clearTimeout(this._addressTimer);this.setState({address:item.address||s.address,city:item.city||s.city,postalCode:item.postalCode||s.postalCode,addressSuggestions:[],addressStatus:"Check your house number, city and postal code before continuing."});}})),
       emailSendDisabled:!connected || s.emailBusy || Date.now()<s.emailResendAt || this._emailVerified(),
-      emailSendLabel:s.emailBusy ? "Please wait…" : this._emailVerified() ? "Email confirmed" : Date.now()<s.emailResendAt ? "Please wait before requesting another code" : s.emailChallenge ? "Send a new code" : "Send confirmation code",
-      showCodeInput:!!s.emailChallenge && !this._emailVerified(),
+      emailSendLabel:s.emailBusy ? "Please wait…" : this._emailVerified() ? "Email confirmed" : Date.now()<s.emailResendAt ? "Resend available in "+Math.max(0,Math.ceil((s.emailResendAt-Date.now())/1000))+" seconds" : s.emailChallenge ? "Send a new code" : "Send confirmation code",
+      showCodeInput:!this._emailVerified(),
       onEmailCodeInput:e=>this.setState({emailCode:e.target.value.replace(/\D/g,"").slice(0,6)}),
       sendEmailCode:async()=>{
         if (!connected || s.emailBusy || Date.now()<s.emailResendAt || this._emailVerified()) return;
@@ -419,7 +462,7 @@ class Component extends DCLogic {
         try{
           const result=await window.EuroPadelAPI.verifyEmailCode(email,challenge,s.emailCode);
           if(this.state.email.trim().toLowerCase()!==email||this.state.emailChallenge!==challenge)return;
-          this.setState({verificationId:result.challenge_id,verificationToken:result.verification_token,verifiedEmail:email,verificationExpires:Date.now()+result.expires_in*1000,emailCode:"",emailStatus:"Email confirmed. You can review your order."});
+          this.setState({verificationId:result.challenge_id,verificationToken:result.verification_token,verifiedEmail:email,step:2,verificationExpires:Date.now()+result.expires_in*1000,emailCode:"",emailStatus:"Email confirmed. You can review your order."});
           clearTimeout(this._verificationTimer);
           this._verificationTimer=setTimeout(()=>this.setState({verificationId:"",verificationToken:"",verificationExpires:0,step:1,emailStatus:"Your verification expired. Request a new code to continue."}),result.expires_in*1000);
         }catch(error){this.setState({emailStatus:error.message});}
@@ -441,6 +484,7 @@ class Component extends DCLogic {
 
       steps: [
         { ...stepDef(1, "Contact & delivery"), showArrow: true },
+        { ...stepDef(1.5, "Verify email"), showArrow: true },
         { ...stepDef(2, "Review & payment"), showArrow: false },
       ],
 
@@ -449,11 +493,11 @@ class Component extends DCLogic {
 
       email: s.email,
       customerName: (s.firstName + " " + s.lastName).trim(),
-      deliveryAddress: s.address,
+      deliveryAddress: [s.address,s.apartment].filter(Boolean).join(", "),
       deliveryLocation: s.postalCode + " " + s.city + ", " + s.country,
       checkoutUnavailable: !connected,
-      contactNotice: connected ? "Shipping across the European Union. Flat shipping: €15. Enter the country name in English or its two-letter code." : "Online ordering is temporarily paused for store maintenance. Your cart is saved. Please do not enter personal details; no order or payment can be submitted.",
-      continueLabel: connected ? "Review order →" : "Ordering temporarily paused",
+      contactNotice: connected ? "Shipping across the European Union. Flat shipping: €15." : "Online ordering is temporarily paused for store maintenance. Your cart is saved. Please do not enter personal details; no order or payment can be submitted.",
+      continueLabel: connected ? "Continue" : "Ordering temporarily paused",
       detailsNotice: "Payment details are collected securely by Stripe, not on this page.",
       confirmationHeading: "Review your order",
       cardCaption: "STRIPE CHECKOUT",
@@ -462,16 +506,20 @@ class Component extends DCLogic {
       paymentError: s.paymentError,
       phone: s.phone,
       contactFields: CONTACT_FIELDS.map(field => ({
-        ...field, id:"co-" + field.key, errorId:"co-" + field.key + "-error",
+        ...field, isCountry:field.key==="country",isText:field.key!=="country",isAddress:field.key==="address", id:"co-" + field.key, errorId:"co-" + field.key + "-error",
         type:field.type || "text", inputMode:field.inputMode || "text",
         layoutClass:field.wide ? "co-field-wide" : "",
         value:s[field.key], error:s.errors[field.key] || "",
         invalid:!!s.errors[field.key], errorClass:s.errors[field.key] ? "co-err" : "",
-        onInput:(e) => this.setState(st => ({ [field.key]:e.target.value, errors:{ ...st.errors, [field.key]:"" },
-          ...(field.key==="email" ? {verificationId:"",verificationToken:"",verifiedEmail:"",verificationExpires:0,emailChallenge:"",emailCode:"",emailStatus:""} : {}) })),
+        onInput:(e) => { const value=e.target.value; this.setState(st => ({ [field.key]:value, errors:{ ...st.errors, [field.key]:"" },
+          ...(field.key==="country"?{addressSuggestions:[]}:{}),
+          ...(field.key==="email" ? {verificationId:"",verificationToken:"",verifiedEmail:"",verificationExpires:0,emailChallenge:"",emailCode:"",emailStatus:""} : {}) }));
+          if(field.key==="address")this._lookupAddress(value);
+          if(field.key==="country"){clearTimeout(this._addressTimer);this._addressAbort?.abort();}
+        },
       })),
-      onContactKey: (e) => { if (e.key === "Enter") { e.preventDefault(); if (connected && items.length && this._emailVerified() && this._validateContact()) this.setState({ step: 2 }); } },
-      goStep2: () => { if (connected && items.length && this._emailVerified() && this._validateContact()) this.setState({ step: 2 }); },
+      onContactKey: (e) => { if (e.key === "Enter") { e.preventDefault(); this._continueContact(); } },
+      goStep2: () => { this._continueContact(); },
       backStep1: () => this.setState({ step: 1 }),
 
       paying: s.paying,
@@ -485,7 +533,7 @@ class Component extends DCLogic {
         this.setState({ paying: true, paymentError:"" });
         if (connected) {
           try {
-            const result = await window.EuroPadelAPI.start(items, s);
+            const result = await window.EuroPadelAPI.start(items, {...s,address:[s.address,s.apartment].filter(Boolean).join(", ")});
             location.href = result.checkout_url;
           } catch (error) { this.setState({ paying:false, paymentError:error.message,
             ...(error.code==="email_verification_required" ? {emailRequired:true,step:1,emailStatus:error.message} : {}) }); }

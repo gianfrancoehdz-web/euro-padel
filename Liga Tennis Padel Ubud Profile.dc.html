@@ -2,6 +2,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="./privacy.css">
+<link rel="stylesheet" href="./store-light.css">
 <link rel="stylesheet" href="./assets/fonts/fonts.css">
 <script src="./privacy-resources.js"></script>
 <script defer src="./privacy.js"></script>
@@ -284,7 +285,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;clubTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Club&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;clubName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Liga Tennis &amp; Padel Ubud&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;city&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ubud, Bali, ID&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;courtsLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;3 tennis + 3 padel courts&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;established&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Racket sports, all year round&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;description&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;A racket sports paradise for all skill levels and ages, all year round. Liga Tennis &amp; Padel Ubud brings together tennis and padel under one roof, with dedicated coaching, open play and a relaxed clubhouse atmosphere at the heart of Bali.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;address&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Jl. Katik Lantang, Singakerta, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, Indonesia&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;websiteUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;https://liga.tennis/venue/ligatennis-padel-ubud&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountCode&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;UBUD5&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;discountMsg&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Each club has a personalized shop, a discount code reserved for members, and a selection of recommended products.&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
 class Component extends DCLogic {
-  state = { theme: "dark", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
+  state = { theme: "light", copied: false, compact: false, langOpen: false, lang: "EN", menuOpen: false };
   componentDidMount() {
     if (window.__bluwxHeaderScrollBound) { this._scrollBound = false; }
     else {
